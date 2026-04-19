@@ -181,3 +181,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For culture and values slides, concrete examples like open standards, client diversity, audits, and privacy tooling teach better than repeating the value words alone.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
+## 2026-04-19 14:54 CEST - SLIDE-06
+- Implemented the DeFi chapter intro as a shared overview slide, framing decentralized finance as modular on-chain financial infrastructure and setting up both the primitive categories and the major risk themes for the next subslides.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-Kj0o5o8y.js`; removed stale build asset `dist/assets/index-Dt5G1hGV.js`
+- **Learnings for future iterations:**
+  - Chapter intros for application-layer topics still fit the shared `overview` layout when the three pillars cover primitives, why composition matters, and what risks stay in scope for the chapter.
+  - For DeFi teaching slides, introduce the space as reusable financial building blocks first; that keeps later swap, lending, and stablecoin slides grounded in function instead of jargon.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---

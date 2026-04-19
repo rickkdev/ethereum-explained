@@ -875,6 +875,28 @@ export const slideGroups = [
       "Swaps, lending, and stablecoins",
       "Risks, composability, and real-world fit",
     ],
+    overview: {
+      eyebrow: "Chapter 06",
+      headline: "DeFi turns financial activities into open on-chain building blocks instead of closed products run by one institution.",
+      intro:
+        "This chapter introduces decentralized finance at the level of primitives rather than trading jargon. The goal is to see how swaps, lending markets, and stable-value assets work as reusable pieces of software, while keeping the tradeoffs visible: transparency, programmability, and open access can create useful new coordination patterns, but they also expose users to smart-contract risk, liquidation risk, and market structure problems.",
+      pillars: [
+        {
+          title: "Finance becomes modular",
+          body: "Instead of one bank or broker bundling everything together, DeFi breaks common financial functions into protocols for exchange, borrowing, collateral, and settlement.",
+        },
+        {
+          title: "Protocols can compose",
+          body: "Because these systems are on-chain and programmable, one application can build on another. A wallet, a swap, a lending market, and a stablecoin can all connect inside one user flow.",
+        },
+        {
+          title: "Opportunity comes with protocol risk",
+          body: "Open access and automation can be powerful, but they do not remove risk. Code flaws, cascading liquidations, oracle failures, and poor market design still matter.",
+        },
+      ],
+      callout: "DeFi is best understood as reusable financial infrastructure: legible, programmable, and sometimes fragile.",
+      footer: "From core primitives to composability, failure modes, and practical fit",
+    },
   },
   {
     number: "07",
