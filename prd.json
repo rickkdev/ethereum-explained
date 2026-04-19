@@ -658,7 +658,7 @@
         "Verify in browser"
       ],
       "priority": 47,
-      "passes": false,
+      "passes": true,
       "notes": "Prefer a dedicated in-app Remotion component over an embedded external player so the execution steps stay tightly integrated with the slide."
     },
     {

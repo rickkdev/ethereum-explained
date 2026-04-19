@@ -741,33 +741,72 @@ export const slideGroups = [
     childContent: [
       {
         number: "04.1",
-        layout: "pipeline",
+        layout: "evm-state-motion",
         eyebrow: "How contracts execute",
         headline: "A contract call follows a repeatable path: code is deployed once, users call functions through transactions, the EVM runs the logic, and the shared state updates if execution succeeds.",
         description:
           "Smart contract execution is deterministic, not magical. The contract code lives on-chain at an address, a user submits a transaction that targets one of its functions, and every node replays the same computation against the same current state before accepting the result.",
-        stages: [
+        frameLabel: "Deploy once, then replay the same contract call everywhere",
+        transaction: {
+          from: "Wallet 0x4C2",
+          to: "Escrow.sol",
+          action: "releasePayment(invoiceId)",
+          gas: "Gas covers deterministic execution",
+        },
+        stateBefore: [
           {
-            title: "Deploy the code",
-            body: "A developer publishes contract bytecode to Ethereum. Once the deployment transaction is accepted, the contract exists at an address with code and, often, initial storage.",
+            label: "Contract code",
+            value: "Already deployed",
           },
           {
-            title: "Call a function",
-            body: "A wallet sends a transaction to that contract address with function data and any required ETH. This transaction is a request for the network to run a specific piece of contract logic.",
+            label: "Escrow balance",
+            value: "5.0 ETH locked",
           },
           {
-            title: "Every node executes it",
-            body: "When the transaction is included in a block, each node runs the same contract code inside the EVM using the same inputs and current state. Determinism matters: honest nodes should compute the same result independently.",
+            label: "Invoice status",
+            value: "Pending release",
+          },
+        ],
+        stateAfter: [
+          {
+            label: "Contract code",
+            value: "Same code, new state",
           },
           {
-            title: "State changes become shared history",
-            body: "If execution succeeds under the protocol rules, balances, storage values, and emitted outputs are updated in Ethereum's shared state. If it fails, the intended state change does not go through.",
+            label: "Escrow balance",
+            value: "3.0 ETH locked",
+          },
+          {
+            label: "Invoice status",
+            value: "Released to seller",
+          },
+        ],
+        executionSteps: [
+          "The contract was deployed earlier, so this transaction targets code already living at an address.",
+          "Every node replays the same function call against the same current storage and balances inside the EVM.",
+          "If the conditions pass, the shared state updates; if they fail, the intended change is rejected everywhere.",
+        ],
+        segments: [
+          {
+            label: "Deploy",
+            title: "Code is published once before anyone can call it",
+            body: "Deployment creates the contract account and stores its bytecode on-chain. Later users do not upload fresh logic each time; they call the same code that already lives at that address.",
+          },
+          {
+            label: "Call",
+            title: "A user asks the network to run one function",
+            body: "The wallet sends a transaction with calldata and, if needed, ETH. That message is not the result itself. It is a request for the network to execute the contract's rules from the current on-chain state.",
+          },
+          {
+            label: "Execute + update",
+            title: "Deterministic execution produces one accepted state transition",
+            body: "When the transaction is included, nodes run the same bytecode, inspect the same conditions, and either commit the resulting storage and balance updates or reject the change together.",
           },
         ],
         notes: [
-          "Deployment is how code gets onto the chain; calling is how users ask that code to run.",
-          "Nodes do not trust one server's answer. They reproduce the same execution themselves.",
-          "The contract can only act on the current on-chain state plus the transaction inputs it receives.",
+          "Deployment is a separate step from calling; the same on-chain code is reused by every later transaction.",
+          "Nodes do not trust one backend result. They reproduce the same contract execution independently.",
+          "A contract call can change balances or storage only if the current state and the function rules both allow it.",
         ],
       },
       {
