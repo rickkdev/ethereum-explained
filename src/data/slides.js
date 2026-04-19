@@ -1235,6 +1235,28 @@ export const slideGroups = [
       "Proof of Work vs Proof of Stake",
       "Security assumptions and tradeoffs",
     ],
+    overview: {
+      eyebrow: "Chapter 10",
+      headline: "Consensus is how a decentralized network agrees on one valid history without relying on one central referee.",
+      intro:
+        "Many participants can store the same chain, but they still need a way to decide which blocks count, which history is canonical, and how costly it should be to attack that process. This chapter frames consensus as the coordination layer that turns independent verifiers into one shared ledger.",
+      pillars: [
+        {
+          title: "Agreement on history",
+          body: "Consensus is the process that helps the network converge on one accepted sequence of blocks instead of many conflicting versions of the truth.",
+        },
+        {
+          title: "Resources and incentives",
+          body: "Different systems secure that agreement with different scarce resources, such as energy and hardware in Proof of Work or staked capital in Proof of Stake.",
+        },
+        {
+          title: "Tradeoffs matter",
+          body: "Consensus is never just a slogan. Each design makes assumptions about attackers, participation, cost, coordination, and what kind of security the network is buying.",
+        },
+      ],
+      callout: "Consensus is the answer to the core decentralized-systems question: who gets to write history, and under what rules?",
+      footer: "From Proof of Work vs Proof of Stake to security assumptions and system tradeoffs",
+    },
   },
   {
     number: "11",

@@ -285,3 +285,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For custody education, keep the framing practical: explain who can sign, recover, freeze, or lose access rather than treating one model as universally correct.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
+## 2026-04-19 15:22 CEST - SLIDE-10
+- Implemented the Consensus chapter intro as a shared overview slide, framing consensus as agreement on canonical history, introducing scarce security resources, and setting up the Proof of Work versus Proof of Stake comparison that follows.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-C4KLTx3f.js`; removed stale build asset `dist/assets/index-ye4mAe5k.js`
+- **Learnings for future iterations:**
+  - Chapter intros for consensus topics still fit the shared `overview` schema when the three pillars cover agreement on history, the scarce resource used for security, and the tradeoff lens for the subslides.
+  - For consensus framing, define the problem first as agreement on canonical history before comparing specific mechanisms like Proof of Work and Proof of Stake.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
