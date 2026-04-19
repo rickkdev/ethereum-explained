@@ -2,7 +2,7 @@
 - Parent chapter intro slides should be added as a group-level `overview` object in `src/data/slides.js`; the shared overview renderer in `src/App.jsx` already maps that shape into the standard chapter layout.
 - Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
 - Historical/context subslides can reuse the `ledger` layout when they read cleanly as "before vs proposal" plus a short dated sequence, so simple origin stories do not need custom timeline components.
-- Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts separated visually without adding slide-specific React code.
+- Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts, roles, or consequences separated visually without adding slide-specific React code.
 - Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
 - Monetary-policy slides can use the shared `issuance` layout with `process`, `eras`, `stats`, and `notes` when one slide needs both a protocol workflow and a stepped reward or supply schedule.
 - The shared `issuance` layout can also explain a fixed cap if `eras` are framed as cumulative supply milestones; the same bar treatment reads well for "approaching the ceiling" stories.
@@ -67,4 +67,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - The shared `issuance` layout is flexible enough for both per-era reward slides and cumulative-supply slides; changing the semantic meaning of `eras` can avoid extra React work.
   - For fixed-cap explanations, focus the copy on flow versus stock: halvings reduce new issuance, while the hard cap describes the eventual total supply.
   - `npm run build` passed; browser verification is still manual in this environment.
+---
+## 2026-04-19 14:01 CEST - SLIDE-02-7
+- Implemented slide 02.7 as a Bitcoin decentralization explainer using the shared anatomy layout, covering node rule enforcement, the distinction between nodes and miners, and why broad node distribution supports censorship resistance and resilience.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-IYO3GbAN.js`; removed stale build asset `dist/assets/index-QZOVW5O0.js`
+- **Learnings for future iterations:**
+  - The shared `anatomy` layout also works for role-based concept slides where each segment explains a different responsibility or consequence, not just the physical parts of one object.
+  - For decentralization topics, anchor the explanation in operational roles first, then connect distribution to censorship resistance and uptime so the concept stays concrete.
+  - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
 ---

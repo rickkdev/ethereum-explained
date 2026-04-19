@@ -467,6 +467,37 @@ export const slideGroups = [
           "In practice, people say the supply caps at 21 million even though the curve technically approaches that number over a very long tail.",
         ],
       },
+      {
+        number: "02.7",
+        layout: "anatomy",
+        eyebrow: "Nodes and decentralization",
+        headline: "Bitcoin stays decentralized because thousands of nodes independently enforce the same rules and reject invalid history.",
+        description:
+          "A Bitcoin node is a computer running the Bitcoin software. It downloads blocks, checks transactions and consensus rules for itself, and only accepts the chain that matches those rules. The more this verification is spread across many operators and jurisdictions, the harder it is for one actor to censor activity or quietly rewrite the system.",
+        frameLabel: "Why node operators matter more than one central server",
+        segments: [
+          {
+            label: "Rule enforcement",
+            title: "Nodes verify the ledger for themselves",
+            body: "Every node checks block headers, signatures, and transaction validity against Bitcoin's consensus rules. It does not need to trust a company API to decide whether a payment or a block is legitimate.",
+          },
+          {
+            label: "Nodes vs miners",
+            title: "Miners produce blocks, but nodes decide whether those blocks count",
+            body: "Miners compete to propose the next block through Proof of Work. Nodes still inspect that block and reject it if it breaks the rules, which is why mining power alone does not get to redefine Bitcoin.",
+          },
+          {
+            label: "Distribution",
+            title: "Wide node distribution improves censorship resistance and resilience",
+            body: "When many people run nodes across different networks and countries, there is no single switch to shut off. If one provider, region, or company goes down, the rest of the network can keep relaying and validating the ledger.",
+          },
+        ],
+        notes: [
+          "A node is primarily a verifier and rule enforcer, not just a passive copy of the chain.",
+          "Decentralization is operational: it depends on many independent operators running the software.",
+          "Miners and nodes overlap sometimes in practice, but conceptually they play different roles in Bitcoin's design.",
+        ],
+      },
     ],
   },
   {
