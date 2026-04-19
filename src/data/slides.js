@@ -192,6 +192,32 @@ export const slideGroups = [
           "Banks solve this with a private ledger; Bitcoin tries to solve it with a public one",
         ],
       },
+      {
+        number: "02.2",
+        layout: "ledger",
+        eyebrow: "Satoshi and the white paper",
+        headline: "In October 2008, Satoshi Nakamoto published a short paper describing peer-to-peer electronic cash.",
+        description:
+          "The white paper introduced Bitcoin's core idea: a network can timestamp and order transactions without relying on a bank to maintain the official ledger. Satoshi remains pseudonymous, but the design gave the internet a workable model for digital scarcity.",
+        comparison: [
+          {
+            label: "Before Bitcoin",
+            title: "Digital money depended on an institution to keep score",
+            body: "Online payments already existed, but a company or bank had to run the central ledger, settle disputes, and decide which transactions counted as final.",
+          },
+          {
+            label: "Bitcoin white paper",
+            title: "Rules and network consensus replace the single scorekeeper",
+            body: "Satoshi's proposal combined signatures, proof of work, and a shared transaction history so strangers could agree on one record of ownership in an open network.",
+          },
+        ],
+        flow: [
+          "October 31, 2008: the Bitcoin white paper is published",
+          "It describes peer-to-peer electronic cash without a trusted third party",
+          "January 2009: the first Bitcoin software and genesis block appear",
+          "The idea moves from paper concept to a live public network",
+        ],
+      },
     ],
   },
   {
