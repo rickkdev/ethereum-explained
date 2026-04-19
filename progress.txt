@@ -5,6 +5,7 @@
 - Pending-versus-confirmed lifecycle slides also fit the `ledger` layout well: use the two comparison cards for state before and after confirmation, and the side flow for the broadcast-to-inclusion path.
 - Capability-comparison slides can also use the `ledger` layout by putting the incumbent system on one card, the expanded system on the other, and the side flow on the reason the newer model exists.
 - Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts, roles, or consequences separated visually without adding slide-specific React code.
+- State-machine explainer slides can also reuse the shared `anatomy` layout by assigning one segment each to the acting account, the shared state snapshot, and the execution environment that computes the next state.
 - Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
 - Monetary-policy slides can use the shared `issuance` layout with `process`, `eras`, `stats`, and `notes` when one slide needs both a protocol workflow and a stepped reward or supply schedule.
 - The shared `issuance` layout can also explain a fixed cap if `eras` are framed as cumulative supply milestones; the same bar treatment reads well for "approaching the ceiling" stories.
@@ -109,5 +110,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Capability-comparison slides can reuse the shared `ledger` layout when the story is "what the newer system adds over the earlier one" rather than a strict before/after state transition.
   - For Ethereum-vs-Bitcoin teaching slides, keep the contrast scoped to programmability versus money-focused settlement so the comparison stays accurate and does not overstate either chain.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 14:37 CEST - SLIDE-03-2
+- Implemented slide 03.2 as an Ethereum state-machine explainer using the shared anatomy layout, covering accounts, shared state, and EVM execution while making the transaction-to-state-update path explicit.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-CHCxaIev.js`; removed stale build asset `dist/assets/index-A_SvU9nh.js`
+- **Learnings for future iterations:**
+  - The shared `anatomy` layout also works for state-machine slides when the three segments map to actor, shared state snapshot, and execution environment.
+  - For Ethereum execution slides, phrase transactions as requests to change shared state so the bridge into smart contracts stays clear and technically accurate.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

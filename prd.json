@@ -252,7 +252,7 @@
         "Verify in browser"
       ],
       "priority": 18,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if needed to show state transitions flowing through the EVM."
     },
     {

@@ -614,6 +614,37 @@ export const slideGroups = [
           "That shift makes the chain a platform for tokens, apps, and smart contracts instead of only money transfer",
         ],
       },
+      {
+        number: "03.2",
+        layout: "anatomy",
+        eyebrow: "State, accounts, and the EVM",
+        headline: "Ethereum keeps one shared state machine: accounts hold data, transactions request changes, and the EVM computes the next valid state.",
+        description:
+          "Instead of tracking only who paid whom, Ethereum tracks account balances, contract code, and contract storage. When a transaction arrives, every node runs the same computation in the Ethereum Virtual Machine, then updates the shared state if the execution is valid.",
+        frameLabel: "How Ethereum turns transactions into state changes",
+        segments: [
+          {
+            label: "Accounts",
+            title: "Every address points to an account with current data",
+            body: "Ethereum organizes the system around accounts. Externally owned accounts can send transactions, while contract accounts also store code and persistent storage. Together they define the current snapshot the network is agreeing on.",
+          },
+          {
+            label: "Shared state",
+            title: "Balances, storage, and code live in one evolving record",
+            body: "The chain is not just a list of transfers. It is a shared state that includes ETH balances, token balances, contract variables, and deployed program code. Each block moves that global state from one version to the next.",
+          },
+          {
+            label: "EVM execution",
+            title: "Transactions are executed before the state is updated",
+            body: "When a transaction calls a contract, nodes run the same instructions inside the EVM. If execution succeeds under the protocol rules, the resulting balance changes, storage writes, and emitted outputs become the next accepted state.",
+          },
+        ],
+        notes: [
+          "A transaction is a request to change Ethereum's shared state, not just a message to move coins.",
+          "The EVM is the common execution environment that lets every node reproduce the same result from the same input.",
+          "This is the bridge to smart contracts: contract code is what the EVM runs when transactions interact with applications on-chain.",
+        ],
+      },
     ],
   },
   {
