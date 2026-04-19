@@ -1,3 +1,15 @@
+## Codebase Patterns
+- Parent chapter intro slides should be added as a group-level `overview` object in `src/data/slides.js`; the shared overview renderer in `src/App.jsx` already maps that shape into the standard chapter layout.
+
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
+---
+
+## 2026-04-19 12:32 CEST - SLIDE-02
+- Implemented the Bitcoin chapter intro as a presentation-ready parent slide using the shared overview layout, framing Bitcoin as the first major blockchain application and outlining the chapter arc.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `AGENTS.md`
+- **Learnings for future iterations:**
+  - Parent chapter slides do not need custom React work when the standard chapter structure is enough; add `overview` content to the slide group and let the shared renderer pick it up.
+  - Root `AGENTS.md` is the right place to preserve deck-wide authoring conventions that apply across future slide stories.
+  - Browser verification is still manual in this environment; use `npm run build` for a fast regression check, then note that a human browser pass is still needed.
 ---

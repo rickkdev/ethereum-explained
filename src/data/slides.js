@@ -143,6 +143,28 @@ export const slideGroups = [
       "Wallets and keys",
       "Transactions and mempool",
     ],
+    overview: {
+      eyebrow: "Chapter 02",
+      headline: "Bitcoin turned the blockchain idea into internet-native money with no central operator.",
+      intro:
+        "It introduced a public ledger, fixed monetary rules, and open participation so digital value could move without trusting one company or government to keep the score.",
+      pillars: [
+        {
+          title: "Why it exists",
+          body: "Bitcoin addresses the double-spend problem by letting a distributed network agree on one transaction history for digital money.",
+        },
+        {
+          title: "What makes it distinct",
+          body: "Proof of Work, predictable issuance, and a hard supply cap give Bitcoin a simple monetary design with very strong rule enforcement.",
+        },
+        {
+          title: "What this chapter covers",
+          body: "We move from the original problem and Satoshi's white paper into blocks, hashing, mining, supply, nodes, wallets, and the mempool.",
+        },
+      ],
+      callout: "Bitcoin is the first major blockchain application: digital scarcity enforced by a public network.",
+      footer: "From double-spend problem to blocks, mining, and self-custody",
+    },
   },
   {
     number: "03",
