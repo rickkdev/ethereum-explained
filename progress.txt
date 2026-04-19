@@ -7,6 +7,7 @@
 - Smart-contract concept slides can also use the shared `ledger` layout by comparing centralized backend logic with on-chain code, then using the side flow for the deploy-call-execute-update lifecycle.
 - Capability-versus-risk slides can also use the shared `ledger` layout by putting concrete use-cases in one card, failure modes in the other, and using the side flow to show how the same automation creates both leverage and risk.
 - Smart-contract execution lifecycle slides can use the shared `pipeline` layout when the story is deploy -> call -> deterministic execution -> state update; that keeps execution explainers data-driven without new React components.
+- Protocol-upgrade and ecosystem-coordination slides can use the shared `pipeline` layout when the story is discussion -> EIP/research -> client implementation -> network adoption, which keeps governance explainers sequence-driven without custom React work.
 - Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts, roles, or consequences separated visually without adding slide-specific React code.
 - State-machine explainer slides can also reuse the shared `anatomy` layout by assigning one segment each to the acting account, the shared state snapshot, and the execution environment that computes the next state.
 - Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
@@ -223,4 +224,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - Ecosystem role-mapping slides fit the shared `anatomy` layout when each segment owns one actor group, its job, and how it depends on adjacent layers.
   - For Ethereum community slides, pair influential institutions with explicit anti-centralization language so the deck teaches coordination without implying command-and-control governance.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:03 CEST - SLIDE-07-2
+- Implemented slide 07.2 as an Ethereum coordination explainer using the shared pipeline layout, walking from public discussion through EIP design and client implementation to ecosystem adoption and live network upgrades.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-C6l4UwBT.js`; removed stale build asset `dist/assets/index-DMyjK0bt.js`
+- **Learnings for future iterations:**
+  - Protocol-change and governance slides fit the shared `pipeline` layout when the story is a coordinated sequence from social discussion into technical specification, client work, and operator adoption.
+  - For Ethereum governance slides, keep the "no central controller" point explicit by ending on adoption choice from validators, node operators, and apps rather than implying EIPs auto-ship themselves.
+  - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
 ---

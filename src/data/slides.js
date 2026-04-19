@@ -1018,6 +1018,37 @@ export const slideGroups = [
           "Builders give the ecosystem its visible products, but those products still depend on the protocol and client layers underneath.",
         ],
       },
+      {
+        number: "07.2",
+        layout: "pipeline",
+        eyebrow: "How the ecosystem coordinates change",
+        headline: "Ethereum changes through rough coordination: ideas are debated socially, specified technically, implemented by multiple teams, and only then activated on the network.",
+        description:
+          "No single leader flips a master switch for Ethereum. Change usually starts in public discussion, matures through research and EIPs, moves into independent client implementation and testing, and reaches the chain only if enough operators choose to adopt the upgrade together.",
+        stages: [
+          {
+            title: "Discussion and problem framing",
+            body: "A pain point, security concern, or design opportunity is debated across calls, forums, research posts, and community conversations. Social alignment starts here: people need to agree that the problem is real and worth changing.",
+          },
+          {
+            title: "Research and EIP design",
+            body: "Researchers and contributors turn the idea into a more precise proposal, often through an Ethereum Improvement Proposal. Tradeoffs, security assumptions, and compatibility questions are made explicit before anyone treats the change as ready.",
+          },
+          {
+            title: "Client implementation and testing",
+            body: "Independent client teams implement the proposal in code, compare behavior across clients, and test whether the upgrade works safely in practice. This is where social intent has to survive engineering reality.",
+          },
+          {
+            title: "Adoption and network upgrade",
+            body: "Validators, node operators, infrastructure providers, and apps choose whether to run software that includes the change. If enough of the ecosystem upgrades in coordination, the new rules become part of Ethereum's live network.",
+          },
+        ],
+        notes: [
+          "Ethereum governance is social and technical together: discussion matters, but implementation and adoption matter too.",
+          "EIPs help structure change, but they do not force the network to accept an idea automatically.",
+          "Network upgrades succeed because many independent actors coordinate on the same new software, not because one company commands them to.",
+        ],
+      },
     ],
   },
   {
