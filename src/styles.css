@@ -1414,6 +1414,11 @@ select {
   min-height: 100%;
 }
 
+.consensus-motion-layout {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 100%;
+}
+
 .evm-motion-layout {
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: 100%;
@@ -1424,8 +1429,241 @@ select {
   min-height: 100%;
 }
 
+.consensus-motion-shell,
 .evm-motion-shell {
   padding: 18px;
+}
+
+.consensus-motion-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.consensus-motion-phase {
+  margin-top: 8px;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.consensus-motion-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.consensus-legend-chip {
+  padding: 8px 12px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(24, 24, 24, 0.78);
+  color: var(--text-dim);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.consensus-legend-chip.pow {
+  border-color: rgba(255, 201, 138, 0.36);
+}
+
+.consensus-legend-chip.pos {
+  border-color: rgba(154, 203, 255, 0.36);
+}
+
+.consensus-legend-chip.neutral {
+  border-color: rgba(185, 185, 185, 0.28);
+}
+
+.consensus-lane-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.consensus-lane {
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(18, 18, 18, 0.94);
+}
+
+.consensus-lane.pow {
+  background:
+    radial-gradient(circle at 24% 20%, rgba(255, 191, 128, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(22, 20, 18, 0.98), rgba(11, 11, 11, 0.98));
+}
+
+.consensus-lane.pos {
+  background:
+    radial-gradient(circle at 76% 20%, rgba(148, 196, 255, 0.12), transparent 26%),
+    linear-gradient(180deg, rgba(18, 21, 26, 0.98), rgba(10, 10, 10, 0.98));
+}
+
+.consensus-lane-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 18px 0;
+}
+
+.consensus-lane-head h3 {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.consensus-lane-resource {
+  flex: 0 0 auto;
+  padding: 8px 10px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  color: var(--text-dim);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.consensus-stage {
+  position: relative;
+  min-height: 340px;
+  margin-top: 14px;
+  padding: 16px 18px 18px;
+  overflow: hidden;
+}
+
+.consensus-stage-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.56), transparent 96%);
+  pointer-events: none;
+}
+
+.consensus-stage-rail {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 50%;
+  border-top: 1px dashed rgba(145, 145, 145, 0.24);
+}
+
+.consensus-node {
+  position: absolute;
+  width: 180px;
+  padding: 14px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(24, 24, 24, 0.88);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}
+
+.consensus-node.resource {
+  left: 4%;
+  top: 22px;
+}
+
+.consensus-node.candidate {
+  left: 50%;
+  top: 34%;
+}
+
+.consensus-node.accepted {
+  right: 4%;
+  bottom: 98px;
+}
+
+.consensus-node strong,
+.consensus-signal,
+.consensus-step-chip strong {
+  display: block;
+}
+
+.consensus-node strong {
+  margin-top: 8px;
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
+}
+
+.consensus-node p,
+.consensus-summary p {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.consensus-signal {
+  position: absolute;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  min-width: 96px;
+  padding: 9px 12px;
+  border: 1px solid rgba(145, 145, 145, 0.2);
+  color: var(--text);
+  font-size: 0.62rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: rgba(16, 16, 16, 0.94);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.26);
+}
+
+.consensus-signal.pow {
+  border-color: rgba(255, 201, 138, 0.34);
+}
+
+.consensus-signal.pos {
+  border-color: rgba(154, 203, 255, 0.36);
+}
+
+.consensus-step-list {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.consensus-step-chip {
+  padding: 12px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(24, 24, 24, 0.78);
+  color: var(--text-dim);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.consensus-step-chip span {
+  color: var(--text-dim);
+  font-size: 0.56rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.consensus-step-chip strong {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.consensus-step-chip.active {
+  border-color: rgba(232, 232, 232, 0.34);
+  background: rgba(34, 34, 34, 0.94);
+  color: var(--text);
+  transform: translateY(-3px);
+}
+
+.consensus-summary {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(145, 145, 145, 0.18);
 }
 
 .evm-motion-head {
@@ -2499,6 +2737,11 @@ select {
     flex-direction: column;
   }
 
+  .consensus-motion-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .defi-motion-head {
     align-items: stretch;
     flex-direction: column;
@@ -2523,6 +2766,10 @@ select {
     justify-content: flex-start;
   }
 
+  .consensus-motion-legend {
+    justify-content: flex-start;
+  }
+
   .defi-motion-legend {
     justify-content: flex-start;
   }
@@ -2540,6 +2787,10 @@ select {
   }
 
   .mining-motion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consensus-lane-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2667,6 +2918,43 @@ select {
     width: auto;
     min-height: 0;
     transform: none !important;
+  }
+
+  .consensus-stage {
+    min-height: 520px;
+  }
+
+  .consensus-step-list {
+    position: static;
+    grid-template-columns: 1fr;
+    margin-top: 216px;
+  }
+
+  .consensus-node.resource,
+  .consensus-node.candidate,
+  .consensus-node.accepted {
+    left: 18px;
+    right: 18px;
+    width: auto;
+  }
+
+  .consensus-node.resource {
+    top: 18px;
+  }
+
+  .consensus-node.candidate {
+    top: 168px;
+    transform: none !important;
+  }
+
+  .consensus-node.accepted {
+    top: 314px;
+    bottom: auto;
+  }
+
+  .consensus-stage-rail,
+  .consensus-signal {
+    display: none;
   }
 
   .evm-motion-stage {

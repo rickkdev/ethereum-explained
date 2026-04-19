@@ -1078,6 +1078,171 @@ function EvmStateMotionGraphic({ slide, isActive }) {
   );
 }
 
+function ConsensusMotionGraphic({ slide, isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 252;
+  const { frameLabel, lanes, summary } = slide.content;
+  const [powLane, posLane] = lanes;
+
+  const phaseLabel = cycleFrame < 72
+    ? "Both paths start with a candidate block, but each commits a different security resource"
+    : cycleFrame < 146
+      ? "Proof of Work races hashes while Proof of Stake gathers proposer and attester coordination"
+      : cycleFrame < 220
+        ? "Each path resolves into one accepted block by a different validation route"
+        : "Loop resets so the parallel comparison stays legible";
+
+  const stepThresholds = [0, 72, 146];
+  const acceptedProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 150),
+    durationInFrames: 44,
+    config: {
+      damping: 16,
+      stiffness: 106,
+      mass: 0.9,
+    },
+  });
+
+  const renderLane = (lane, laneIndex) => {
+    const isPow = laneIndex === 0;
+    const laneClass = isPow ? "pow" : "pos";
+    const packetProgress = spring({
+      fps: PRESENTATION_FPS,
+      frame: Math.max(0, cycleFrame - (isPow ? 18 : 28)),
+      durationInFrames: 126,
+      config: {
+        damping: 16,
+        stiffness: 88,
+        mass: 0.96,
+      },
+    });
+    const packetX = interpolate(packetProgress, [0, 1], [14, 86], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+    const packetOpacity = interpolate(packetProgress, [0, 0.08, 0.9, 1], [0, 1, 1, 0], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+    const candidateGlow = spring({
+      fps: PRESENTATION_FPS,
+      frame: Math.max(0, cycleFrame - (isPow ? 56 : 82)),
+      durationInFrames: 34,
+      config: {
+        damping: 15,
+        stiffness: 114,
+        mass: 0.88,
+      },
+    });
+    const acceptedOffset = interpolate(acceptedProgress, [0, 1], [22, 0], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+    const acceptedOpacity = interpolate(acceptedProgress, [0, 0.16, 1], [0, 0.92, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    });
+
+    return (
+      <article key={lane.label} className={`consensus-lane ${laneClass}`}>
+        <div className="consensus-lane-head">
+          <div>
+            <div className="card-label">{lane.label}</div>
+            <h3>{lane.title}</h3>
+          </div>
+          <div className="consensus-lane-resource">{lane.resourceLabel}</div>
+        </div>
+
+        <div className="consensus-stage">
+          <div className="consensus-stage-grid" />
+          <div className="consensus-stage-rail" />
+
+          <article className="consensus-node resource">
+            <div className="mining-card-label">Committed resource</div>
+            <strong>{lane.resourceValue}</strong>
+            <p>{lane.resourceBody}</p>
+          </article>
+
+          <article
+            className="consensus-node candidate"
+            style={{
+              transform: `translate(-50%, -50%) scale(${interpolate(candidateGlow, [0, 1], [0.94, 1.02], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              })})`,
+            }}
+          >
+            <div className="mining-card-label">Candidate block</div>
+            <strong>{lane.candidateLabel}</strong>
+            <p>{lane.candidateBody}</p>
+          </article>
+
+          <article
+            className="consensus-node accepted"
+            style={{
+              transform: `translateY(${acceptedOffset}px)`,
+              opacity: acceptedOpacity,
+            }}
+          >
+            <div className="mining-card-label">Accepted history</div>
+            <strong>{lane.acceptedLabel}</strong>
+            <p>{lane.acceptedBody}</p>
+          </article>
+
+          <div
+            className={`consensus-signal ${laneClass}`}
+            style={{
+              left: `${packetX}%`,
+              opacity: packetOpacity,
+            }}
+          >
+            {lane.signalLabel}
+          </div>
+
+          <div className="consensus-step-list">
+            {lane.steps.map((step, index) => (
+              <div
+                key={step}
+                className={`consensus-step-chip ${cycleFrame >= stepThresholds[index] ? "active" : ""}`}
+              >
+                <span>0{index + 1}</span>
+                <strong>{step}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </article>
+    );
+  };
+
+  return (
+    <div className="content-card consensus-motion-shell">
+      <div className="consensus-motion-head">
+        <div>
+          <div className="panel-label">{frameLabel}</div>
+          <div className="consensus-motion-phase">{phaseLabel}</div>
+        </div>
+
+        <div className="consensus-motion-legend">
+          <span className="consensus-legend-chip pow">Hardware + energy</span>
+          <span className="consensus-legend-chip pos">Bonded stake + votes</span>
+          <span className="consensus-legend-chip neutral">One accepted block</span>
+        </div>
+      </div>
+
+      <div className="consensus-lane-grid">
+        {lanes.map((lane, index) => renderLane(lane, index))}
+      </div>
+
+      <div className="consensus-summary">
+        <div className="panel-label">What stays parallel</div>
+        <p>{summary}</p>
+      </div>
+    </div>
+  );
+}
+
 function HashChainGraphic({ slide }) {
   const { chain, tamperedChain, frameLabel } = slide.content;
 
@@ -1479,6 +1644,35 @@ function SlideFrame({ slide, isActive }) {
             </div>
 
             <EvmStateMotionGraphic slide={slide} isActive={isActive} />
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "consensus-motion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout consensus-motion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <ConsensusMotionGraphic slide={slide} isActive={isActive} />
 
             <div className="notes-panel">
               {slide.content.notes.map((note, index) => (

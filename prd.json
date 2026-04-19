@@ -700,7 +700,7 @@
         "Verify in browser"
       ],
       "priority": 50,
-      "passes": false,
+      "passes": true,
       "notes": "Use motion only where it clarifies the parallel decision paths; avoid turning the comparison into a flashy but shallow infographic."
     }
   ]

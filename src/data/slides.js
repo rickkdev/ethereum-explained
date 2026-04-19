@@ -1449,28 +1449,60 @@ export const slideGroups = [
     childContent: [
       {
         number: "10.1",
-        layout: "ledger",
+        layout: "consensus-motion",
         eyebrow: "Proof of Work vs Proof of Stake",
         headline: "Proof of Work and Proof of Stake solve the same problem differently: who may extend the chain, and what resource an attacker must control to cheat.",
         description:
           "Both models aim to make honest block production easier than rewriting history, but they use different scarce inputs. Proof of Work leans on computation, hardware, and electricity, while Proof of Stake leans on locked capital and the risk of losing that stake for bad behavior.",
-        comparison: [
+        frameLabel: "Two consensus paths resolving the same candidate block",
+        lanes: [
           {
             label: "Proof of Work",
             title: "Block producers compete with energy and hardware",
-            body: "Miners gather transactions and race to find a valid hash below the difficulty target. Winning depends on computational work, specialized equipment, and ongoing electricity costs, so attacking the chain means outspending honest miners in real-world resources.",
+            resourceLabel: "Security resource",
+            resourceValue: "Hashes, ASICs, electricity",
+            resourceBody:
+              "Miners spend real-world energy and hardware cycles to keep searching for a valid block hash below the target.",
+            candidateLabel: "Nonce race starts",
+            candidateBody:
+              "A miner assembles a candidate block and keeps changing the nonce while hashing over and over.",
+            signalLabel: "Hash attempts",
+            acceptedLabel: "Winning block verified",
+            acceptedBody:
+              "Once one miner finds a valid solution, the rest of the network checks that work and accepts the block if it follows the rules.",
+            steps: [
+              "Miners gather transactions into one candidate block",
+              "Hardware races nonces until one valid hash appears",
+              "Nodes verify the work and extend the accepted chain",
+            ],
           },
           {
             label: "Proof of Stake",
             title: "Validators participate by bonding capital to the protocol",
-            body: "Validators lock up stake, take turns proposing and attesting to blocks, and risk penalties if they act dishonestly or stay offline. Security comes from the value placed at risk and the network's ability to slash or eject bad actors instead of from constant energy burn.",
+            resourceLabel: "Security resource",
+            resourceValue: "Bonded stake, proposer/attester votes",
+            resourceBody:
+              "Validators lock capital into the protocol, then the system selects proposers and attesters who risk penalties for bad behavior.",
+            candidateLabel: "Round begins",
+            candidateBody:
+              "A selected proposer builds the block while other validators prepare to attest to the same history.",
+            signalLabel: "Stake-backed votes",
+            acceptedLabel: "Stake confirms history",
+            acceptedBody:
+              "When enough stake-backed attestations support the same block, the network treats that history as the accepted path forward.",
+            steps: [
+              "Validators post stake and the protocol assigns roles",
+              "One proposer builds the block while attesters vote",
+              "Enough stake-backed attestations advance accepted history",
+            ],
           },
         ],
-        flow: [
-          "Proof of Work: miners assemble a block candidate and hash repeatedly until someone finds a valid solution",
-          "The network verifies that work and accepts the winning block if it follows the rules",
-          "Proof of Stake: validators post stake, then the protocol selects proposers and attesters for each round",
-          "The network accepts the block when enough stake-backed votes confirm the same history",
+        summary:
+          "Both models answer the same coordination question, but the expensive thing an attacker must control is different: ongoing computation in Proof of Work versus slashable stake and validator influence in Proof of Stake.",
+        notes: [
+          "The teaching comparison is not 'old versus new.' It is 'what scarce resource secures the next block?'",
+          "Proof of Work spends energy continuously to earn one valid block; Proof of Stake locks capital and uses role-based voting to advance history.",
+          "Both still rely on the wider network to verify the block and keep one canonical chain.",
         ],
       },
       {

@@ -1,4 +1,5 @@
 ## Codebase Patterns
+- Consensus comparison motion slides can reuse the shared `consensus-motion` layout by defining paired lane objects with `resourceValue`, `candidate`, `signal`, `accepted`, and `steps` fields so Proof of Work and Proof of Stake stay visually parallel without slide-specific React.
 - Smart-contract lifecycle motion slides can reuse the shared `evm-state-motion` layout by keeping the conceptual deploy/call/execute/update arc in `segments` and feeding one concrete contract call through `transaction`, `stateBefore`, `stateAfter`, and `executionSteps`.
 - DeFi motion follow-ups can reuse the shared `defi-journey-motion` layout by keeping the primitive explainer's `segments` and `notes`, then adding `journeyLabel`, `journeySteps`, `walletStart`, and `walletFinish` for one concrete multi-protocol user flow.
 - DeFi fragility motion slides can reuse the shared `defi-cascade-motion` layout by defining the composed `stages` plus `healthySnapshot`, `stressSnapshot`, and `incidentSteps` so the learner sees the normal stack before the cascade.
@@ -390,5 +391,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - DeFi fragility motion slides can reuse the shared `defi-cascade-motion` layout when the teaching goal is to show the normal composed path before showing one dependency break propagate across the stack.
   - Compact slide data in `src/data/slides.js` is enough for this pattern: `stages` for the stack, `healthySnapshot` and `stressSnapshot` for before-and-after state, and `incidentSteps` for the cascade sequence.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 17:58 CEST - REMOTION-10-1
+- Reworked slide 10.1 into a Remotion-style consensus comparison that runs Proof of Work and Proof of Stake in parallel, keeping the candidate-block path aligned while making hardware-and-energy commitment distinct from stake-backed proposer and attester coordination.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-DVA0kfhA.css`, `dist/assets/index-CUzyDRu7.js`; removed stale build assets `dist/assets/index-NrJS6xW8.css` and `dist/assets/index-K69vVd0j.js`
+- **Learnings for future iterations:**
+  - Consensus comparison motion slides work best as two synchronized lanes that share the same candidate-to-accepted-history arc while changing only the committed resource and verification path.
+  - For Proof of Work versus Proof of Stake motion, keep the copy anchored on scarce security resources and acceptance flow; that makes the operational difference visible without collapsing into caricature.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
