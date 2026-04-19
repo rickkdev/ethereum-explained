@@ -140,7 +140,7 @@
         "Verify in browser"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if needed to show hash links updating or breaking across a chain."
     },
     {

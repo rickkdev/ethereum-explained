@@ -327,6 +327,57 @@ function NodeNetworkRemotionGraphic({ isActive }) {
   );
 }
 
+function HashChainGraphic({ slide }) {
+  const { chain, tamperedChain, frameLabel } = slide.content;
+
+  const renderChainRow = (blocks, rowLabel) => (
+    <div className="hash-chain-row">
+      <div className="hash-chain-row-label">{rowLabel}</div>
+
+      <div className="hash-chain-track">
+        {blocks.map((block, index) => {
+          const nextBlock = blocks[index + 1];
+          const linkMatches = !nextBlock || nextBlock.prevHash === block.hash;
+
+          return (
+            <div key={`${rowLabel}-${block.label}`} className="hash-chain-item">
+              <article className={`hash-block ${block.tone ?? "stable"}`}>
+                <div className="block-eyebrow">{block.label}</div>
+                <div className="hash-field">
+                  <span>Prev hash</span>
+                  <strong>{block.prevHash}</strong>
+                </div>
+                <div className="hash-field">
+                  <span>Block hash</span>
+                  <strong>{block.hash}</strong>
+                </div>
+                <p>{block.note}</p>
+              </article>
+
+              {nextBlock ? (
+                <div className={`hash-link ${linkMatches ? "linked" : "broken"}`}>
+                  <div className="hash-link-line" />
+                  <div className="hash-link-copy">
+                    {linkMatches ? "Next block stores this hash" : "Next block points to the old hash"}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="content-card hash-chain-shell">
+      <div className="panel-label">{frameLabel}</div>
+      {renderChainRow(chain, "Valid chain")}
+      {renderChainRow(tamperedChain, "After tampering")}
+    </div>
+  );
+}
+
 function SlideShell({ slide, children }) {
   return (
     <div className={`slide lesson-slide slide-${slide.number.replaceAll(".", "-")}`}>
@@ -527,6 +578,35 @@ function SlideFrame({ slide, isActive }) {
                 ))}
               </div>
             </div>
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "hash-chain") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="hash-chain-layout">
+            <div className="anatomy-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <HashChainGraphic slide={slide} />
 
             <div className="notes-panel">
               {slide.content.notes.map((note, index) => (

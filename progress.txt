@@ -3,6 +3,7 @@
 - Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
 - Historical/context subslides can reuse the `ledger` layout when they read cleanly as "before vs proposal" plus a short dated sequence, so simple origin stories do not need custom timeline components.
 - Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts separated visually without adding slide-specific React code.
+- Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -40,4 +41,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - The shared `anatomy` layout is a good fit when one slide needs to explain the internal parts of a single object rather than compare two systems or show a process sequence.
   - Keeping the layout generic in `src/App.jsx` and driving it from `segments` in `src/data/slides.js` makes it reusable for later slides without bespoke component work.
   - `npm run build` passed after the change; browser verification is still manual in this environment.
+---
+## 2026-04-19 13:53 CEST - SLIDE-02-4
+- Implemented slide 02.4 as a hash-link explainer that shows a valid three-block chain first, then a tampered middle block that changes its hash and breaks the next block's stored reference.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-W9nIsY-6.css`, `dist/assets/index-C-3jAm-n.js`; removed stale build assets `dist/assets/index-BLt89fn4.css` and `dist/assets/index-BhboGCNT.js`
+- **Learnings for future iterations:**
+  - The shared `hash-chain` layout works well for slides that need to compare a valid chain against a tampered one without introducing motion.
+  - Driving both the intact and broken rows from slide data keeps the React renderer reusable for later security or consensus explainers.
+  - `npm run build` passed; browser verification is still manual in this environment.
 ---

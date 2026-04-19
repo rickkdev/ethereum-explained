@@ -249,6 +249,62 @@ export const slideGroups = [
           "Mining is about finding a valid block hash for that package, not creating money from nothing.",
         ],
       },
+      {
+        number: "02.4",
+        layout: "hash-chain",
+        eyebrow: "The chain and hashing",
+        headline: "Bitcoin links blocks by storing the previous block's hash inside the next block's header.",
+        description:
+          "A hash is a compact fingerprint of block data. If one block changes, its fingerprint changes too, and the next block's stored reference no longer matches. That is why rewriting history breaks the chain unless later blocks are rebuilt as well.",
+        frameLabel: "How one block points to the last one",
+        chain: [
+          {
+            label: "Block 728,441",
+            prevHash: "0000A1F9",
+            hash: "0000C4B2",
+            note: "Produces a block hash from its header.",
+          },
+          {
+            label: "Block 728,442",
+            prevHash: "0000C4B2",
+            hash: "00008E31",
+            note: "Stores the prior block hash in its header.",
+          },
+          {
+            label: "Block 728,443",
+            prevHash: "00008E31",
+            hash: "0000D771",
+            note: "Extends the same ordered history.",
+          },
+        ],
+        tamperedChain: [
+          {
+            label: "Block 728,441",
+            prevHash: "0000A1F9",
+            hash: "0000C4B2",
+            note: "This earlier block still matches the chain.",
+          },
+          {
+            label: "Block 728,442*",
+            prevHash: "0000C4B2",
+            hash: "7F31AA09",
+            note: "Edit one transaction and the block hash changes.",
+            tone: "tampered",
+          },
+          {
+            label: "Block 728,443",
+            prevHash: "00008E31",
+            hash: "0000D771",
+            note: "Its stored previous hash no longer matches.",
+            tone: "broken",
+          },
+        ],
+        notes: [
+          "Each block header carries the previous block's hash, so the chain is linked one block at a time.",
+          "Change the contents of a past block and its hash changes immediately.",
+          "That mismatch ripples forward: later blocks still point to the old hash, so the chain shows visible tampering.",
+        ],
+      },
     ],
   },
   {
