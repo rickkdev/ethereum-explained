@@ -1141,6 +1141,28 @@ export const slideGroups = [
     number: "09",
     title: "Wallets & Keys / EOA",
     children: ["EOAs, seed phrases, and signing", "Custody models and wallet UX"],
+    overview: {
+      eyebrow: "Chapter 09",
+      headline: "Wallets are how users control blockchain accounts: they manage keys, produce signatures, and define who actually holds custody.",
+      intro:
+        "A wallet is the interface between a person and the chain. On Ethereum, that means understanding externally owned accounts, the private key material behind them, and the tradeoff between controlling your own keys or delegating that responsibility to someone else.",
+      pillars: [
+        {
+          title: "Control",
+          body: "An externally owned account is controlled by private key material. The wallet helps the user access that account, inspect activity, and authorize actions, but the underlying authority comes from the keys.",
+        },
+        {
+          title: "Signing",
+          body: "Transactions and messages are not approved by a company account page. They are authorized with cryptographic signatures, which is why seed phrases, backups, and device security matter so much.",
+        },
+        {
+          title: "Custody",
+          body: "Some wallets leave the keys entirely with the user, others keep them with an exchange or service, and many products sit somewhere in between. The UX tradeoff is convenience versus direct control.",
+        },
+      ],
+      callout: "The wallet is the user's control surface, but the real power lies in who can produce a valid signature.",
+      footer: "From EOAs and seed phrases to self-custody, custodians, and wallet tradeoffs",
+    },
   },
   {
     number: "10",

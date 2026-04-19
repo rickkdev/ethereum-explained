@@ -259,3 +259,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For gas chapter follow-up slides, keep the protocol explanation at the level of competition for scarce block space and avoid drifting into detailed fee-formula mechanics unless the story explicitly asks for them.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
+## 2026-04-19 15:10 CEST - SLIDE-09
+- Implemented the Wallets & Keys / EOA chapter intro as a shared overview slide, framing wallets as the user control surface for EOAs, signatures, and custody tradeoffs before the detailed subslides.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-hpophB5h.js`; removed stale build asset `dist/assets/index-CP8D1VB-.js`
+- **Learnings for future iterations:**
+  - Wallet chapter intros work best when they distinguish the wallet UI from the actual signing authority, so later slides can explain seed phrases and custody without implying the app itself is the account.
+  - For intro slides in account-security chapters, keep the three pillars on control, authorization, and custody tradeoffs rather than trying to teach operational safety details too early.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
