@@ -1109,6 +1109,32 @@ export const slideGroups = [
           "Keep the distinction clear: gas describes workload, while total fees depend on market pricing.",
         ],
       },
+      {
+        number: "08.2",
+        layout: "ledger",
+        eyebrow: "Fee market and user experience",
+        headline: "When block space is crowded, users compete with fees, and that competition changes both transaction cost and waiting time.",
+        description:
+          "Ethereum does not have a central scheduler deciding whose transaction matters most. When demand rises above available block space, wallets turn the fee market into a user choice: pay more for faster inclusion, wait longer, or come back when congestion eases.",
+        comparison: [
+          {
+            label: "Lighter demand",
+            title: "Plenty of room keeps transaction costs calmer",
+            body: "When blocks are not heavily contested, users do not need to outbid each other aggressively. Wallet estimates tend to look more stable, and ordinary transactions are more likely to land quickly without much tuning from the sender.",
+          },
+          {
+            label: "Crowded demand",
+            title: "Competition pushes fees up and slower bids wait",
+            body: "When NFT mints, market volatility, or popular app activity crowd the network, more transactions chase the same limited block space. Users willing to pay higher fees are more likely to be included first, while lower bids can sit pending until demand cools or the sender reprices.",
+          },
+        ],
+        flow: [
+          "A wallet estimates the current fee market and suggests a price for the user's desired speed.",
+          "The signed transaction enters the network and competes with other pending transactions for limited block space.",
+          "Validators usually include the transactions that offer more attractive fees first when demand is high.",
+          "The result is user-visible: higher costs during congestion and longer waiting times for lower-fee transactions.",
+        ],
+      },
     ],
   },
   {
