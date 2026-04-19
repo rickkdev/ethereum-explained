@@ -1163,6 +1163,39 @@ export const slideGroups = [
       callout: "The wallet is the user's control surface, but the real power lies in who can produce a valid signature.",
       footer: "From EOAs and seed phrases to self-custody, custodians, and wallet tradeoffs",
     },
+    childContent: [
+      {
+        number: "09.1",
+        layout: "anatomy",
+        eyebrow: "EOAs, seed phrases, and signing",
+        headline: "An Ethereum wallet gives you access to an externally owned account, but the real authority comes from the secret material that can produce valid signatures.",
+        description:
+          "For beginners, the key mental model is simple: the account is the public identity on-chain, the seed phrase or private key is the recovery secret behind it, and signing is the act that proves control without revealing that secret to the network.",
+        frameLabel: "Three layers of wallet control",
+        segments: [
+          {
+            label: "EOA",
+            title: "An externally owned account is a user-controlled address on Ethereum",
+            body: "An EOA has an address, can hold ETH and tokens, and can start transactions. Unlike a smart-contract account, it does not run its own code. It acts because someone with the right key material authorizes an action on its behalf.",
+          },
+          {
+            label: "Seed phrase",
+            title: "The seed phrase is a human backup for deriving wallet keys",
+            body: "Most modern wallets give the user a recovery phrase that can regenerate the private keys for that wallet. It is not something you share in normal use. It is a backup secret, and anyone who gets it can usually recreate the same wallet control on another device.",
+          },
+          {
+            label: "Signing",
+            title: "A signature proves control without exposing the private key itself",
+            body: "When you send a transaction or approve a message, the wallet uses the private key to create a signature. Nodes and applications can verify that signature against the public address, which is why the network can trust the authorization without ever seeing the secret.",
+          },
+        ],
+        notes: [
+          "The wallet app is the interface; the EOA is the on-chain account that others can see and interact with.",
+          "The recovery phrase is for backup and restoration, not for routine transaction flow or customer support.",
+          "Signing is the core act of authorization: it is how a user proves, \"I control this account,\" without publishing the secret.",
+        ],
+      },
+    ],
   },
   {
     number: "10",
