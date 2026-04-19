@@ -986,6 +986,39 @@ export const slideGroups = [
       callout: "Ethereum works because many independent groups keep aligning on the same shared system, not because one organization commands the network.",
       footer: "From ecosystem roles to rough consensus, client work, and protocol change",
     },
+    childContent: [
+      {
+        number: "07.1",
+        layout: "anatomy",
+        eyebrow: "Core teams, researchers, and builders",
+        headline: "Ethereum has a recognizable set of actor groups, but they do different jobs and none of them is the single owner of the network.",
+        description:
+          "The ecosystem has human shape once you separate research, client implementation, and application building. These groups overlap in practice, but they contribute at different layers and depend on each other to move the network forward.",
+        frameLabel: "Who does what in the Ethereum ecosystem",
+        segments: [
+          {
+            label: "Research and stewardship",
+            title: "Core researchers and foundation-style teams explore protocol direction",
+            body: "Researchers study upgrades, tradeoffs, and security assumptions. Stewardship groups often fund work, coordinate discussion, and help keep long-term priorities visible, but they do not control the chain by decree.",
+          },
+          {
+            label: "Client teams",
+            title: "Independent client teams turn protocol ideas into production software",
+            body: "Execution and consensus clients implement Ethereum's rules in code, test upgrades, fix bugs, and ship releases that validators and node operators can run. Multiple teams matter because client diversity reduces reliance on one codebase.",
+          },
+          {
+            label: "Builders",
+            title: "Application builders, tooling teams, and educators make the ecosystem usable",
+            body: "Wallet teams, app developers, infrastructure providers, educators, and community organizers turn protocol capability into things people can actually use. They also surface pain points that feed back into future research and client work.",
+          },
+        ],
+        notes: [
+          "Ethereum has influential institutions and teams, but not one central operator with unilateral control.",
+          "Client teams are distinct from researchers: one group studies and proposes, the other implements and ships network software.",
+          "Builders give the ecosystem its visible products, but those products still depend on the protocol and client layers underneath.",
+        ],
+      },
+    ],
   },
   {
     number: "08",

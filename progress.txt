@@ -16,6 +16,7 @@
 - Acronym or framework slides can also reuse the shared `anatomy` layout if each letter or principle is one segment; keep the grid responsive so 5+ cards wrap cleanly without new React code.
 - Principle-to-manifestation slides can also reuse the shared `anatomy` layout by pairing each value with one visible ecosystem or governance choice instead of falling back to abstract slogans.
 - Category-tour slides can also reuse the shared `anatomy` layout by making each segment one protocol primitive or function, which works well for scanning DeFi building blocks without custom React.
+- Ecosystem role-mapping slides can also reuse the shared `anatomy` layout by assigning each segment to one actor group, its job, and its dependency on the rest of the network.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 
 # Ralph Progress Log
@@ -213,5 +214,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Community-focused chapter intros still fit the shared `overview` layout when the three pillars cover ecosystem roles, social-plus-technical coordination, and the chapter roadmap.
   - For Ethereum governance or community framing, keep the language on rough coordination and independent actor groups so the deck does not imply a central manager.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:01 CEST - SLIDE-07-1
+- Implemented slide 07.1 as an Ethereum ecosystem role explainer using the shared anatomy layout, separating research and stewardship, independent client teams, and builders/tooling into distinct responsibilities while keeping the "no single owner" point explicit.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-DMyjK0bt.js`; removed stale build asset `dist/assets/index-tA95tn_d.js`
+- **Learnings for future iterations:**
+  - Ecosystem role-mapping slides fit the shared `anatomy` layout when each segment owns one actor group, its job, and how it depends on adjacent layers.
+  - For Ethereum community slides, pair influential institutions with explicit anti-centralization language so the deck teaches coordination without implying command-and-control governance.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
