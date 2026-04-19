@@ -677,6 +677,28 @@ export const slideGroups = [
     number: "04",
     title: "Smart Contracts",
     children: ["How contracts execute", "Common examples and risks"],
+    overview: {
+      eyebrow: "Chapter 04",
+      headline: "Smart contracts are deterministic programs on a blockchain: rules go on-chain, and outcomes follow from the code plus current state.",
+      intro:
+        "Ethereum lets developers deploy software that many users can call through the same shared state machine. That creates new coordination tools, but it also means bugs, bad assumptions, and upgrade choices become part of the system's real risk surface.",
+      pillars: [
+        {
+          title: "Programs on-chain",
+          body: "A smart contract is code stored at an address. Users send transactions to its functions, and every node executes the same logic against the same state.",
+        },
+        {
+          title: "Rules create outcomes",
+          body: "Contracts can move assets, update storage, enforce conditions, and coordinate users without a central operator manually approving each step.",
+        },
+        {
+          title: "Power with constraints",
+          body: "Because the code is public, stateful, and hard to change safely, developers must think about bugs, exploits, gas costs, and upgrade paths from the start.",
+        },
+      ],
+      callout: "Smart contracts are not magic agreements. They are software with explicit rules, predictable execution, and real failure modes.",
+      footer: "From execution flow to practical examples, risks, and tradeoffs",
+    },
   },
   {
     number: "05",

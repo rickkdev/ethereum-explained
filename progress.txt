@@ -129,3 +129,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For introductory contract slides, concrete behaviors like token minting, escrow release, and vote recording make programmability easier to grasp than abstract "if/then" phrasing alone.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
+## 2026-04-19 14:41 CEST - SLIDE-04
+- Implemented the Smart Contracts chapter intro as a shared overview slide, framing contracts as deterministic on-chain programs, highlighting rules-and-outcomes thinking, and keeping risk and constraint language explicit instead of promotional.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-DChGl4oB.js`; removed stale build asset `dist/assets/index-CNmmPNi9.js`
+- **Learnings for future iterations:**
+  - Chapter intro slides for more caution-heavy topics still fit the existing `overview` schema; the tone can be shifted by using the three pillars to balance capability, mechanism, and risk.
+  - For smart-contract chapter framing, it helps to define them as software first and agreements second so later execution and risk slides have a grounded mental model.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
