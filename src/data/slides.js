@@ -587,6 +587,34 @@ export const slideGroups = [
       callout: "Ethereum extends the blockchain idea from digital money to shared computation.",
       footer: "From Bitcoin-style ledgers to accounts, state, and on-chain applications",
     },
+    childContent: [
+      {
+        number: "03.1",
+        layout: "ledger",
+        eyebrow: "What Ethereum adds beyond Bitcoin",
+        headline: "Bitcoin proved scarce digital money. Ethereum keeps that foundation, then adds a programmable execution layer on top.",
+        description:
+          "Both networks maintain a shared history that nodes can verify. The difference is scope: Bitcoin is optimized around money and settlement, while Ethereum was designed so transactions can also trigger application logic and update shared on-chain state.",
+        comparison: [
+          {
+            label: "Bitcoin",
+            title: "A blockchain focused on money and transaction settlement",
+            body: "Bitcoin's design is intentionally narrow. It excels at recording ownership, moving value, and enforcing monetary rules, but it does not aim to be a broad application platform for many kinds of on-chain logic.",
+          },
+          {
+            label: "Ethereum",
+            title: "A blockchain that can also run shared application logic",
+            body: "Ethereum still moves assets between accounts, but transactions can also call code, change contract storage, mint tokens, and coordinate applications that many users interact with through the same chain state.",
+          },
+        ],
+        flow: [
+          "Bitcoin showed that a public network can agree on one trustworthy history without a central operator",
+          "Developers then asked for a blockchain that could do more than record payments",
+          "Ethereum introduced transactions that can execute code and update shared application state",
+          "That shift makes the chain a platform for tokens, apps, and smart contracts instead of only money transfer",
+        ],
+      },
+    ],
   },
   {
     number: "04",

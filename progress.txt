@@ -3,6 +3,7 @@
 - Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
 - Historical/context subslides can reuse the `ledger` layout when they read cleanly as "before vs proposal" plus a short dated sequence, so simple origin stories do not need custom timeline components.
 - Pending-versus-confirmed lifecycle slides also fit the `ledger` layout well: use the two comparison cards for state before and after confirmation, and the side flow for the broadcast-to-inclusion path.
+- Capability-comparison slides can also use the `ledger` layout by putting the incumbent system on one card, the expanded system on the other, and the side flow on the reason the newer model exists.
 - Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts, roles, or consequences separated visually without adding slide-specific React code.
 - Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
 - Monetary-policy slides can use the shared `issuance` layout with `process`, `eras`, `stats`, and `notes` when one slide needs both a protocol workflow and a stepped reward or supply schedule.
@@ -100,5 +101,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Chapter intro slides stay clean when the three pillars cover capability shift, mental model, and chapter roadmap rather than trying to teach subtopics too early.
   - The existing overview schema is sufficient for new chapter intros; if the story is a parent slide, default to slide-data changes before considering React edits.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 14:35 CEST - SLIDE-03-1
+- Implemented slide 03.1 as an Ethereum comparison explainer using the shared ledger layout, contrasting Bitcoin's narrow money-and-settlement focus with Ethereum's programmable shared state and execution model.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-A_SvU9nh.js`; removed stale build asset `dist/assets/index-CNY0yA9z.js`
+- **Learnings for future iterations:**
+  - Capability-comparison slides can reuse the shared `ledger` layout when the story is "what the newer system adds over the earlier one" rather than a strict before/after state transition.
+  - For Ethereum-vs-Bitcoin teaching slides, keep the contrast scoped to programmability versus money-focused settlement so the comparison stays accurate and does not overstate either chain.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
