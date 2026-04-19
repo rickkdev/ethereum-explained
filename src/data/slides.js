@@ -929,6 +929,32 @@ export const slideGroups = [
           "Thinking in protocol roles first makes later composability slides easier to teach than starting with brand names or token jargon.",
         ],
       },
+      {
+        number: "06.2",
+        layout: "ledger",
+        eyebrow: "Risks, composability, and real-world fit",
+        headline: "DeFi is powerful because protocols can stack together, but that same composability can turn one weak link into a larger failure.",
+        description:
+          "On-chain finance is modular: a wallet can connect to a swap, a lending market can rely on a stablecoin, and an app can build on all of them. That openness creates new product possibilities, but it also means liquidation engines, oracle inputs, smart-contract code, and thin markets can amplify each other's problems.",
+        comparison: [
+          {
+            label: "Composability",
+            title: "Protocols can plug into each other like financial Lego",
+            body: "A user might swap into collateral, deposit it into a lending market, borrow a stablecoin, and move that stable asset into another app without leaving the chain. Shared standards and visible state make those connections possible.",
+          },
+          {
+            label: "Fragility and fit",
+            title: "Open finance still has sharp edges and does not fit every need",
+            body: "Smart-contract bugs, forced liquidations, oracle mistakes, MEV-heavy market structure, and shallow liquidity can all hurt users. DeFi fits best when programmability and open access matter more than chargebacks, customer support, or strong legal recourse.",
+          },
+        ],
+        flow: [
+          "A user starts with one on-chain asset in a wallet",
+          "That asset is swapped or posted as collateral in another protocol",
+          "The next app depends on prices, code, and liquidity from the earlier layers",
+          "If one layer breaks or markets move fast, risk can cascade through the full stack",
+        ],
+      },
     ],
   },
   {

@@ -392,7 +392,7 @@
         "Verify in browser"
       ],
       "priority": 28,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if needed to illustrate composability chains or cascading risk."
     },
     {
