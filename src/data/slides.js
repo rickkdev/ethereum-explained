@@ -699,6 +699,39 @@ export const slideGroups = [
       callout: "Smart contracts are not magic agreements. They are software with explicit rules, predictable execution, and real failure modes.",
       footer: "From execution flow to practical examples, risks, and tradeoffs",
     },
+    childContent: [
+      {
+        number: "04.1",
+        layout: "pipeline",
+        eyebrow: "How contracts execute",
+        headline: "A contract call follows a repeatable path: code is deployed once, users call functions through transactions, the EVM runs the logic, and the shared state updates if execution succeeds.",
+        description:
+          "Smart contract execution is deterministic, not magical. The contract code lives on-chain at an address, a user submits a transaction that targets one of its functions, and every node replays the same computation against the same current state before accepting the result.",
+        stages: [
+          {
+            title: "Deploy the code",
+            body: "A developer publishes contract bytecode to Ethereum. Once the deployment transaction is accepted, the contract exists at an address with code and, often, initial storage.",
+          },
+          {
+            title: "Call a function",
+            body: "A wallet sends a transaction to that contract address with function data and any required ETH. This transaction is a request for the network to run a specific piece of contract logic.",
+          },
+          {
+            title: "Every node executes it",
+            body: "When the transaction is included in a block, each node runs the same contract code inside the EVM using the same inputs and current state. Determinism matters: honest nodes should compute the same result independently.",
+          },
+          {
+            title: "State changes become shared history",
+            body: "If execution succeeds under the protocol rules, balances, storage values, and emitted outputs are updated in Ethereum's shared state. If it fails, the intended state change does not go through.",
+          },
+        ],
+        notes: [
+          "Deployment is how code gets onto the chain; calling is how users ask that code to run.",
+          "Nodes do not trust one server's answer. They reproduce the same execution themselves.",
+          "The contract can only act on the current on-chain state plus the transaction inputs it receives.",
+        ],
+      },
+    ],
   },
   {
     number: "05",

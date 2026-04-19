@@ -294,7 +294,7 @@
         "Verify in browser"
       ],
       "priority": 21,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if needed to show a contract call moving from user input to state change."
     },
     {
