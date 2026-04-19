@@ -788,6 +788,49 @@ export const slideGroups = [
       callout: "Technical systems reflect human values. Ethereum's architecture makes more sense once you see the principles behind it.",
       footer: "From cultural principles to visible ecosystem design choices",
     },
+    childContent: [
+      {
+        number: "05.1",
+        layout: "anatomy",
+        eyebrow: "What CROPS stands for",
+        headline: "CROPS is a compact way to remember the values Ethereum keeps trying to protect in practice.",
+        description:
+          "The recent Ethereum Foundation mandate describes Ethereum as needing to remain censorship resistant, open source, private, and secure. This slide turns that phrase into a teachable framework: one value is about access, one about resistance to control, one about transparent building, one about user privacy, and one about system safety.",
+        frameLabel: "Reading the CROPS framework left to right",
+        segments: [
+          {
+            label: "C",
+            title: "Censorship",
+            body: "Ethereum aims to let valid users and transactions participate without a platform owner deciding who is allowed to speak, publish, or transact.",
+          },
+          {
+            label: "R",
+            title: "Resistance",
+            body: "The point is not just anti-censorship in theory. The infrastructure should resist pressure from states, companies, or intermediaries that want to block or reshape usage.",
+          },
+          {
+            label: "O",
+            title: "Open source",
+            body: "Core software, standards, and tooling are developed in public so anyone can inspect the code, contribute improvements, or build compatible alternatives.",
+          },
+          {
+            label: "P",
+            title: "Privacy",
+            body: "Users should not have to reveal every detail about themselves just to participate. Privacy protects safety, dignity, and room for self-sovereign action.",
+          },
+          {
+            label: "S",
+            title: "Security",
+            body: "Assets, applications, and the base protocol need strong guarantees against theft, corruption, and accidental failure so people can rely on the system.",
+          },
+        ],
+        notes: [
+          "C and R belong together: censorship resistance is stronger than a promise from one company to behave well.",
+          "Open source is about inspectability and exit, not just putting code on GitHub.",
+          "Privacy and security are separate values: one protects information and autonomy, the other protects funds and system integrity.",
+        ],
+      },
+    ],
   },
   {
     number: "06",

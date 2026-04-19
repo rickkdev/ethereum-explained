@@ -13,6 +13,7 @@
 - Monetary-policy slides can use the shared `issuance` layout with `process`, `eras`, `stats`, and `notes` when one slide needs both a protocol workflow and a stepped reward or supply schedule.
 - The shared `issuance` layout can also explain a fixed cap if `eras` are framed as cumulative supply milestones; the same bar treatment reads well for "approaching the ceiling" stories.
 - Wallet mental-model slides can reuse the shared `anatomy` layout by splitting the explanation into public-side details, private-key control, and wallet-software responsibilities.
+- Acronym or framework slides can also reuse the shared `anatomy` layout if each letter or principle is one segment; keep the grid responsive so 5+ cards wrap cleanly without new React code.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -162,4 +163,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - Chapter intros for culture or values topics still fit the shared `overview` layout well when the three pillars cover why the topic matters, how to remember it, and where it shows up in practice.
   - If a parent slide introduces an acronym that is defined in the next story, keep the opener high-level and avoid overloading it with the full breakdown too early.
   - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
+---
+## 2026-04-19 14:50 CEST - SLIDE-05-1
+- Implemented slide 05.1 as a CROPS framework explainer using the shared anatomy layout, defining the acronym as censorship resistance, open source, privacy, and security with a separate emphasis on resistance to control.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-B6ltLMnU.css`, `dist/assets/index-CSp9mfRB.js`; removed stale build assets `dist/assets/index-BFby-P-C.css` and `dist/assets/index-Bs1MIwp0.js`
+- **Learnings for future iterations:**
+  - Acronym and framework slides fit the shared `anatomy` layout well when each letter or principle maps to one segment and the grid is allowed to auto-fit rather than forcing exactly three columns.
+  - For values-heavy slides, define the principle in operational terms first so the content stays specific and does not read like a slogan wall.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
