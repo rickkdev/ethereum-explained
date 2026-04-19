@@ -251,7 +251,7 @@ export const slideGroups = [
       },
       {
         number: "02.4",
-        layout: "hash-chain",
+        layout: "hash-chain-motion",
         eyebrow: "The chain and hashing",
         headline: "Bitcoin links blocks by storing the previous block's hash inside the next block's header.",
         description:

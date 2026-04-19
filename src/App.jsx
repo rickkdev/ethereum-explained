@@ -378,6 +378,140 @@ function HashChainGraphic({ slide }) {
   );
 }
 
+function HashTamperMotionGraphic({ slide, isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 240;
+  const { chain, tamperedChain, frameLabel } = slide.content;
+  const tamperProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 62),
+    durationInFrames: 44,
+    config: {
+      damping: 16,
+      stiffness: 108,
+      mass: 0.9,
+    },
+  });
+  const rippleProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 118),
+    durationInFrames: 54,
+    config: {
+      damping: 17,
+      stiffness: 96,
+      mass: 0.94,
+    },
+  });
+  const phaseLabel = cycleFrame < 62 ? "Stable chain" :
+    cycleFrame < 118 ? "Block edit changes the fingerprint" :
+      cycleFrame < 198 ? "Mismatch ripples into the next block" :
+        "Loop resets";
+
+  const activeBlocks = chain.map((block, index) => {
+    if (index === 1) {
+      return tamperProgress > 0.5 ? tamperedChain[index] : block;
+    }
+
+    if (index === 2) {
+      return rippleProgress > 0.52 ? tamperedChain[index] : block;
+    }
+
+    return block;
+  });
+
+  const auditScale = interpolate(tamperProgress, [0, 1], [1, 1.08], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const tamperGlow = interpolate(tamperProgress, [0, 1], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const rippleX = interpolate(rippleProgress, [0, 1], [35, 69], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const rippleOpacity = interpolate(rippleProgress, [0, 0.15, 1], [0, 0.9, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <div className="content-card hash-motion-shell">
+      <div className="hash-motion-head">
+        <div>
+          <div className="panel-label">{frameLabel}</div>
+          <div className="hash-motion-phase">{phaseLabel}</div>
+        </div>
+
+        <div className="hash-motion-legend">
+          <span className="hash-legend-chip stable">Linked</span>
+          <span className="hash-legend-chip tampered">Edited block</span>
+          <span className="hash-legend-chip broken">Broken reference</span>
+        </div>
+      </div>
+
+      <div className="hash-motion-stage">
+        <div className="hash-motion-trackline" />
+        <div
+          className="hash-ripple"
+          style={{
+            left: `${rippleX}%`,
+            opacity: rippleOpacity,
+          }}
+        />
+
+        {activeBlocks.map((block, index) => {
+          const isTampered = block.tone === "tampered";
+          const isBroken = block.tone === "broken";
+          const scale = index === 1 ? auditScale : 1;
+          const blockGlow = index === 1 ? tamperGlow : 0;
+
+          return (
+            <div key={block.label} className="hash-motion-node">
+              <article
+                className={`hash-block hash-motion-block ${block.tone ?? "stable"}`}
+                style={{
+                  transform: `scale(${scale})`,
+                  boxShadow: isTampered
+                    ? `0 0 ${18 + blockGlow * 26}px rgba(255, 188, 128, ${0.12 + blockGlow * 0.22})`
+                    : isBroken
+                      ? "0 0 26px rgba(255, 128, 128, 0.14)"
+                      : "none",
+                }}
+              >
+                <div className="block-eyebrow">{block.label}</div>
+                <div className="hash-field">
+                  <span>Prev hash</span>
+                  <strong>{block.prevHash}</strong>
+                </div>
+                <div className="hash-field">
+                  <span>Block hash</span>
+                  <strong>{block.hash}</strong>
+                </div>
+                <p>{block.note}</p>
+              </article>
+
+              {index < activeBlocks.length - 1 ? (
+                <div
+                  className={`hash-link hash-motion-link ${!isBroken && activeBlocks[index + 1].prevHash === block.hash ? "linked" : "broken"}`}
+                >
+                  <div className="hash-link-line" />
+                  <div className="hash-link-copy">
+                    {!isBroken && activeBlocks[index + 1].prevHash === block.hash
+                      ? "Next block still matches"
+                      : "Next block points to the old hash"}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function SlideShell({ slide, children }) {
   return (
     <div className={`slide lesson-slide slide-${slide.number.replaceAll(".", "-")}`}>
@@ -607,6 +741,35 @@ function SlideFrame({ slide, isActive }) {
             </div>
 
             <HashChainGraphic slide={slide} />
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "hash-chain-motion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout hash-motion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <HashTamperMotionGraphic slide={slide} isActive={isActive} />
 
             <div className="notes-panel">
               {slide.content.notes.map((note, index) => (

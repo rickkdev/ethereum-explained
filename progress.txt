@@ -28,6 +28,7 @@
 - Practical checklist or habit slides can also reuse the shared `anatomy` layout by making each segment one repeatable behavior cluster, which keeps final guidance actionable without collapsing into a dense bullet list.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
+- Motion follow-ups to an existing explainer slide can often keep the same structured data in `src/data/slides.js` and just switch the slide `layout`, which keeps the static lesson and the animated version synchronized.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -336,5 +337,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Practical checklist or habit slides fit the shared `anatomy` layout when each segment owns one repeatable behavior cluster instead of one system component.
   - For final security guidance, emphasize routines users can apply before every click or signature rather than ending on abstract warnings.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 17:28 CEST - REMOTION-02-4
+- Reworked slide 02.4 into a Remotion-style in-app animation that stages a stable three-block chain, highlights an edited middle block, and then shows the downstream prev-hash mismatch as a visible ripple.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-B5Rqau_7.css`, `dist/assets/index-BNd5K7WJ.js`; removed stale build assets `dist/assets/index-3cUUQMXY.js` and `dist/assets/index-B6ltLMnU.css`
+- **Learnings for future iterations:**
+  - Motion follow-ups can reuse the same slide data as the static explainer and swap only the layout, which keeps copy, labels, and animation states aligned.
+  - For tamper-evidence animations, a short phase loop works well: show the intact chain first, then the edited block, then the broken downstream reference instead of animating every field continuously.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

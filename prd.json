@@ -604,6 +604,104 @@
       "priority": 43,
       "passes": true,
       "notes": ""
+    },
+    {
+      "id": "REMOTION-02-4",
+      "title": "Animate slide 02.4 Hash links and tamper ripple",
+      "description": "As a learner, I want to watch one edited block break the downstream links so the chain's tamper-evidence becomes intuitive at a glance.",
+      "acceptanceCriteria": [
+        "Slide 02.4 gains a Remotion-style animation that shows one block changing and the downstream hash references no longer matching",
+        "The motion stages the normal chain first, then the tampered chain, without overwhelming the learner with protocol detail",
+        "The animation integrates with the existing slide system and matches the deck's visual language",
+        "Verify in browser"
+      ],
+      "priority": 44,
+      "passes": true,
+      "notes": "Treat this as a dedicated motion follow-up to the base hash-chain explainer, similar to how slide 01.2 isolates the animation-first teaching moment."
+    },
+    {
+      "id": "REMOTION-02-5",
+      "title": "Animate slide 02.5 Mining race and halving cadence",
+      "description": "As a learner, I want to see miners racing to produce a block and the reward stepping down over eras so Proof of Work and halving feel dynamic rather than purely textual.",
+      "acceptanceCriteria": [
+        "Slide 02.5 gains a Remotion-style sequence that shows candidate block production, one winning miner, and the accepted block entering the chain",
+        "The animation also visualizes the reward shrinking across halving eras without turning into a chart-only slide",
+        "The motion stays beginner-friendly and supports the existing issuance slide copy instead of duplicating it verbatim",
+        "Verify in browser"
+      ],
+      "priority": 45,
+      "passes": false,
+      "notes": "Use motion to teach both the competition loop and the stepwise issuance reduction, not just to decorate the existing issuance layout."
+    },
+    {
+      "id": "REMOTION-03-2",
+      "title": "Animate slide 03.2 State transitions through the EVM",
+      "description": "As a learner, I want to watch a transaction move through execution into a new shared state so Ethereum's state-machine model is easier to internalize.",
+      "acceptanceCriteria": [
+        "Slide 03.2 gains a Remotion-style animation that shows an account-originated transaction entering the EVM and producing a new state snapshot",
+        "The motion distinguishes accounts, current state, execution, and updated state clearly enough for a first-time audience",
+        "The animation can loop cleanly during presentation without requiring narration to stay legible",
+        "Verify in browser"
+      ],
+      "priority": 46,
+      "passes": false,
+      "notes": "This should turn the static anatomy explanation into a visible before-and-after state transition, not a generic moving background."
+    },
+    {
+      "id": "REMOTION-04-1",
+      "title": "Animate slide 04.1 Contract call lifecycle",
+      "description": "As a learner, I want to see deployment, a user call, deterministic execution, and shared-state update happen in sequence so smart contract execution stops feeling magical.",
+      "acceptanceCriteria": [
+        "Slide 04.1 gains a Remotion-style animation for deploy, call, execute, and update as one continuous lifecycle",
+        "The motion makes clear that every node replays the same logic rather than trusting one backend result",
+        "The animation reinforces the deterministic model without adding unnecessary visual clutter",
+        "Verify in browser"
+      ],
+      "priority": 47,
+      "passes": false,
+      "notes": "Prefer a dedicated in-app Remotion component over an embedded external player so the execution steps stay tightly integrated with the slide."
+    },
+    {
+      "id": "REMOTION-06-1",
+      "title": "Animate slide 06.1 A DeFi user journey across protocols",
+      "description": "As a learner, I want to watch assets move through swaps, lending, and stablecoin flows so DeFi composability reads as one connected system.",
+      "acceptanceCriteria": [
+        "Slide 06.1 gains a Remotion-style animation that follows one user action or asset through multiple DeFi primitives",
+        "The motion makes each protocol role legible without implying all activity happens inside one monolithic app",
+        "The animation complements the category tour and gives the audience a memorable flow to anchor the concepts",
+        "Verify in browser"
+      ],
+      "priority": 48,
+      "passes": false,
+      "notes": "A single looping user journey is higher value than animating each primitive separately."
+    },
+    {
+      "id": "REMOTION-06-2",
+      "title": "Animate slide 06.2 Composability and cascading risk",
+      "description": "As a learner, I want to see how one dependency failure can ripple through stacked protocols so DeFi fragility is concrete instead of abstract.",
+      "acceptanceCriteria": [
+        "Slide 06.2 gains a Remotion-style animation that shows a normal multi-protocol flow and then a disruption propagating across dependencies",
+        "The motion balances upside and fragility rather than presenting composability only as a failure story",
+        "The animation stays teachable in a live presentation and does not rely on dense labels to explain the cascade",
+        "Verify in browser"
+      ],
+      "priority": 49,
+      "passes": false,
+      "notes": "This is a strong candidate for animation because cascading dependency risk is hard to communicate with a static comparison alone."
+    },
+    {
+      "id": "REMOTION-10-1",
+      "title": "Animate slide 10.1 Proof of Work and Proof of Stake consensus flows",
+      "description": "As a learner, I want to watch both consensus paths resolve a candidate block so the operational difference between Proof of Work and Proof of Stake is easier to compare.",
+      "acceptanceCriteria": [
+        "Slide 10.1 gains a Remotion-style comparison that shows the acceptance flow for Proof of Work and Proof of Stake side by side or in staged sequence",
+        "The motion makes the resource being committed in each model visually distinct without caricaturing either system",
+        "The animation remains balanced, concise, and usable during a live explanation",
+        "Verify in browser"
+      ],
+      "priority": 50,
+      "passes": false,
+      "notes": "Use motion only where it clarifies the parallel decision paths; avoid turning the comparison into a flashy but shallow infographic."
     }
   ]
 }
