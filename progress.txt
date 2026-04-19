@@ -15,6 +15,7 @@
 - Wallet mental-model slides can reuse the shared `anatomy` layout by splitting the explanation into public-side details, private-key control, and wallet-software responsibilities.
 - Acronym or framework slides can also reuse the shared `anatomy` layout if each letter or principle is one segment; keep the grid responsive so 5+ cards wrap cleanly without new React code.
 - Principle-to-manifestation slides can also reuse the shared `anatomy` layout by pairing each value with one visible ecosystem or governance choice instead of falling back to abstract slogans.
+- Category-tour slides can also reuse the shared `anatomy` layout by making each segment one protocol primitive or function, which works well for scanning DeFi building blocks without custom React.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -188,4 +189,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - Chapter intros for application-layer topics still fit the shared `overview` layout when the three pillars cover primitives, why composition matters, and what risks stay in scope for the chapter.
   - For DeFi teaching slides, introduce the space as reusable financial building blocks first; that keeps later swap, lending, and stablecoin slides grounded in function instead of jargon.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 14:55 CEST - SLIDE-06-1
+- Implemented slide 06.1 as a DeFi primitive tour using the shared anatomy layout, separating swaps, lending markets, and stablecoins into distinct jobs-to-be-done with concrete examples and notes that set up later composability discussion.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-BC1elv6j.js`; removed stale build asset `dist/assets/index-Kj0o5o8y.js`
+- **Learnings for future iterations:**
+  - Category-tour slides fit the shared `anatomy` layout when each segment owns one protocol primitive or functional role rather than one physical system component.
+  - For DeFi beginner slides, explain the protocol job first and keep brand names secondary so the audience learns the primitive instead of memorizing products.
+  - Manual browser verification is still needed in this environment; `npm run build` remains the automated quality check.
 ---

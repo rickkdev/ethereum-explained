@@ -378,7 +378,7 @@
         "Verify in browser"
       ],
       "priority": 27,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if useful for showing assets moving across protocols in one user journey."
     },
     {

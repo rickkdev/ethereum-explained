@@ -897,6 +897,39 @@ export const slideGroups = [
       callout: "DeFi is best understood as reusable financial infrastructure: legible, programmable, and sometimes fragile.",
       footer: "From core primitives to composability, failure modes, and practical fit",
     },
+    childContent: [
+      {
+        number: "06.1",
+        layout: "anatomy",
+        eyebrow: "Swaps, lending, and stablecoins",
+        headline: "Three DeFi primitives show up again and again: swaps move between assets, lending markets turn collateral into credit, and stablecoins try to keep one unit close to one dollar.",
+        description:
+          "The easiest way to read DeFi is by function. One protocol category helps users exchange assets, another lets them borrow against posted collateral, and another provides a steadier unit of account so prices, loans, and payments are easier to reason about on-chain.",
+        frameLabel: "Reading core DeFi primitives by job to be done",
+        segments: [
+          {
+            label: "Swaps",
+            title: "Swap protocols let users trade one asset for another on-chain",
+            body: "A swap protocol is the exchange layer of DeFi. Instead of sending funds to a centralized broker, users interact with a contract that quotes a price path and settles the trade against on-chain liquidity, such as swapping ETH for USDC or one token for another.",
+          },
+          {
+            label: "Lending",
+            title: "Lending markets turn posted collateral into borrowable liquidity",
+            body: "A lending protocol lets users deposit assets into shared pools and borrow against collateral they lock on-chain. One user earns yield by supplying liquidity, while another can unlock short-term capital without selling the asset they already hold.",
+          },
+          {
+            label: "Stablecoins",
+            title: "Stablecoins provide the relatively steady unit that many DeFi workflows depend on",
+            body: "Stablecoins are blockchain-based assets designed to track something less volatile, usually the US dollar. They matter because traders, borrowers, and apps often need a predictable reference asset for quoting prices, posting collateral, or making payments without taking full crypto price risk every step of the way.",
+          },
+        ],
+        notes: [
+          "Swaps answer exchange, lending answers credit, and stablecoins answer price stability and settlement.",
+          "These primitives often connect in one user flow: swap into collateral, borrow a stablecoin, then move that stable asset elsewhere.",
+          "Thinking in protocol roles first makes later composability slides easier to teach than starting with brand names or token jargon.",
+        ],
+      },
+    ],
   },
   {
     number: "07",
