@@ -29,6 +29,7 @@
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
 - Motion follow-ups to an existing explainer slide can often keep the same structured data in `src/data/slides.js` and just switch the slide `layout`, which keeps the static lesson and the animated version synchronized.
+- Motion follow-ups for process-plus-schedule slides can keep the same `process` and `eras` data and swap only the layout, so animated mining or issuance explainers stay aligned with the underlying lesson model.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -257,6 +258,14 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Resource-pricing slides fit the shared `anatomy` layout when one segment explains the metered work, one explains spam resistance and fair allocation, and one explicitly fences off the next topic such as fee-market math.
   - For gas education slides, keep the protocol purpose explicit: gas measures workload and bounds shared resources before the deck explains how wallets turn that into a quoted fee.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 17:30 CEST - REMOTION-02-5
+- Implemented slide 02.5 as a dedicated Remotion-style mining animation, showing mempool transactions feeding candidate blocks, miners racing nonces, one winning block joining the accepted chain, and the halving eras stepping down alongside the race.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-hlwbVHek.css`, `dist/assets/index-Co65yFBE.js`; removed stale build assets `dist/assets/index-B5Rqau_7.css` and `dist/assets/index-BNd5K7WJ.js`
+- **Learnings for future iterations:**
+  - Process-plus-schedule motion slides can stay data-driven by reusing the existing `process` and `eras` fields from `src/data/slides.js` rather than defining a separate animation-only schema.
+  - For mining explainers, show the accepted block entering the chain separately from the reward cadence so learners can distinguish block production from the slower issuance schedule.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
 ## 2026-04-19 15:13 CEST - SLIDE-08-2

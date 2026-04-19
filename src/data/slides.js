@@ -307,11 +307,11 @@ export const slideGroups = [
       },
       {
         number: "02.5",
-        layout: "issuance",
+        layout: "mining-motion",
         eyebrow: "Mining and halving",
         headline: "Mining adds new blocks through Proof of Work, and the block reward halves on a fixed schedule.",
         description:
-          "Miners gather transactions and compete to find a valid block hash. When a miner wins, the network accepts a new block and issues the block reward. Roughly every 210,000 blocks, that reward is cut in half, so Bitcoin's new supply arrives more slowly over time.",
+          "This animation turns the static model into a loop: candidate blocks rise out of the mempool, miners race nonces against the target, one accepted block joins the chain, and the attached subsidy shrinks across halving eras.",
         processLabel: "How mining turns pending payments into one new block",
         process: [
           {

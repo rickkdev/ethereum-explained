@@ -327,6 +327,269 @@ function NodeNetworkRemotionGraphic({ isActive }) {
   );
 }
 
+function MiningRaceRemotionGraphic({ slide, isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 270;
+  const miners = [
+    { id: "miner-a", label: "Miner A", x: 18, tone: "calm" },
+    { id: "miner-b", label: "Miner B", x: 50, tone: "winner" },
+    { id: "miner-c", label: "Miner C", x: 82, tone: "calm" },
+  ];
+  const mempoolPackets = [
+    { id: "tx-a", fromX: 18, toX: 18, start: 10, duration: 28 },
+    { id: "tx-b", fromX: 50, toX: 50, start: 20, duration: 28 },
+    { id: "tx-c", fromX: 82, toX: 82, start: 30, duration: 28 },
+    { id: "tx-d", fromX: 34, toX: 50, start: 44, duration: 30 },
+    { id: "tx-e", fromX: 66, toX: 82, start: 54, duration: 30 },
+  ];
+
+  const raceProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 54),
+    durationInFrames: 68,
+    config: {
+      damping: 16,
+      stiffness: 96,
+      mass: 0.92,
+    },
+  });
+  const winnerProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 118),
+    durationInFrames: 38,
+    config: {
+      damping: 15,
+      stiffness: 112,
+      mass: 0.88,
+    },
+  });
+  const chainProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 148),
+    durationInFrames: 44,
+    config: {
+      damping: 17,
+      stiffness: 104,
+      mass: 0.9,
+    },
+  });
+  const eraProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 150),
+    durationInFrames: 92,
+    config: {
+      damping: 18,
+      stiffness: 72,
+      mass: 0.98,
+    },
+  });
+  const activeEraIndex = Math.min(
+    slide.content.eras.length - 1,
+    Math.floor(interpolate(eraProgress, [0, 1], [0, slide.content.eras.length], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    })),
+  );
+  const phaseLabel = cycleFrame < 54 ? "Candidate blocks form from pending transactions" :
+    cycleFrame < 118 ? "Miners race different nonces against the target" :
+      cycleFrame < 150 ? "One miner finds a valid hash first" :
+        cycleFrame < 236 ? "Accepted block joins the chain as rewards step down" :
+          "Loop resets for the next block";
+
+  const incomingBlockX = interpolate(chainProgress, [0, 1], [54, 4], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const incomingBlockOpacity = interpolate(chainProgress, [0, 0.18, 1], [0, 1, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <div className="content-card mining-motion-shell">
+      <div className="mining-motion-head">
+        <div>
+          <div className="panel-label">{slide.content.processLabel}</div>
+          <div className="mining-motion-phase">{phaseLabel}</div>
+        </div>
+
+        <div className="mining-motion-legend">
+          <span className="mining-legend-chip">Pending txs</span>
+          <span className="mining-legend-chip winner">Winning miner</span>
+          <span className="mining-legend-chip reward">Reward era</span>
+        </div>
+      </div>
+
+      <div className="mining-motion-grid">
+        <div className="mining-race-stage">
+          <div className="mining-grid" />
+          <div className="mining-mempool">
+            <div className="mining-card-label">Mempool</div>
+            <div className="mempool-stack">
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+
+          {mempoolPackets.map((packet) => {
+            const travel = spring({
+              fps: PRESENTATION_FPS,
+              frame: Math.max(0, cycleFrame - packet.start),
+              durationInFrames: packet.duration,
+              config: {
+                damping: 14,
+                stiffness: 104,
+                mass: 0.88,
+              },
+            });
+            const isVisible = cycleFrame >= packet.start && cycleFrame <= packet.start + packet.duration + 10;
+            const x = packet.fromX + (packet.toX - packet.fromX) * travel;
+            const y = 76 - 40 * travel;
+
+            return (
+              <div
+                key={packet.id}
+                className="mining-packet"
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
+                  opacity: isVisible ? 1 : 0,
+                  transform: `translate(-50%, -50%) scale(${interpolate(travel, [0, 1], [0.84, 1])})`,
+                }}
+              />
+            );
+          })}
+
+          <div className="hash-target-band">
+            <span>Difficulty target</span>
+            <strong>Hash must land below this line</strong>
+          </div>
+
+          <div className="mining-chain-lane">
+            <div className="chain-lane-label">Accepted chain</div>
+            <div className="chain-lane-track">
+              {[0, 1, 2].map((index) => (
+                <article key={index} className="chain-lane-block stable">
+                  <div className="block-eyebrow">Confirmed</div>
+                  <div className="block-number">#{728440 + index}</div>
+                  <div className="block-hash">0x{((728440 + index) * 1297).toString(16).slice(-4).padStart(4, "0")}</div>
+                </article>
+              ))}
+              <article
+                className="chain-lane-block incoming"
+                style={{
+                  transform: `translateX(${incomingBlockX}px) scale(${interpolate(chainProgress, [0, 1], [0.9, 1])})`,
+                  opacity: incomingBlockOpacity,
+                }}
+              >
+                <div className="block-eyebrow">New winner</div>
+                <div className="block-number">#728443</div>
+                <div className="block-hash">0x00af</div>
+              </article>
+            </div>
+          </div>
+
+          {miners.map((miner, index) => {
+            const isWinner = miner.tone === "winner";
+            const pulse = spring({
+              fps: PRESENTATION_FPS,
+              frame: Math.max(0, cycleFrame - (isWinner ? 112 : 64 + index * 8)),
+              durationInFrames: isWinner ? 42 : 52,
+              config: {
+                damping: 16,
+                stiffness: isWinner ? 118 : 94,
+                mass: 0.9,
+              },
+            });
+            const ringOpacity = isWinner
+              ? interpolate(winnerProgress, [0, 1], [0.12, 0.46], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                })
+              : interpolate(raceProgress, [0, 1], [0.06, 0.2], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                });
+            const nonceCount = 184320 + index * 932 + Math.floor((cycleFrame + index * 13) * (isWinner ? 41 : 33));
+
+            return (
+              <article
+                key={miner.id}
+                className={`mining-rig ${isWinner ? "winner" : ""}`}
+                style={{
+                  left: `${miner.x}%`,
+                  transform: `translateX(-50%) scale(${interpolate(pulse, [0, 1], [0.96, 1])})`,
+                }}
+              >
+                <div className="mining-rig-ring" style={{ opacity: ringOpacity }} />
+                <div className="mining-card-label">{miner.label}</div>
+                <div className="mining-rig-block">
+                  <span>Candidate block</span>
+                  <strong>Nonce {nonceCount.toLocaleString()}</strong>
+                  <div className="mining-hash-meter">
+                    <div
+                      className="mining-hash-fill"
+                      style={{
+                        width: `${interpolate(
+                          isWinner ? winnerProgress : raceProgress,
+                          [0, 1],
+                          [18 + index * 7, isWinner ? 92 : 66 + index * 6],
+                          {
+                            extrapolateLeft: "clamp",
+                            extrapolateRight: "clamp",
+                          },
+                        )}%`,
+                      }}
+                    />
+                  </div>
+                  <p>{isWinner ? slide.content.process[2].title : slide.content.process[1].title}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <div className="halving-cadence-panel">
+          <div className="panel-label">{slide.content.erasLabel}</div>
+          <div className="halving-cadence-rail" />
+
+          <div className="halving-era-list">
+            {slide.content.eras.map((era, index) => {
+              const isActiveEra = index === activeEraIndex;
+              const isPastEra = index < activeEraIndex;
+
+              return (
+                <article
+                  key={era.title}
+                  className={`halving-era-card ${isActiveEra ? "active" : ""} ${isPastEra ? "past" : ""}`}
+                >
+                  <div className="halving-era-step">0{index + 1}</div>
+                  <div className="card-label">{era.label}</div>
+                  <div className="halving-era-reward">{era.reward}</div>
+                  <div className="halving-era-bar-track">
+                    <div className="halving-era-bar" style={{ width: era.width }} />
+                  </div>
+                  <p>{era.body}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="halving-summary">
+            <div className="halving-summary-label">What the learner should notice</div>
+            <p>
+              One block wins at a time, but the subsidy attached to that block keeps shrinking across eras. Mining
+              stays continuous while issuance steps down on schedule.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function HashChainGraphic({ slide }) {
   const { chain, tamperedChain, frameLabel } = slide.content;
 
@@ -670,6 +933,35 @@ function SlideFrame({ slide, isActive }) {
                 </article>
               ))}
             </div>
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "mining-motion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout mining-motion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <MiningRaceRemotionGraphic slide={slide} isActive={isActive} />
 
             <div className="notes-panel">
               {slide.content.notes.map((note, index) => (

@@ -630,7 +630,7 @@
         "Verify in browser"
       ],
       "priority": 45,
-      "passes": false,
+      "passes": true,
       "notes": "Use motion to teach both the competition loop and the stepwise issuance reduction, not just to decorate the existing issuance layout."
     },
     {
