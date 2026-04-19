@@ -616,12 +616,51 @@ export const slideGroups = [
       },
       {
         number: "03.2",
-        layout: "anatomy",
+        layout: "evm-state-motion",
         eyebrow: "State, accounts, and the EVM",
         headline: "Ethereum keeps one shared state machine: accounts hold data, transactions request changes, and the EVM computes the next valid state.",
         description:
           "Instead of tracking only who paid whom, Ethereum tracks account balances, contract code, and contract storage. When a transaction arrives, every node runs the same computation in the Ethereum Virtual Machine, then updates the shared state if the execution is valid.",
         frameLabel: "How Ethereum turns transactions into state changes",
+        transaction: {
+          from: "EOA 0xA91",
+          to: "Vault.sol",
+          action: "deposit(2 ETH)",
+          gas: "Gas budget attached",
+        },
+        stateBefore: [
+          {
+            label: "User balance",
+            value: "12 ETH",
+          },
+          {
+            label: "Vault balance",
+            value: "40 ETH",
+          },
+          {
+            label: "Vault shares",
+            value: "100 shares",
+          },
+        ],
+        stateAfter: [
+          {
+            label: "User balance",
+            value: "10 ETH",
+          },
+          {
+            label: "Vault balance",
+            value: "42 ETH",
+          },
+          {
+            label: "Vault shares",
+            value: "102 shares",
+          },
+        ],
+        executionSteps: [
+          "The EOA signs a transaction that targets contract code at an address.",
+          "Every node runs the same bytecode against the same current state snapshot.",
+          "If execution succeeds, balances and storage move to one new accepted state.",
+        ],
         segments: [
           {
             label: "Accounts",

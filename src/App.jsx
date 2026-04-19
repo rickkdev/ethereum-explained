@@ -590,6 +590,164 @@ function MiningRaceRemotionGraphic({ slide, isActive }) {
   );
 }
 
+function EvmStateMotionGraphic({ slide, isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 270;
+  const { frameLabel, transaction, stateBefore, stateAfter, executionSteps, segments } = slide.content;
+  const txProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 18),
+    durationInFrames: 38,
+    config: {
+      damping: 15,
+      stiffness: 112,
+      mass: 0.88,
+    },
+  });
+  const execProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 74),
+    durationInFrames: 52,
+    config: {
+      damping: 16,
+      stiffness: 96,
+      mass: 0.92,
+    },
+  });
+  const stateProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 142),
+    durationInFrames: 48,
+    config: {
+      damping: 16,
+      stiffness: 104,
+      mass: 0.9,
+    },
+  });
+  const phaseLabel = cycleFrame < 52 ? "Account signs a state-change request" :
+    cycleFrame < 130 ? "The EVM executes the same logic on every node" :
+      cycleFrame < 222 ? "One updated shared state snapshot is accepted" :
+        "Loop resets to the next transaction";
+
+  const packetX = interpolate(txProgress, [0, 1], [20, 50], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const packetY = interpolate(txProgress, [0, 1], [62, 33], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const packetOpacity = interpolate(txProgress, [0, 0.12, 0.9, 1], [0, 1, 1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const beamOpacity = interpolate(execProgress, [0, 0.12, 1], [0, 0.75, 0.16], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const glowScale = interpolate(execProgress, [0, 1], [0.9, 1.08], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const afterPanelOffset = interpolate(stateProgress, [0, 1], [28, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const afterPanelOpacity = interpolate(stateProgress, [0, 0.18, 1], [0, 0.9, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <div className="content-card evm-motion-shell">
+      <div className="evm-motion-head">
+        <div>
+          <div className="panel-label">{frameLabel}</div>
+          <div className="evm-motion-phase">{phaseLabel}</div>
+        </div>
+
+        <div className="evm-motion-legend">
+          <span className="evm-legend-chip account">Account</span>
+          <span className="evm-legend-chip execution">Execution</span>
+          <span className="evm-legend-chip state">State snapshot</span>
+        </div>
+      </div>
+
+      <div className="evm-motion-stage">
+        <div className="evm-motion-grid" />
+
+        <article className="evm-account-card">
+          <div className="mining-card-label">{segments[0].label}</div>
+          <strong>{transaction.from}</strong>
+          <p>{segments[0].body}</p>
+        </article>
+
+        <article className="evm-state-card before">
+          <div className="mining-card-label">Current state</div>
+          <strong>{segments[1].title}</strong>
+          <div className="evm-state-list">
+            {stateBefore.map((entry) => (
+              <div key={`before-${entry.label}`} className="evm-state-row">
+                <span>{entry.label}</span>
+                <strong>{entry.value}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article
+          className="evm-core-card"
+          style={{
+            transform: `translate(-50%, -50%) scale(${glowScale})`,
+          }}
+        >
+          <div className="evm-core-aura" style={{ opacity: beamOpacity }} />
+          <div className="mining-card-label">{segments[2].label}</div>
+          <strong>Ethereum Virtual Machine</strong>
+          <p>{executionSteps[1]}</p>
+          <div className="evm-step-list">
+            {executionSteps.map((step, index) => (
+              <div key={step} className={`evm-step-chip ${cycleFrame >= 24 + index * 52 ? "active" : ""}`}>
+                <span>0{index + 1}</span>
+                <span>{step}</span>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article
+          className="evm-state-card after"
+          style={{
+            transform: `translateY(${afterPanelOffset}px)`,
+            opacity: afterPanelOpacity,
+          }}
+        >
+          <div className="mining-card-label">Next state</div>
+          <strong>Accepted shared update</strong>
+          <div className="evm-state-list">
+            {stateAfter.map((entry, index) => (
+              <div key={`after-${entry.label}`} className={`evm-state-row ${index === 0 ? "decrease" : "increase"}`}>
+                <span>{entry.label}</span>
+                <strong>{entry.value}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <div className="evm-transaction-packet" style={{ left: `${packetX}%`, top: `${packetY}%`, opacity: packetOpacity }}>
+          <div className="evm-packet-label">Transaction</div>
+          <strong>{transaction.action}</strong>
+          <span>{transaction.to}</span>
+          <span>{transaction.gas}</span>
+        </div>
+
+        <div className="evm-flow-line account-to-evm" style={{ opacity: beamOpacity }} />
+        <div className="evm-flow-line evm-to-state" style={{ opacity: afterPanelOpacity }} />
+      </div>
+    </div>
+  );
+}
+
 function HashChainGraphic({ slide }) {
   const { chain, tamperedChain, frameLabel } = slide.content;
 
@@ -962,6 +1120,35 @@ function SlideFrame({ slide, isActive }) {
             </div>
 
             <MiningRaceRemotionGraphic slide={slide} isActive={isActive} />
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "evm-state-motion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout evm-motion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <EvmStateMotionGraphic slide={slide} isActive={isActive} />
 
             <div className="notes-panel">
               {slide.content.notes.map((note, index) => (

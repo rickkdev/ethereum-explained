@@ -974,9 +974,260 @@ select {
   min-height: 100%;
 }
 
+.evm-motion-layout {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 100%;
+}
+
 .mining-motion-layout {
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: 100%;
+}
+
+.evm-motion-shell {
+  padding: 18px;
+}
+
+.evm-motion-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.evm-motion-phase {
+  margin-top: 8px;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.evm-motion-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.evm-legend-chip {
+  padding: 8px 12px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(24, 24, 24, 0.78);
+  color: var(--text-dim);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.evm-legend-chip.account {
+  border-color: rgba(162, 188, 255, 0.34);
+}
+
+.evm-legend-chip.execution {
+  border-color: rgba(255, 216, 166, 0.34);
+}
+
+.evm-legend-chip.state {
+  border-color: rgba(152, 214, 178, 0.3);
+}
+
+.evm-motion-stage {
+  position: relative;
+  min-height: 420px;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 214, 160, 0.08), transparent 26%),
+    radial-gradient(circle at 78% 24%, rgba(123, 224, 167, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(10, 10, 10, 0.98));
+}
+
+.evm-motion-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.56), transparent 96%);
+  pointer-events: none;
+}
+
+.evm-account-card,
+.evm-state-card,
+.evm-core-card,
+.evm-transaction-packet {
+  position: absolute;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(24, 24, 24, 0.9);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
+}
+
+.evm-account-card,
+.evm-state-card {
+  width: 240px;
+  padding: 16px;
+}
+
+.evm-account-card {
+  left: 4%;
+  bottom: 34px;
+}
+
+.evm-account-card strong,
+.evm-state-card strong,
+.evm-core-card strong,
+.evm-transaction-packet strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.evm-account-card p,
+.evm-state-card p {
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.evm-state-card.before {
+  left: 29%;
+  top: 34px;
+}
+
+.evm-state-card.after {
+  right: 4%;
+  top: 34px;
+  border-color: rgba(152, 214, 178, 0.24);
+}
+
+.evm-state-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.evm-state-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 10px;
+  border: 1px solid rgba(145, 145, 145, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.78rem;
+}
+
+.evm-state-row strong {
+  margin-top: 0;
+  font-size: 0.88rem;
+}
+
+.evm-state-row.increase strong {
+  color: #a8e7be;
+}
+
+.evm-state-row.decrease strong {
+  color: #f0c8ad;
+}
+
+.evm-core-card {
+  left: 50%;
+  top: 50%;
+  width: min(360px, calc(100% - 56px));
+  padding: 20px 18px 18px;
+  transform: translate(-50%, -50%);
+  border-color: rgba(255, 216, 166, 0.22);
+}
+
+.evm-core-card p {
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.evm-core-aura {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 214, 160, 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.evm-step-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.evm-step-chip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid rgba(145, 145, 145, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.evm-step-chip span:first-child {
+  color: var(--text-main);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
+.evm-step-chip.active {
+  border-color: rgba(255, 216, 166, 0.24);
+  background: rgba(255, 214, 160, 0.08);
+  color: var(--text-main);
+}
+
+.evm-transaction-packet {
+  width: 190px;
+  padding: 12px 14px;
+  background: rgba(28, 31, 38, 0.96);
+  border-color: rgba(162, 188, 255, 0.3);
+  transform: translate(-50%, -50%);
+}
+
+.evm-packet-label {
+  color: var(--text-dim);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.evm-transaction-packet span {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+
+.evm-flow-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(162, 188, 255, 0), rgba(255, 255, 255, 0.52), rgba(152, 214, 178, 0));
+  pointer-events: none;
+}
+
+.evm-flow-line.account-to-evm {
+  left: 20%;
+  top: 58%;
+  width: 30%;
+  transform: rotate(-12deg);
+}
+
+.evm-flow-line.evm-to-state {
+  left: 55%;
+  top: 42%;
+  width: 24%;
+  transform: rotate(-12deg);
 }
 
 .blockchain-window {
@@ -1804,12 +2055,21 @@ select {
     flex-direction: column;
   }
 
+  .evm-motion-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .mining-motion-head {
     align-items: stretch;
     flex-direction: column;
   }
 
   .hash-motion-legend {
+    justify-content: flex-start;
+  }
+
+  .evm-motion-legend {
     justify-content: flex-start;
   }
 
@@ -1910,6 +2170,46 @@ select {
   .hash-motion-trackline,
   .hash-ripple {
     display: none;
+  }
+
+  .evm-motion-stage {
+    min-height: 720px;
+  }
+
+  .evm-flow-line {
+    display: none;
+  }
+
+  .evm-account-card,
+  .evm-state-card.before,
+  .evm-core-card,
+  .evm-state-card.after,
+  .evm-transaction-packet {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    transform: none !important;
+  }
+
+  .evm-account-card {
+    top: 18px;
+    bottom: auto;
+  }
+
+  .evm-state-card.before {
+    top: 166px;
+  }
+
+  .evm-core-card {
+    top: 336px;
+  }
+
+  .evm-state-card.after {
+    top: 542px;
+  }
+
+  .evm-transaction-packet {
+    top: 278px !important;
   }
 
   .hash-motion-node {

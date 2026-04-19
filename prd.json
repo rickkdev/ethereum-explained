@@ -644,7 +644,7 @@
         "Verify in browser"
       ],
       "priority": 46,
-      "passes": false,
+      "passes": true,
       "notes": "This should turn the static anatomy explanation into a visible before-and-after state transition, not a generic moving background."
     },
     {

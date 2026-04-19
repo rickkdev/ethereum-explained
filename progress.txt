@@ -30,6 +30,7 @@
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
 - Motion follow-ups to an existing explainer slide can often keep the same structured data in `src/data/slides.js` and just switch the slide `layout`, which keeps the static lesson and the animated version synchronized.
 - Motion follow-ups for process-plus-schedule slides can keep the same `process` and `eras` data and swap only the layout, so animated mining or issuance explainers stay aligned with the underlying lesson model.
+- Motion follow-ups for state-transition slides can keep the conceptual `segments` and `notes`, then add compact `transaction`, `stateBefore`, `stateAfter`, and `executionSteps` fields so the animation can show one explicit before-and-after state snapshot without duplicating the main lesson copy.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -354,5 +355,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Motion follow-ups can reuse the same slide data as the static explainer and swap only the layout, which keeps copy, labels, and animation states aligned.
   - For tamper-evidence animations, a short phase loop works well: show the intact chain first, then the edited block, then the broken downstream reference instead of animating every field continuously.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 17:39 CEST - REMOTION-03-2
+- Reworked slide 03.2 into a Remotion-style EVM state-transition animation that shows an EOA transaction entering execution, highlights the shared-state snapshot currently being read, and reveals the accepted post-execution state as a clear before-and-after update.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-Cm2lUSQt.css`, `dist/assets/index-DLoB9jJP.js`; removed stale build assets `dist/assets/index-hlwbVHek.css` and `dist/assets/index-Co65yFBE.js`
+- **Learnings for future iterations:**
+  - State-transition motion slides work best when the animation makes one concrete transaction mutate one concrete state snapshot instead of trying to animate every possible EVM concept at once.
+  - Keeping the explainer's conceptual `segments` alongside compact `transaction`, `stateBefore`, `stateAfter`, and `executionSteps` data keeps the motion slide reusable without cloning the original lesson copy.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
