@@ -565,6 +565,28 @@ export const slideGroups = [
       "State, accounts, and the EVM",
       "Smart contracts and programmability",
     ],
+    overview: {
+      eyebrow: "Chapter 03",
+      headline: "Ethereum turned the blockchain from a payment rail into a general-purpose computing platform.",
+      intro:
+        "Bitcoin proved that a public network could keep one trustworthy money ledger. Ethereum keeps the shared-history idea, then adds a programmable execution layer so developers can build applications directly on-chain.",
+      pillars: [
+        {
+          title: "Beyond transfers",
+          body: "Ethereum is not limited to sending value from one address to another. It can run application logic, manage digital assets, and coordinate many kinds of shared state.",
+        },
+        {
+          title: "Programmable state",
+          body: "Accounts, balances, contract storage, and code all live inside one evolving system state that every node can verify and reproduce.",
+        },
+        {
+          title: "What this chapter covers",
+          body: "We move from why Ethereum exists into accounts and state, the EVM, and the idea of smart contracts as software on a blockchain.",
+        },
+      ],
+      callout: "Ethereum extends the blockchain idea from digital money to shared computation.",
+      footer: "From Bitcoin-style ledgers to accounts, state, and on-chain applications",
+    },
   },
   {
     number: "04",

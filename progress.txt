@@ -94,3 +94,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For mempool slides, keep the distinction explicit: nodes verify and relay valid pending transactions, while miners select from that pool when building blocks.
   - `npm run build` passed; browser verification is still manual in this environment.
 ---
+## 2026-04-19 14:33 CEST - SLIDE-03
+- Implemented the Ethereum chapter intro as a shared overview slide, framing Ethereum as the shift from blockchain as money infrastructure to blockchain as a programmable state machine and previewing the accounts, EVM, and smart contract topics.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-CNY0yA9z.js`; removed stale build asset `dist/assets/index-BgJdMKNS.js`
+- **Learnings for future iterations:**
+  - Chapter intro slides stay clean when the three pillars cover capability shift, mental model, and chapter roadmap rather than trying to teach subtopics too early.
+  - The existing overview schema is sufficient for new chapter intros; if the story is a parent slide, default to slide-data changes before considering React edits.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
