@@ -18,6 +18,7 @@
 - Principle-to-manifestation slides can also reuse the shared `anatomy` layout by pairing each value with one visible ecosystem or governance choice instead of falling back to abstract slogans.
 - Category-tour slides can also reuse the shared `anatomy` layout by making each segment one protocol primitive or function, which works well for scanning DeFi building blocks without custom React.
 - Ecosystem role-mapping slides can also reuse the shared `anatomy` layout by assigning each segment to one actor group, its job, and its dependency on the rest of the network.
+- Resource-pricing slides can also reuse the shared `anatomy` layout by separating what the protocol meters, why that pricing exists, and what misconception or next-step topic should be kept out of scope.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 
 # Ralph Progress Log
@@ -239,5 +240,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Chapter intros for protocol economics topics still fit the shared `overview` layout when the three pillars cover resource scarcity, coordination mechanism, and user-facing consequences.
   - For gas slides, teach fees as resource pricing first and wallet cost second so the chapter starts with protocol purpose rather than user frustration.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:12 CEST - SLIDE-08-1
+- Implemented slide 08.1 as a gas explainer using the shared anatomy layout, separating what gas meters, why Ethereum charges for those resources, and why gas should stay distinct from the later fee-calculation discussion.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-BoMn0r6J.js`; removed stale build asset `dist/assets/index-BEzKclME.js`
+- **Learnings for future iterations:**
+  - Resource-pricing slides fit the shared `anatomy` layout when one segment explains the metered work, one explains spam resistance and fair allocation, and one explicitly fences off the next topic such as fee-market math.
+  - For gas education slides, keep the protocol purpose explicit: gas measures workload and bounds shared resources before the deck explains how wallets turn that into a quoted fee.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

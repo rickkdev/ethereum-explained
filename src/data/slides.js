@@ -1077,6 +1077,39 @@ export const slideGroups = [
       callout: "Gas is Ethereum's resource meter: it prices execution so shared computation stays bounded and prioritizable.",
       footer: "From scarce block space to fee markets and wallet-level user experience",
     },
+    childContent: [
+      {
+        number: "08.1",
+        layout: "anatomy",
+        eyebrow: "Why gas exists",
+        headline: "Gas exists so Ethereum can measure resource usage before the network commits shared computation and storage.",
+        description:
+          "Gas is not an arbitrary surcharge added after the fact. It is the unit Ethereum uses to meter how much work a transaction asks the network to do, so scarce block space and state growth are allocated with rules instead of guesswork.",
+        frameLabel: "Why Ethereum meters execution",
+        segments: [
+          {
+            label: "What gas measures",
+            title: "Computation, storage access, and state changes",
+            body: "Different EVM operations consume different amounts of gas because they place different demands on the network. A simple transfer, a contract call, and writing new data to storage do not all cost the same amount of work.",
+          },
+          {
+            label: "Why it matters",
+            title: "Spam resistance and bounded shared resources",
+            body: "If execution were free, attackers could flood the network with pointless computation or huge storage writes. Gas makes every action carry a resource cost, which discourages spam and keeps block capacity available for users willing to pay for real demand.",
+          },
+          {
+            label: "What it is not",
+            title: "Not the full fee formula by itself",
+            body: "Gas tells Ethereum how much work an action requires. The actual amount a user pays depends on fee-market pricing layered on top of that meter, which is the next slide's topic rather than this one.",
+          },
+        ],
+        notes: [
+          "Gas is a protocol meter first and a wallet cost second.",
+          "The network uses gas to allocate scarce computation and storage more fairly under congestion.",
+          "Keep the distinction clear: gas describes workload, while total fees depend on market pricing.",
+        ],
+      },
+    ],
   },
   {
     number: "09",
