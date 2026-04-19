@@ -590,6 +590,134 @@ function MiningRaceRemotionGraphic({ slide, isActive }) {
   );
 }
 
+function DeFiJourneyMotionGraphic({ slide, isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 240;
+  const { journeyLabel, journeySteps, walletStart, walletFinish, segments } = slide.content;
+
+  const activeStep = Math.min(journeySteps.length - 1, Math.floor(cycleFrame / 72));
+  const phaseLabel = cycleFrame < 72
+    ? "User starts with ETH and swaps into a more useful DeFi position"
+    : cycleFrame < 144
+      ? "The swapped asset becomes collateral inside a lending market"
+      : cycleFrame < 216
+        ? "Borrowed stablecoins leave as the reusable output"
+        : "The loop resets so the connected protocol roles stay visible";
+
+  const tokenProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 10),
+    durationInFrames: 188,
+    config: {
+      damping: 17,
+      stiffness: 84,
+      mass: 0.96,
+    },
+  });
+
+  const tokenX = interpolate(tokenProgress, [0, 1], [14, 86], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const tokenY = cycleFrame < 72 ? 38 : cycleFrame < 144 ? 50 : 38;
+  const tokenLabel = activeStep === 0 ? "1.95 cbETH" : activeStep === 1 ? "Collateral live" : "1,500 USDC";
+  const activeWallet = cycleFrame < 156 ? walletStart : walletFinish;
+
+  return (
+    <div className="content-card defi-motion-shell">
+      <div className="defi-motion-head">
+        <div>
+          <div className="panel-label">{journeyLabel}</div>
+          <div className="defi-motion-phase">{phaseLabel}</div>
+        </div>
+
+        <div className="defi-motion-legend">
+          <span className="defi-legend-chip">Exchange layer</span>
+          <span className="defi-legend-chip">Credit layer</span>
+          <span className="defi-legend-chip stable">Stable output</span>
+        </div>
+      </div>
+
+      <div className="defi-motion-stage">
+        <div className="defi-motion-rail" />
+
+        {journeySteps.map((step, index) => {
+          const isActiveStep = index === activeStep;
+          const pulse = spring({
+            fps: PRESENTATION_FPS,
+            frame: Math.max(0, cycleFrame - index * 72),
+            durationInFrames: 34,
+            config: {
+              damping: 16,
+              stiffness: 108,
+              mass: 0.9,
+            },
+          });
+
+          return (
+            <article
+              key={step.label}
+              className={`defi-stage-card ${isActiveStep ? "active" : ""}`}
+              style={{
+                transform: `translateY(${interpolate(pulse, [0, 1], [10, 0], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                })}px)`,
+              }}
+            >
+              <div className="stage-index">0{index + 1}</div>
+              <div className="card-label">{step.label}</div>
+              <h3>{step.venue}</h3>
+              <p>{step.action}</p>
+              <div className="defi-stage-io">
+                <span>{step.input}</span>
+                <strong>{step.output}</strong>
+              </div>
+              <div className="defi-stage-detail">{step.detail}</div>
+            </article>
+          );
+        })}
+
+        <div
+          className={`defi-asset-token ${activeStep === 2 ? "stable" : ""}`}
+          style={{
+            left: `${tokenX}%`,
+            top: `${tokenY}%`,
+          }}
+        >
+          {tokenLabel}
+        </div>
+      </div>
+
+      <div className="defi-motion-bottom">
+        <article className="defi-wallet-panel">
+          <div className="panel-label">Wallet + position snapshot</div>
+          <div className="defi-wallet-grid">
+            {activeWallet.map((item) => (
+              <div key={item.label} className="defi-wallet-cell">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="defi-roles-panel">
+          <div className="panel-label">{slide.content.frameLabel}</div>
+          <div className="defi-role-list">
+            {segments.map((segment, index) => (
+              <div key={segment.label} className={`defi-role-item ${index === activeStep ? "active" : ""}`}>
+                <span>{segment.label}</span>
+                <strong>{segment.title}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+      </div>
+    </div>
+  );
+}
+
 function EvmStateMotionGraphic({ slide, isActive }) {
   const frame = useLoopFrame(isActive);
   const cycleFrame = frame % 270;
@@ -1149,6 +1277,35 @@ function SlideFrame({ slide, isActive }) {
             </div>
 
             <EvmStateMotionGraphic slide={slide} isActive={isActive} />
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "defi-journey-motion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout defi-motion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <DeFiJourneyMotionGraphic slide={slide} isActive={isActive} />
 
             <div className="notes-panel">
               {slide.content.notes.map((note, index) => (

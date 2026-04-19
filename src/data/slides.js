@@ -978,12 +978,70 @@ export const slideGroups = [
     childContent: [
       {
         number: "06.1",
-        layout: "anatomy",
+        layout: "defi-journey-motion",
         eyebrow: "Swaps, lending, and stablecoins",
         headline: "Three DeFi primitives show up again and again: swaps move between assets, lending markets turn collateral into credit, and stablecoins try to keep one unit close to one dollar.",
         description:
           "The easiest way to read DeFi is by function. One protocol category helps users exchange assets, another lets them borrow against posted collateral, and another provides a steadier unit of account so prices, loans, and payments are easier to reason about on-chain.",
         frameLabel: "Reading core DeFi primitives by job to be done",
+        journeyLabel: "One looping DeFi user journey",
+        walletStart: [
+          {
+            label: "Wallet",
+            value: "2.0 ETH",
+          },
+          {
+            label: "Collateral",
+            value: "None yet",
+          },
+          {
+            label: "Stablecoin",
+            value: "0 USDC",
+          },
+        ],
+        walletFinish: [
+          {
+            label: "Wallet",
+            value: "1,500 USDC",
+          },
+          {
+            label: "Collateral",
+            value: "1.95 cbETH locked",
+          },
+          {
+            label: "Debt",
+            value: "Borrow open",
+          },
+        ],
+        journeySteps: [
+          {
+            label: "Swap",
+            venue: "DEX liquidity pool",
+            action: "Swap ETH into a collateral asset",
+            input: "2.0 ETH",
+            output: "1.95 cbETH",
+            detail:
+              "The exchange layer turns one on-chain asset into another without handing custody to a broker.",
+          },
+          {
+            label: "Lending",
+            venue: "Collateral market",
+            action: "Deposit the new asset into a lending protocol",
+            input: "1.95 cbETH",
+            output: "Collateral active",
+            detail:
+              "The credit layer recognizes posted collateral and opens borrowing capacity against it.",
+          },
+          {
+            label: "Stablecoin",
+            venue: "Borrowed liquidity",
+            action: "Borrow a dollar-like asset against that collateral",
+            input: "Collateral posted",
+            output: "1,500 USDC",
+            detail:
+              "The stable unit becomes the spendable output that other apps, payments, or treasury flows can use.",
+          },
+        ],
         segments: [
           {
             label: "Swaps",

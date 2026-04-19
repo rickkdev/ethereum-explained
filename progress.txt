@@ -1,5 +1,6 @@
 ## Codebase Patterns
 - Smart-contract lifecycle motion slides can reuse the shared `evm-state-motion` layout by keeping the conceptual deploy/call/execute/update arc in `segments` and feeding one concrete contract call through `transaction`, `stateBefore`, `stateAfter`, and `executionSteps`.
+- DeFi motion follow-ups can reuse the shared `defi-journey-motion` layout by keeping the primitive explainer's `segments` and `notes`, then adding `journeyLabel`, `journeySteps`, `walletStart`, and `walletFinish` for one concrete multi-protocol user flow.
 - Practical or closing chapter intros can still use the shared `overview` layout; make the three pillars cover the threat model or behavior shift plus the roadmap into actionable subslides.
 - Parent chapter intro slides should be added as a group-level `overview` object in `src/data/slides.js`; the shared overview renderer in `src/App.jsx` already maps that shape into the standard chapter layout.
 - Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
@@ -372,5 +373,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Contract-execution motion slides can reuse the existing EVM state-transition renderer if the slide data keeps one concrete contract call and one before/after state snapshot in view.
   - For smart-contract lifecycle motion, show deployment as prior context, then animate the user call and deterministic replay path; that keeps the loop legible and avoids overloading the canvas.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 17:47 CEST - REMOTION-06-1
+- Reworked slide 06.1 into a Remotion-style DeFi journey animation that follows one asset through a swap, into collateral, and out again as borrowed USDC so the three primitive roles read as one connected system.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-Uv6kd9kM.css`, `dist/assets/index-CnpnX5A_.js`; removed stale build assets `dist/assets/index-Cm2lUSQt.css` and `dist/assets/index-DAvBD2ti.js`
+- **Learnings for future iterations:**
+  - DeFi motion slides work best when one concrete user journey ties the primitives together; animating swap, collateral, and stablecoin steps separately makes composability harder to feel.
+  - Keeping the explainer's `segments` and `notes` while adding compact journey-state fields lets the motion slide stay data-driven without duplicating the original lesson copy.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

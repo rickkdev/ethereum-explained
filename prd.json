@@ -672,7 +672,7 @@
         "Verify in browser"
       ],
       "priority": 48,
-      "passes": false,
+      "passes": true,
       "notes": "A single looping user journey is higher value than animating each primitive separately."
     },
     {

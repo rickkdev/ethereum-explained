@@ -568,6 +568,195 @@ select {
     rgba(24, 24, 24, 0.82);
 }
 
+.defi-motion-shell {
+  padding: 24px;
+  min-height: 100%;
+  display: grid;
+  gap: 22px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(119, 208, 176, 0.08), transparent 24%),
+    radial-gradient(circle at 82% 24%, rgba(114, 170, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 78% 82%, rgba(242, 210, 115, 0.07), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%),
+    rgba(24, 24, 24, 0.82);
+}
+
+.defi-motion-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: start;
+}
+
+.defi-motion-phase {
+  margin-top: 10px;
+  max-width: 36rem;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.defi-motion-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.defi-legend-chip {
+  padding: 8px 10px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: rgba(18, 18, 18, 0.82);
+}
+
+.defi-legend-chip.stable {
+  border-color: rgba(242, 210, 115, 0.44);
+  color: rgba(255, 241, 189, 0.94);
+}
+
+.defi-motion-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+  min-height: 310px;
+}
+
+.defi-motion-rail {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 41%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(214, 214, 214, 0.06), rgba(214, 214, 214, 0.34), rgba(214, 214, 214, 0.06));
+}
+
+.defi-stage-card {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  padding: 22px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 34%),
+    rgba(24, 24, 24, 0.82);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.defi-stage-card.active {
+  border-color: rgba(255, 255, 255, 0.36);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.defi-stage-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.02rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.defi-stage-io {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(145, 145, 145, 0.18);
+}
+
+.defi-stage-io span,
+.defi-wallet-cell span,
+.defi-role-item span {
+  display: block;
+  color: var(--text-dim);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.defi-stage-io strong,
+.defi-wallet-cell strong,
+.defi-role-item strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.defi-stage-detail {
+  margin-top: 16px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.defi-asset-token {
+  position: absolute;
+  z-index: 2;
+  min-width: 120px;
+  padding: 10px 14px;
+  border: 1px solid rgba(119, 208, 176, 0.44);
+  background: rgba(17, 36, 30, 0.94);
+  color: #d8fff0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.26);
+}
+
+.defi-asset-token.stable {
+  border-color: rgba(242, 210, 115, 0.48);
+  background: rgba(47, 40, 15, 0.94);
+  color: #fff0b8;
+}
+
+.defi-motion-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 16px;
+}
+
+.defi-wallet-panel,
+.defi-roles-panel {
+  padding: 20px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(18, 18, 18, 0.8);
+}
+
+.defi-wallet-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.defi-wallet-cell {
+  padding: 14px;
+  border: 1px solid rgba(145, 145, 145, 0.16);
+  background: rgba(26, 26, 26, 0.8);
+}
+
+.defi-role-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.defi-role-item {
+  padding: 14px;
+  border: 1px solid rgba(145, 145, 145, 0.14);
+  background: rgba(26, 26, 26, 0.76);
+}
+
+.defi-role-item.active {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(33, 33, 33, 0.86);
+}
+
 .hash-motion-head {
   display: flex;
   justify-content: space-between;
@@ -2037,6 +2226,9 @@ select {
   .pipeline-grid,
   .anatomy-stack,
   .hash-chain-track,
+  .defi-motion-stage,
+  .defi-motion-bottom,
+  .defi-wallet-grid,
   .issuance-stats,
   .notes-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2055,6 +2247,11 @@ select {
     flex-direction: column;
   }
 
+  .defi-motion-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .evm-motion-head {
     align-items: stretch;
     flex-direction: column;
@@ -2066,6 +2263,10 @@ select {
   }
 
   .hash-motion-legend {
+    justify-content: flex-start;
+  }
+
+  .defi-motion-legend {
     justify-content: flex-start;
   }
 
@@ -2147,6 +2348,9 @@ select {
   .anatomy-stack,
   .hash-chain-track,
   .hash-motion-stage,
+  .defi-motion-stage,
+  .defi-motion-bottom,
+  .defi-wallet-grid,
   .chain-lane-track,
   .issuance-stats,
   .notes-panel,
@@ -2169,6 +2373,15 @@ select {
 
   .hash-motion-trackline,
   .hash-ripple {
+    display: none;
+  }
+
+  .defi-motion-stage {
+    min-height: auto;
+  }
+
+  .defi-motion-rail,
+  .defi-asset-token {
     display: none;
   }
 
