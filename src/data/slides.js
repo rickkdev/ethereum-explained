@@ -731,6 +731,32 @@ export const slideGroups = [
           "The contract can only act on the current on-chain state plus the transaction inputs it receives.",
         ],
       },
+      {
+        number: "04.2",
+        layout: "ledger",
+        eyebrow: "Common examples and risks",
+        headline: "Smart contracts can automate tokens, escrow, and voting, but the same automation makes bugs and governance mistakes matter immediately.",
+        description:
+          "Useful contract systems turn shared rules into software that anyone can inspect and call. That power comes with sharp edges: if the code has a flaw, the exploit path can be just as automatic as the intended behavior, and even a safe contract can become risky if its upgrade process is unclear.",
+        comparison: [
+          {
+            label: "Common examples",
+            title: "Contracts make repeated coordination tasks explicit and automatic",
+            body: "A token contract tracks balances and transfer rules, an escrow contract holds funds until agreed conditions are met, and a governance contract records votes and enforces outcomes without one operator editing a private database.",
+          },
+          {
+            label: "Common risks",
+            title: "The chain executes flawed logic just as faithfully as correct logic",
+            body: "A bug can freeze or leak funds, an exploit can abuse a hidden edge case, and an upgrade path can introduce governance risk if users are no longer sure who can change the rules after deployment.",
+          },
+        ],
+        flow: [
+          "Developers encode the business rules into contract functions and storage",
+          "Users depend on those rules for tokens, escrow, exchanges, or voting",
+          "If the logic is sound, the workflow is transparent and repeatable for everyone",
+          "If the logic is flawed, the same automation can scale the failure or exploit just as fast",
+        ],
+      },
     ],
   },
   {

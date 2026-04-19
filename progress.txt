@@ -5,6 +5,7 @@
 - Pending-versus-confirmed lifecycle slides also fit the `ledger` layout well: use the two comparison cards for state before and after confirmation, and the side flow for the broadcast-to-inclusion path.
 - Capability-comparison slides can also use the `ledger` layout by putting the incumbent system on one card, the expanded system on the other, and the side flow on the reason the newer model exists.
 - Smart-contract concept slides can also use the shared `ledger` layout by comparing centralized backend logic with on-chain code, then using the side flow for the deploy-call-execute-update lifecycle.
+- Capability-versus-risk slides can also use the shared `ledger` layout by putting concrete use-cases in one card, failure modes in the other, and using the side flow to show how the same automation creates both leverage and risk.
 - Smart-contract execution lifecycle slides can use the shared `pipeline` layout when the story is deploy -> call -> deterministic execution -> state update; that keeps execution explainers data-driven without new React components.
 - Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts, roles, or consequences separated visually without adding slide-specific React code.
 - State-machine explainer slides can also reuse the shared `anatomy` layout by assigning one segment each to the acting account, the shared state snapshot, and the execution environment that computes the next state.
@@ -144,5 +145,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Smart-contract execution lifecycle slides fit the shared `pipeline` layout well when the teaching arc is deployment, user call, deterministic execution, and state update.
   - For execution slides, make the "every node runs the same logic" point explicit so determinism is taught as the reason smart contracts are trustworthy, not as incidental detail.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 14:45 CEST - SLIDE-04-2
+- Implemented slide 04.2 as a smart-contract tradeoff explainer using the shared ledger layout, pairing concrete examples like tokens, escrow, and governance with risks such as bugs, exploits, and upgrade complexity.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-CoNhTYeI.js`; removed stale build asset `dist/assets/index-C1btE1xe.js`
+- **Learnings for future iterations:**
+  - Capability-versus-risk slides can reuse the shared `ledger` layout when one card covers useful applications, the other covers failure modes, and the side flow explains how the same automation creates both leverage and danger.
+  - For smart-contract risk slides, balance the warning language with concrete examples first so the caution feels grounded in real use-cases rather than abstract fear.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
