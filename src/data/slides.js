@@ -386,6 +386,87 @@ export const slideGroups = [
           "A halving cuts only the new issuance rate. The network keeps running, and miners still compete to produce blocks.",
         ],
       },
+      {
+        number: "02.6",
+        layout: "issuance",
+        eyebrow: "21M hard cap",
+        headline: "Bitcoin's supply does not grow forever. New issuance keeps shrinking until total supply approaches 21 million BTC.",
+        description:
+          "The same halving schedule that slows new issuance also places a ceiling on total supply. Most bitcoin is issued early, later eras add much less, and no company or central bank can decide to print beyond the cap without the network accepting different rules.",
+        processLabel: "How Bitcoin moves from new issuance toward a fixed ceiling",
+        process: [
+          {
+            title: "Each block starts with a subsidy",
+            body: "New bitcoin enters circulation only through the block subsidy paid to the miner who produces a valid block.",
+          },
+          {
+            title: "Every halving cuts the flow in half",
+            body: "After each 210,000-block interval, the subsidy shrinks, so each new era adds less bitcoin than the one before it.",
+          },
+          {
+            title: "Most supply arrives early",
+            body: "Because the reductions are geometric, the cumulative supply gets close to 21 million quickly but never jumps past it.",
+          },
+          {
+            title: "The limit comes from the rules",
+            body: "The hard cap is part of Bitcoin's monetary policy. Raising it would require widespread agreement to run different software.",
+          },
+        ],
+        erasLabel: "Cumulative supply climbs fast early, then flattens toward 21M",
+        eras: [
+          {
+            label: "After launch era",
+            title: "2009 to 2012",
+            reward: "10.5M BTC",
+            width: "50%",
+            body: "The first era issues half of the eventual supply because the subsidy begins at 50 BTC per block.",
+          },
+          {
+            label: "After 1st halving",
+            title: "2012 to 2016",
+            reward: "15.75M BTC",
+            width: "75%",
+            body: "Another quarter of the total arrives in the second era, bringing cumulative supply to three quarters of the cap.",
+          },
+          {
+            label: "After 3rd halving",
+            title: "2016 to 2024",
+            reward: "19.6875M BTC",
+            width: "93.75%",
+            body: "By the end of the 6.25 BTC era, nearly all bitcoin has already been issued even though the network keeps producing blocks.",
+          },
+          {
+            label: "Long tail to the cap",
+            title: "Future eras",
+            reward: "< 21M BTC",
+            width: "99.9%",
+            body: "Later halvings add smaller and smaller amounts, so total supply approaches 21 million asymptotically rather than crossing above it.",
+            tone: "active",
+          },
+        ],
+        stats: [
+          {
+            label: "Maximum supply",
+            value: "21M BTC",
+            body: "Bitcoin's monetary policy aims at a fixed terminal supply instead of open-ended issuance.",
+          },
+          {
+            label: "Issued by 2024 halving",
+            value: "93.75%",
+            body: "Most of the supply is already in circulation before the later eras, which is why halvings matter more for marginal new issuance than total stock.",
+          },
+          {
+            label: "Who can raise it?",
+            value: "No single actor",
+            body: "Changing the cap would require the network to adopt different consensus rules, not a unilateral decision from one institution.",
+          },
+        ],
+        notes: [
+          "The 21 million figure is tied to Bitcoin's block subsidy schedule, not to a board meeting or discretionary monetary committee.",
+          "Halvings affect the flow of new bitcoin entering circulation; the hard cap describes the eventual stock of bitcoin outstanding.",
+          "In practice, people say the supply caps at 21 million even though the curve technically approaches that number over a very long tail.",
+        ],
+      },
     ],
   },
   {
