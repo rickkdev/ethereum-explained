@@ -25,6 +25,7 @@
 - Multi-model tradeoff slides can also reuse the shared `anatomy` layout by making each segment one operating model and using the notes to spell out control, recovery, and UX tradeoffs without forcing the story into the two-card `ledger` template.
 - Security-assumption tradeoff slides can also reuse the shared `anatomy` layout by making each segment one comparison dimension such as attack cost, honest participation, recovery path, or attack surface, then comparing the consensus models inside each card.
 - User-security slides can also reuse the shared `anatomy` layout by making each segment one attack surface cluster such as phishing, dangerous approvals, or compromised environments, which keeps OPSEC content practical without new React code.
+- Practical checklist or habit slides can also reuse the shared `anatomy` layout by making each segment one repeatable behavior cluster, which keeps final guidance actionable without collapsing into a dense bullet list.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
 
@@ -327,5 +328,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - User-security slides fit the shared `anatomy` layout well when each segment owns one attack surface cluster and the notes compress the defensive mental model.
   - For OPSEC slides, keep the threat model focused on where users grant trust, permission, or environment control instead of turning the slide into a long scam catalog.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:33 CEST - SLIDE-11-2
+- Implemented slide 11.2 as a practical OPSEC closeout using the shared anatomy layout, turning the final slide into three repeatable habit clusters: compartmentalizing wallets, verifying every action, and protecting recovery paths.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-3cUUQMXY.js`; removed stale build asset `dist/assets/index-CnWrn3vf.js`
+- **Learnings for future iterations:**
+  - Practical checklist or habit slides fit the shared `anatomy` layout when each segment owns one repeatable behavior cluster instead of one system component.
+  - For final security guidance, emphasize routines users can apply before every click or signature rather than ending on abstract warnings.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

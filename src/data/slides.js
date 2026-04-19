@@ -1380,6 +1380,37 @@ export const slideGroups = [
           "The next slide should turn these threat patterns into repeatable habits rather than vague fear.",
         ],
       },
+      {
+        number: "11.2",
+        layout: "anatomy",
+        eyebrow: "Practical safety habits",
+        headline: "Good OPSEC is a set of repeatable habits: separate risk, verify before signing, and protect recovery like it is the final backdoor.",
+        description:
+          "This closing slide should feel usable tomorrow morning, not merely cautionary. The goal is to give everyday users a short set of behaviors they can repeat across wallets, devices, and apps to reduce the chance that one rushed click becomes permanent loss.",
+        frameLabel: "Three habits that prevent many avoidable losses",
+        segments: [
+          {
+            label: "Compartmentalize",
+            title: "Use different wallets and balances for different jobs",
+            body: "Keep a smaller day-to-day wallet for experiments, approvals, and new apps. Keep long-term holdings in a separate wallet with fewer interactions. Separation limits blast radius when one device, site, or signature goes wrong.",
+          },
+          {
+            label: "Verify every action",
+            title: "Slow down before links, addresses, signatures, and approvals",
+            body: "Open important sites from trusted bookmarks, read wallet prompts carefully, verify recipient addresses, and revoke permissions you no longer need. The safest habit is to treat every signature as a permission request, not as a routine click-through.",
+          },
+          {
+            label: "Protect recovery",
+            title: "Secure seed phrases, devices, and update paths before an emergency",
+            body: "Store recovery secrets offline, do not share them with support or websites, keep devices patched, and plan how trusted people or locations would help you recover access if hardware fails. Good recovery planning reduces panic, which is when attackers often win.",
+          },
+        ],
+        notes: [
+          "Separate storage from exploration so one mistake does not expose everything.",
+          "Assume every signature and approval changes authority until you verify otherwise.",
+          "If recovery is weak, the wallet is weak even when the interface looks polished.",
+        ],
+      },
     ],
   },
 ];
