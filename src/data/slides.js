@@ -766,6 +766,28 @@ export const slideGroups = [
       "What CROPS stands for",
       "How values show up in ecosystem design",
     ],
+    overview: {
+      eyebrow: "Chapter 05",
+      headline: "Ethereum is also a culture: the ecosystem keeps returning to a small set of values that shape how it builds.",
+      intro:
+        "This chapter shifts from protocol mechanics to design principles. Instead of asking only what Ethereum can do, it asks what kinds of systems the community tends to prefer and why those values show up in tools, governance, and public infrastructure.",
+      pillars: [
+        {
+          title: "Values guide design",
+          body: "Ethereum is not one company with one product strategy. Shared values help explain why the ecosystem keeps favoring certain technical and social choices.",
+        },
+        {
+          title: "CROPS is a memory aid",
+          body: "The CROPS framework bundles several recurring Ethereum principles into one simple acronym so learners can scan and remember them more easily.",
+        },
+        {
+          title: "Ideas become institutions",
+          body: "These values do not stay abstract. They show up in open-source norms, public goods funding, protocol choices, and how the ecosystem thinks about coordination.",
+        },
+      ],
+      callout: "Technical systems reflect human values. Ethereum's architecture makes more sense once you see the principles behind it.",
+      footer: "From cultural principles to visible ecosystem design choices",
+    },
   },
   {
     number: "06",

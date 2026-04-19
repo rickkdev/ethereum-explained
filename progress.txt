@@ -155,3 +155,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For smart-contract risk slides, balance the warning language with concrete examples first so the caution feels grounded in real use-cases rather than abstract fear.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
+## 2026-04-19 14:47 CEST - SLIDE-05
+- Implemented the Ethereum Values & CROPS chapter intro as a shared overview slide, framing ecosystem values as design principles and positioning CROPS as the memory aid for the next two subslides.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`
+- **Learnings for future iterations:**
+  - Chapter intros for culture or values topics still fit the shared `overview` layout well when the three pillars cover why the topic matters, how to remember it, and where it shows up in practice.
+  - If a parent slide introduces an acronym that is defined in the next story, keep the opener high-level and avoid overloading it with the full breakdown too early.
+  - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
+---
