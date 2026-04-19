@@ -1055,6 +1055,28 @@ export const slideGroups = [
     number: "08",
     title: "Gas & transaction fees",
     children: ["Why gas exists", "Fee market and user experience"],
+    overview: {
+      eyebrow: "Chapter 08",
+      headline: "Gas is how Ethereum prices scarce computation and block space.",
+      intro:
+        "Fees are not just an annoyance layered on top of the network. They are part of how Ethereum meters execution, limits congestion, and decides which transactions get included when many users want the same shared resources at once.",
+      pillars: [
+        {
+          title: "Computation is scarce",
+          body: "Every contract call uses processing, storage access, and limited block capacity. Gas turns that resource use into a measurable cost instead of letting demand grow without limits.",
+        },
+        {
+          title: "Fees manage contention",
+          body: "When more users compete for the same block space, fees help prioritize what gets included first. The fee market is how the network handles congestion without a central scheduler.",
+        },
+        {
+          title: "Users feel the tradeoff",
+          body: "Wallets surface gas as a practical choice about speed, timing, and cost. This chapter connects protocol-level resource pricing to the real transaction experience users see on screen.",
+        },
+      ],
+      callout: "Gas is Ethereum's resource meter: it prices execution so shared computation stays bounded and prioritizable.",
+      footer: "From scarce block space to fee markets and wallet-level user experience",
+    },
   },
   {
     number: "09",

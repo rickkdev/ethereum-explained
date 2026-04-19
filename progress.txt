@@ -233,3 +233,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For Ethereum governance slides, keep the "no central controller" point explicit by ending on adoption choice from validators, node operators, and apps rather than implying EIPs auto-ship themselves.
   - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
 ---
+## 2026-04-19 15:05 CEST - SLIDE-08
+- Implemented the Gas & transaction fees chapter intro as a shared overview slide, framing gas as Ethereum's resource meter for scarce computation and block space while previewing both fee-market mechanics and wallet-level user experience.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-BEzKclME.js`; removed stale build asset `dist/assets/index-C6l4UwBT.js`
+- **Learnings for future iterations:**
+  - Chapter intros for protocol economics topics still fit the shared `overview` layout when the three pillars cover resource scarcity, coordination mechanism, and user-facing consequences.
+  - For gas slides, teach fees as resource pricing first and wallet cost second so the chapter starts with protocol purpose rather than user frustration.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
