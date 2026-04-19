@@ -500,6 +500,48 @@ function SlideFrame({ slide, isActive }) {
     );
   }
 
+  if (slide.content?.layout === "anatomy") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="anatomy-layout">
+            <div className="anatomy-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <div className="content-card anatomy-shell">
+              <div className="panel-label">{slide.content.frameLabel}</div>
+
+              <div className="anatomy-stack">
+                {slide.content.segments.map((segment, index) => (
+                  <article key={segment.title} className="anatomy-segment">
+                    <div className="card-index">0{index + 1}</div>
+                    <div className="card-label">{segment.label}</div>
+                    <h3>{segment.title}</h3>
+                    <p>{segment.body}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
   if (slide.content) {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>

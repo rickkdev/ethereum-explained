@@ -218,6 +218,37 @@ export const slideGroups = [
           "The idea moves from paper concept to a live public network",
         ],
       },
+      {
+        number: "02.3",
+        layout: "anatomy",
+        eyebrow: "What is a block?",
+        headline: "A Bitcoin block is one packaged update to the ledger: ordered transactions plus the metadata that lets the network verify and link it.",
+        description:
+          "Think of a block as a container. Most of its payload is transactions, but it also carries summary data in the header and a unique identity that lets the rest of the chain point to it.",
+        frameLabel: "Inside a Bitcoin block",
+        segments: [
+          {
+            label: "Transactions",
+            title: "A batch of ordered payments",
+            body: "The block body contains individual Bitcoin transactions. Their order matters because the network will process them in that sequence when updating the ledger.",
+          },
+          {
+            label: "Header data",
+            title: "Metadata for verification",
+            body: "The header summarizes the block with fields like the previous block hash, timestamp, difficulty target, and Merkle root so nodes can validate what this block claims.",
+          },
+          {
+            label: "Block identity",
+            title: "One fingerprint for the whole package",
+            body: "When miners hash the header, they are trying to produce a valid block hash. That hash becomes the block's identity and is what the next block will reference.",
+          },
+        ],
+        notes: [
+          "A block is more than raw transactions; it also carries the data needed to verify and link them.",
+          "The header is the bridge to the next lesson: hashing turns this metadata into a tamper-evident chain.",
+          "Mining is about finding a valid block hash for that package, not creating money from nothing.",
+        ],
+      },
     ],
   },
   {
