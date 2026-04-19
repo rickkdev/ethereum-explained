@@ -24,6 +24,7 @@
 - EOA and key-management slides can also reuse the shared `anatomy` layout by separating the visible account, the recovery secret, and the signature flow; that keeps wallet education accurate without implying the seed phrase is used directly on-chain.
 - Multi-model tradeoff slides can also reuse the shared `anatomy` layout by making each segment one operating model and using the notes to spell out control, recovery, and UX tradeoffs without forcing the story into the two-card `ledger` template.
 - Security-assumption tradeoff slides can also reuse the shared `anatomy` layout by making each segment one comparison dimension such as attack cost, honest participation, recovery path, or attack surface, then comparing the consensus models inside each card.
+- User-security slides can also reuse the shared `anatomy` layout by making each segment one attack surface cluster such as phishing, dangerous approvals, or compromised environments, which keeps OPSEC content practical without new React code.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
 
@@ -318,5 +319,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Practical or closing chapter intros still fit the shared `overview` layout when the three pillars cover the threat model, the behavior shift, and the roadmap into concrete habits.
   - For security chapter openers, connect technical risks with routine user actions early so later phishing and wallet-hygiene slides read as one coherent topic.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:31 CEST - SLIDE-11-1
+- Implemented slide 11.1 as an OPSEC attack-surface explainer using the shared anatomy layout, covering phishing and impersonation, malicious approvals and signatures, and compromised devices or sites.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-CnWrn3vf.js`; removed stale build asset `dist/assets/index-DShu3Val.js`
+- **Learnings for future iterations:**
+  - User-security slides fit the shared `anatomy` layout well when each segment owns one attack surface cluster and the notes compress the defensive mental model.
+  - For OPSEC slides, keep the threat model focused on where users grant trust, permission, or environment control instead of turning the slide into a long scam catalog.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

@@ -1348,6 +1348,39 @@ export const slideGroups = [
       callout: "OPSEC is not paranoia. It is the routine practice of making theft, coercion, and mistakes harder.",
       footer: "From phishing and approvals to wallet hygiene and safer daily practice",
     },
+    childContent: [
+      {
+        number: "11.1",
+        layout: "anatomy",
+        eyebrow: "Common attack surfaces",
+        headline: "Most everyday crypto losses happen at the user edge: fake prompts, bad approvals, and compromised environments turn one routine click into real asset loss.",
+        description:
+          "The goal is not to memorize every scam variant. It is to recognize the recurring surfaces where attackers meet the user: social engineering that gets a signature, permissions that grant too much power, and devices or sites that cannot be trusted to show the truth.",
+        frameLabel: "Three attack surfaces to watch for",
+        segments: [
+          {
+            label: "Phishing and impersonation",
+            title: "Fake sites, spoofed support, and urgent messages try to redirect trust before the user notices",
+            body: "Attackers clone wallet or exchange pages, impersonate project teams in chat, or push users into rushed recovery flows and 'security checks.' The common pattern is social pressure plus a believable interface that gets the user to reveal secrets or sign on the wrong site.",
+          },
+          {
+            label: "Malicious approvals",
+            title: "A wallet signature or token approval can grant more power than the screen title suggests",
+            body: "Not every dangerous action is a direct transfer. Users can sign approvals, permit messages, or opaque contract interactions that let an attacker move tokens later. The risk surface is the permission itself: once granted, the drain can happen after the original click.",
+          },
+          {
+            label: "Compromised devices and sites",
+            title: "If the device or web environment is hostile, even careful users can be shown the wrong thing",
+            body: "Malware, browser extensions, clipboard hijacking, DNS poisoning, and tampered Wi-Fi or websites can alter addresses, inject wallet prompts, or present fake transaction details. Good OPSEC treats the device and browsing setup as part of the wallet's security boundary, not as neutral background.",
+          },
+        ],
+        notes: [
+          "Attackers usually win by getting trust or permission first, then using that access later.",
+          "Phishing steals attention, malicious approvals steal authority, and compromised environments steal visibility into what is really happening.",
+          "The next slide should turn these threat patterns into repeatable habits rather than vague fear.",
+        ],
+      },
+    ],
   },
 ];
 
