@@ -645,6 +645,32 @@ export const slideGroups = [
           "This is the bridge to smart contracts: contract code is what the EVM runs when transactions interact with applications on-chain.",
         ],
       },
+      {
+        number: "03.3",
+        layout: "ledger",
+        eyebrow: "Smart contracts and programmability",
+        headline: "A smart contract is on-chain code that runs the same way for every participant and updates shared state when its rules are triggered.",
+        description:
+          "Instead of asking one company server to execute business logic, Ethereum lets transactions call contract code that lives on the chain itself. That makes behaviors like token issuance, escrow release, and automated exchange logic part of the shared state machine every node can verify.",
+        comparison: [
+          {
+            label: "Traditional app logic",
+            title: "One backend decides what the program should do",
+            body: "In a normal web app, the rules for balances, permissions, or payouts run on a company's server. Users can interact with the product, but they cannot independently verify or reproduce the exact execution environment.",
+          },
+          {
+            label: "Smart contract logic",
+            title: "Shared code executes against the same chain state",
+            body: "On Ethereum, the contract code and storage live on-chain. When a transaction calls that code, every node runs the same instructions and arrives at the same state update, which is why the application logic becomes part of the network itself.",
+          },
+        ],
+        flow: [
+          "A developer deploys contract code to an address on Ethereum",
+          "A user sends a transaction that calls one of the contract's functions",
+          "The EVM executes the code against the current shared state",
+          "The result can transfer tokens, release escrow, record votes, or update application storage for everyone",
+        ],
+      },
     ],
   },
   {
