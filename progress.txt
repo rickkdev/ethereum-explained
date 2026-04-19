@@ -22,6 +22,7 @@
 - Resource-pricing slides can also reuse the shared `anatomy` layout by separating what the protocol meters, why that pricing exists, and what misconception or next-step topic should be kept out of scope.
 - EOA and key-management slides can also reuse the shared `anatomy` layout by separating the visible account, the recovery secret, and the signature flow; that keeps wallet education accurate without implying the seed phrase is used directly on-chain.
 - Multi-model tradeoff slides can also reuse the shared `anatomy` layout by making each segment one operating model and using the notes to spell out control, recovery, and UX tradeoffs without forcing the story into the two-card `ledger` template.
+- Security-assumption tradeoff slides can also reuse the shared `anatomy` layout by making each segment one comparison dimension such as attack cost, honest participation, recovery path, or attack surface, then comparing the consensus models inside each card.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
 
@@ -301,4 +302,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - Consensus comparison slides fit the shared `ledger` layout well when each card owns one mechanism and the side flow narrates how candidate blocks become accepted history.
   - For Proof of Work versus Proof of Stake teaching slides, keep the comparison anchored on scarce security resources and participation models rather than drifting into culture-war framing.
   - Browser verification still needs a manual follow-up in this environment; `npm run build` remains the automated quality check.
+---
+## 2026-04-19 15:27 CEST - SLIDE-10-2
+- Implemented slide 10.2 as a consensus security explainer using the shared anatomy layout, comparing Proof of Work and Proof of Stake across attack cost, honest participation assumptions, recovery path, and broader tradeoff surface.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-BlNllGKA.js`; removed stale build asset `dist/assets/index-CCEGSmlO.js`
+- **Learnings for future iterations:**
+  - Security-assumption tradeoff slides fit the shared `anatomy` layout when each segment owns one comparison dimension instead of one system.
+  - For consensus nuance slides, compare what attackers must acquire, what honest participants must keep doing, and how recovery works after faults; that keeps the content balanced without flattening differences into slogans.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

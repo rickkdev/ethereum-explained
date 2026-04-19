@@ -1284,6 +1284,42 @@ export const slideGroups = [
           "The network accepts the block when enough stake-backed votes confirm the same history",
         ],
       },
+      {
+        number: "10.2",
+        layout: "anatomy",
+        eyebrow: "Security assumptions and tradeoffs",
+        headline: "Consensus security is not free. Each model makes different assumptions about what attackers can buy, what honest participants must keep doing, and how the network responds under stress.",
+        description:
+          "The useful comparison is not \"which model is perfect?\" It is which scarce resource secures the chain, what kind of coordination is needed when something goes wrong, and what failure modes are most important for the audience to understand.",
+        frameLabel: "Four dimensions of consensus security",
+        segments: [
+          {
+            label: "Attack cost",
+            title: "Proof of Work prices attacks in hardware and energy; Proof of Stake prices them in slashable capital",
+            body: "In Proof of Work, an attacker needs enough mining capacity and electricity to outrun or rival honest miners, which ties security to real-world operating costs. In Proof of Stake, the attacker needs enough stake to influence finalization or block production, which ties security to large amounts of capital that can be penalized or trapped if the protocol detects misconduct.",
+          },
+          {
+            label: "Honest participation",
+            title: "Each model assumes enough honest actors keep supplying the resource it depends on",
+            body: "Proof of Work assumes miners continue devoting hash power because block rewards and fees justify the expense. Proof of Stake assumes validators stay online, run current software, and keep enough stake distributed across many operators. If the honest side stops showing up, both systems become easier to censor, stall, or capture.",
+          },
+          {
+            label: "Recovery path",
+            title: "Proof of Work leans on ongoing competition; Proof of Stake adds explicit coordination and penalties",
+            body: "When Proof of Work forks or suffers disruption, recovery usually comes from more honest work accumulating on one chain over time. Proof of Stake can use slashing, inactivity penalties, and social coordination to isolate bad validators or recover from severe faults, but that also means governance and client coordination become part of the practical security story.",
+          },
+          {
+            label: "Tradeoff surface",
+            title: "Energy, capital, latency, and attack style shift depending on the consensus choice",
+            body: "Proof of Work's critics focus on energy use, hardware concentration, and the possibility of majority hash-power attacks. Proof of Stake reduces constant energy burn, but its tradeoffs move toward validator concentration, correlated client or staking-provider risk, and the need to reason carefully about long-range attacks, censorship pressure, and who can coordinate upgrades or emergency responses.",
+          },
+        ],
+        notes: [
+          "Security assumptions are the hidden contract behind consensus: what resource must stay scarce, and what behavior from honest participants is taken for granted?",
+          "Proof of Work and Proof of Stake both buy history protection, but they buy it with different costs and different operational dependencies.",
+          "For beginners, the key takeaway is not that one model has no tradeoffs. It is that every consensus system chooses what kind of pain an attacker should face and what kind of burden defenders must carry.",
+        ],
+      },
     ],
   },
   {
