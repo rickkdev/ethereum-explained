@@ -89,7 +89,7 @@ function BlockchainLoopGraphic({ isActive }) {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const pulseOpacity = interpolate(newestProgress, [0, 1], [0, 0.34], {
+  const pulseOpacity = interpolate(newestProgress, [0, 1], [0, 0.24], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -132,7 +132,7 @@ function BlockchainLoopGraphic({ isActive }) {
 
 function NodeNetworkGraphic() {
   return (
-    <div className="node-network-card content-card">
+    <div className="node-network-stage">
       <hyperframes-player
         className="node-network-player"
         src="/hyperframes/node-network.html"
@@ -144,45 +144,255 @@ function NodeNetworkGraphic() {
   );
 }
 
+function NodeNetworkRemotionGraphic({ isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 240;
+
+  const nodes = [
+    { id: "wallet", x: 10, y: 54, label: "Wallet", role: "entry" },
+    { id: "peer-a", x: 26, y: 26, label: "Peer A", role: "peer" },
+    { id: "peer-b", x: 33, y: 72, label: "Peer B", role: "peer" },
+    { id: "peer-c", x: 49, y: 48, label: "Peer C", role: "peer" },
+    { id: "validator-a", x: 66, y: 20, label: "Validator 1", role: "validator" },
+    { id: "validator-b", x: 72, y: 74, label: "Validator 2", role: "validator" },
+    { id: "archive", x: 88, y: 46, label: "Shared Ledger", role: "ledger" },
+  ];
+
+  const nodeMap = Object.fromEntries(nodes.map((node) => [node.id, node]));
+  const edges = [
+    ["wallet", "peer-a", "entry"],
+    ["wallet", "peer-b", "entry"],
+    ["peer-a", "peer-c", "peer"],
+    ["peer-b", "peer-c", "peer"],
+    ["peer-a", "validator-a", "validator-link"],
+    ["peer-b", "validator-b", "validator-link"],
+    ["peer-c", "validator-a", "validator-link"],
+    ["peer-c", "validator-b", "validator-link"],
+    ["validator-a", "validator-b", "validator-link"],
+    ["validator-a", "archive", "ledger-link"],
+    ["validator-b", "archive", "ledger-link"],
+  ];
+
+  const packets = [
+    { id: "tx-1", from: "wallet", to: "peer-a", start: 8, duration: 26, kind: "tx" },
+    { id: "tx-2", from: "wallet", to: "peer-b", start: 14, duration: 26, kind: "tx" },
+    { id: "check-1", from: "peer-a", to: "peer-c", start: 44, duration: 30, kind: "verify" },
+    { id: "check-2", from: "peer-b", to: "peer-c", start: 50, duration: 30, kind: "verify" },
+    { id: "vote-1", from: "peer-c", to: "validator-a", start: 92, duration: 28, kind: "vote" },
+    { id: "vote-2", from: "peer-c", to: "validator-b", start: 98, duration: 28, kind: "vote" },
+    { id: "attest-1", from: "validator-a", to: "validator-b", start: 138, duration: 22, kind: "vote" },
+    { id: "attest-2", from: "validator-b", to: "validator-a", start: 146, duration: 22, kind: "vote" },
+    { id: "final-1", from: "validator-a", to: "archive", start: 178, duration: 24, kind: "finality" },
+    { id: "final-2", from: "validator-b", to: "archive", start: 186, duration: 24, kind: "finality" },
+  ];
+
+  const pulses = [
+    { id: "wallet-pulse", nodeId: "wallet", start: 0 },
+    { id: "peer-a-pulse", nodeId: "peer-a", start: 42 },
+    { id: "peer-b-pulse", nodeId: "peer-b", start: 48 },
+    { id: "peer-c-pulse", nodeId: "peer-c", start: 82 },
+    { id: "validator-a-pulse", nodeId: "validator-a", start: 128 },
+    { id: "validator-b-pulse", nodeId: "validator-b", start: 134 },
+    { id: "archive-pulse", nodeId: "archive", start: 176 },
+  ];
+
+  const statusPhase = cycleFrame < 40 ? "Transaction enters one node" :
+    cycleFrame < 88 ? "Peers verify and relay" :
+      cycleFrame < 174 ? "Validators attest to each other" :
+        cycleFrame < 220 ? "Ledger update converges" :
+          "Network resets for the next transaction";
+
+  return (
+    <div className="node-remotion-shell content-card">
+      <div className="node-remotion-stage">
+        <div className="node-remotion-grid" />
+        <div className="node-remotion-aura node-remotion-aura-left" />
+        <div className="node-remotion-aura node-remotion-aura-right" />
+
+        <svg className="network-edges-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {edges.map(([fromId, toId, edgeKind]) => {
+            const from = nodeMap[fromId];
+            const to = nodeMap[toId];
+
+            return (
+              <line
+                key={`${fromId}-${toId}`}
+                className={`network-edge ${edgeKind}`}
+                x1={from.x}
+                y1={from.y}
+                x2={to.x}
+                y2={to.y}
+              />
+            );
+          })}
+        </svg>
+
+        {pulses.map((pulse) => {
+          const node = nodeMap[pulse.nodeId];
+          const pulseFrame = Math.max(0, cycleFrame - pulse.start);
+          const scale = interpolate(pulseFrame, [0, 24], [0.42, 1.8], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+          });
+          const opacity = interpolate(pulseFrame, [0, 8, 24], [0, 0.3, 0], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+          });
+
+          return (
+            <div
+              key={pulse.id}
+              className="network-pulse"
+              style={{
+                left: `${node.x}%`,
+                top: `${node.y}%`,
+                transform: `translate(-50%, -50%) scale(${scale})`,
+                opacity,
+              }}
+            />
+          );
+        })}
+
+        {packets.map((packet) => {
+          const from = nodeMap[packet.from];
+          const to = nodeMap[packet.to];
+          const travel = spring({
+            fps: PRESENTATION_FPS,
+            frame: Math.max(0, cycleFrame - packet.start),
+            durationInFrames: packet.duration,
+            config: {
+              damping: 15,
+              stiffness: 110,
+              mass: 0.9,
+            },
+          });
+
+          const isVisible = cycleFrame >= packet.start && cycleFrame <= packet.start + packet.duration + 8;
+          const x = from.x + (to.x - from.x) * travel;
+          const y = from.y + (to.y - from.y) * travel;
+
+          return (
+            <div
+              key={packet.id}
+              className={`network-packet ${packet.kind}`}
+              style={{
+                left: `${x}%`,
+                top: `${y}%`,
+                opacity: isVisible ? 1 : 0,
+                transform: `translate(-50%, -50%) scale(${interpolate(travel, [0, 1], [0.86, 1])})`,
+              }}
+            />
+          );
+        })}
+
+        {nodes.map((node) => {
+          const nodeFrame = Math.max(0, cycleFrame - (node.role === "entry" ? 0 : node.role === "peer" ? 46 : node.role === "validator" ? 118 : 168));
+          const glow = spring({
+            fps: PRESENTATION_FPS,
+            frame: nodeFrame,
+            durationInFrames: 28,
+            config: {
+              damping: 16,
+              stiffness: 120,
+              mass: 0.9,
+            },
+          });
+          const scale = interpolate(glow, [0, 1], [0.94, 1], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+          });
+
+          return (
+            <div
+              key={node.id}
+              className={`network-node ${node.role}`}
+              style={{
+                left: `${node.x}%`,
+                top: `${node.y}%`,
+                transform: `translate(-50%, -50%) scale(${scale})`,
+              }}
+            >
+              <div className="network-node-core" />
+              <div className="network-node-label">{node.label}</div>
+            </div>
+          );
+        })}
+
+        <div className="network-status-bar">
+          <div className="network-status-label">Live phase</div>
+          <div className="network-status-copy">{statusPhase}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SlideShell({ slide, children }) {
+  return (
+    <div className={`slide lesson-slide slide-${slide.number.replaceAll(".", "-")}`}>
+      <div className="slide-grid-bg" />
+      <div className="slide-edge slide-edge-left" />
+      <div className="slide-edge slide-edge-right" />
+
+      <header className="slide-topbar">
+        <div className="brand-mark">Architectural Noir</div>
+        <div className="topbar-meta">
+          <span>{slide.level === "parent" ? "Main topic" : "Subtopic"}</span>
+          <span>{slide.parentTitle}</span>
+        </div>
+      </header>
+
+      <div className="slide-content">{children}</div>
+    </div>
+  );
+}
+
+function SlideIntro({ kicker, title, copy }) {
+  return (
+    <div className="slide-intro">
+      <div className="slide-kicker">{kicker}</div>
+      <h1 className="hero-title">{title}</h1>
+      <div className="intro-rule" />
+      <p className="hero-copy">{copy}</p>
+    </div>
+  );
+}
+
 function SlideFrame({ slide, isActive }) {
   if (slide.content?.layout === "ledger") {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
-        <div className={`slide lesson-slide ledger-slide slide-${slide.number.replaceAll(".", "-")}`}>
-          <div className="slide-grid">
-            <div className="slide-main">
-              <div className="slide-kicker">{slide.content.eyebrow}</div>
-              <h2 className="hero-title">{slide.content.headline}</h2>
-              <p className="hero-copy">{slide.content.description}</p>
+        <SlideShell slide={slide}>
+          <div className="ledger-layout">
+            <div className="intro-column">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
 
-              <div className="comparison-grid">
-                {slide.content.comparison.map((item) => (
-                  <article key={item.label} className="content-card comparison-card">
-                    <div className="card-label">{item.label}</div>
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                  </article>
+            <aside className="content-card side-panel">
+              <div className="panel-label">Protocol sequence</div>
+              <ol className="flow-list">
+                {slide.content.flow.map((step) => (
+                  <li key={step}>{step}</li>
                 ))}
-              </div>
-            </div>
+              </ol>
+            </aside>
 
-            <div className="slide-side-stack">
-              <aside className="content-card flow-card">
-                <div className="card-label">How one ledger update spreads</div>
-                <ol className="flow-list">
-                  {slide.content.flow.map((step) => (
-                    <li key={step}>{step}</li>
-                  ))}
-                </ol>
-              </aside>
+            <div className="comparison-grid">
+              {slide.content.comparison.map((item, index) => (
+                <article key={item.label} className="content-card comparison-card">
+                  <div className="card-index">0{index + 1}</div>
+                  <div className="card-label">{item.label}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              ))}
             </div>
           </div>
-
-          <div className="slide-chrome">
-            <div>{slide.chrome}</div>
-            <div>Shared verification over central control</div>
-          </div>
-        </div>
+        </SlideShell>
       </section>
     );
   }
@@ -190,30 +400,28 @@ function SlideFrame({ slide, isActive }) {
   if (slide.content?.layout === "blockchain-motion") {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
-        <div className={`slide lesson-slide motion-slide slide-${slide.number.replaceAll(".", "-")}`}>
-          <div className="motion-slide-header">
-            <div>
-              <div className="slide-kicker">{slide.content.eyebrow}</div>
-              <h2 className="hero-title">{slide.content.headline}</h2>
+        <SlideShell slide={slide}>
+          <div className="motion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
             </div>
-            <p className="hero-copy">{slide.content.description}</p>
-          </div>
 
-          <BlockchainLoopGraphic isActive={isActive} />
+            <BlockchainLoopGraphic isActive={isActive} />
 
-          <div className="motion-slide-rail">
-            {slide.content.bullets.map((bullet) => (
-              <div key={bullet} className="note-pill motion-pill">
-                {bullet}
-              </div>
-            ))}
+            <div className="notes-panel">
+              {slide.content.bullets.map((bullet, index) => (
+                <div key={bullet} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <div className="slide-chrome">
-            <div>{slide.chrome}</div>
-            <div>Visual intuition for a growing chain</div>
-          </div>
-        </div>
+        </SlideShell>
       </section>
     );
   }
@@ -221,30 +429,38 @@ function SlideFrame({ slide, isActive }) {
   if (slide.content?.layout === "node-motion") {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
-        <div className={`slide lesson-slide motion-slide slide-${slide.number.replaceAll(".", "-")}`}>
-          <div className="motion-slide-header">
-            <div>
-              <div className="slide-kicker">{slide.content.eyebrow}</div>
-              <h2 className="hero-title">{slide.content.headline}</h2>
-            </div>
-            <p className="hero-copy">{slide.content.description}</p>
-          </div>
-
+        <div className={`slide node-motion-slide slide-${slide.number.replaceAll(".", "-")}`}>
           <NodeNetworkGraphic />
-
-          <div className="motion-slide-rail">
-            {slide.content.bullets.map((bullet) => (
-              <div key={bullet} className="note-pill motion-pill">
-                {bullet}
-              </div>
-            ))}
-          </div>
-
-          <div className="slide-chrome">
-            <div>{slide.chrome}</div>
-            <div>Peer-to-peer verification in motion</div>
-          </div>
         </div>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "node-motion-remotion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout node-remotion-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <NodeNetworkRemotionGraphic isActive={isActive} />
+
+            <div className="notes-panel">
+              {slide.content.bullets.map((bullet, index) => (
+                <div key={bullet} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
       </section>
     );
   }
@@ -252,36 +468,34 @@ function SlideFrame({ slide, isActive }) {
   if (slide.content?.layout === "pipeline") {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
-        <div className={`slide lesson-slide pipeline-slide slide-${slide.number.replaceAll(".", "-")}`}>
-          <div className="slide-kicker">{slide.content.eyebrow}</div>
-          <div className="pipeline-header">
-            <h2 className="hero-title">{slide.content.headline}</h2>
-            <p className="hero-copy">{slide.content.description}</p>
-          </div>
+        <SlideShell slide={slide}>
+          <div className="pipeline-layout">
+            <SlideIntro
+              kicker={`Slide ${slide.number}`}
+              title={slide.title}
+              copy={slide.content.description}
+            />
 
-          <div className="pipeline-grid">
-            {slide.content.stages.map((stage, index) => (
-              <article key={stage.title} className="content-card stage-card">
-                <div className="stage-index">0{index + 1}</div>
-                <h3>{stage.title}</h3>
-                <p>{stage.body}</p>
-              </article>
-            ))}
-          </div>
+            <div className="pipeline-grid">
+              {slide.content.stages.map((stage, index) => (
+                <article key={stage.title} className="content-card stage-card">
+                  <div className="stage-index">0{index + 1}</div>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.body}</p>
+                </article>
+              ))}
+            </div>
 
-          <div className="notes-panel">
-            {slide.content.notes.map((note) => (
-              <div key={note} className="note-pill">
-                {note}
-              </div>
-            ))}
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <div className="slide-chrome">
-            <div>{slide.chrome}</div>
-            <div>Consensus turns updates into trusted history</div>
-          </div>
-        </div>
+        </SlideShell>
       </section>
     );
   }
@@ -289,62 +503,57 @@ function SlideFrame({ slide, isActive }) {
   if (slide.content) {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
-        <div className={`slide lesson-slide overview-slide slide-${slide.number.replaceAll(".", "-")}`}>
-          <div className="overview-hero">
-            <div className="overview-header">
-              <div className="slide-kicker">{slide.content.eyebrow}</div>
-              <h1 className="overview-title">{slide.content.headline}</h1>
-              <p className="overview-copy">{slide.content.intro}</p>
+        <SlideShell slide={slide}>
+          <div className="overview-layout">
+            <SlideIntro
+              kicker={`Slide ${slide.number}`}
+              title={slide.title}
+              copy={slide.content.headline}
+            />
+
+            <div className="overview-pillar-grid">
+              {slide.content.pillars.map((pillar, index) => (
+                <article key={pillar.title} className="content-card pillar-card">
+                  <div className="card-index">0{index + 1}</div>
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.body}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="overview-footer">
+              <div className="callout-card">{slide.content.callout}</div>
+              <div className="footer-tag">{slide.content.footer}</div>
             </div>
           </div>
-
-          <div className="overview-pillar-grid">
-            {slide.content.pillars.map((pillar) => (
-              <article key={pillar.title} className="content-card pillar-card">
-                <h3>{pillar.title}</h3>
-                <p>{pillar.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="overview-footer">
-            <div className="callout-card">{slide.content.callout}</div>
-            <div className="footer-tag">{slide.content.footer}</div>
-          </div>
-
-          <div className="slide-chrome">
-            <div>{slide.chrome}</div>
-            <div>Chapter opener</div>
-          </div>
-        </div>
+        </SlideShell>
       </section>
     );
   }
 
   return (
     <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
-      <div className="slide placeholder-slide">
-        <div className="placeholder-card">
-          <div className="slide-kicker slide-kicker-static">
-            Slide {slide.number} / {slide.parentTitle}
-          </div>
-          <h2>{slide.title}</h2>
-          <p>
-            This section is intentionally left as a placeholder so the deck can
-            be reorganized around a more detailed sidebar and submenu flow first.
-          </p>
-          <div className="placeholder-meta">
-            <div className="placeholder-chip">
-              Type: {slide.level === "parent" ? "Main topic slide" : "Subtopic slide"}
+      <SlideShell slide={slide}>
+        <div className="placeholder-slide">
+          <div className="placeholder-card">
+            <div className="slide-kicker slide-kicker-static">
+              Slide {slide.number} / {slide.parentTitle}
             </div>
-            <div className="placeholder-chip">Section: {slide.parentTitle}</div>
+            <h2>{slide.title}</h2>
+            <div className="intro-rule" />
+            <p>
+              This section is intentionally left as a placeholder so the deck can
+              be reorganized around a more detailed sidebar and submenu flow first.
+            </p>
+            <div className="placeholder-meta">
+              <div className="placeholder-chip">
+                Type: {slide.level === "parent" ? "Main topic slide" : "Subtopic slide"}
+              </div>
+              <div className="placeholder-chip">Section: {slide.parentTitle}</div>
+            </div>
           </div>
         </div>
-        <div className="slide-chrome">
-          <div>{slide.chrome}</div>
-          <div>Outline placeholder</div>
-        </div>
-      </div>
+      </SlideShell>
     </section>
   );
 }

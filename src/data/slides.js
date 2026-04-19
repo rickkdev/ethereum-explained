@@ -6,7 +6,6 @@ export const slideGroups = [
       "Shared ledger basics",
       "Blockchain in motion",
       "How nodes work",
-      "Node network in motion",
       "Blocks, validators, and finality",
     ],
     overview: {
@@ -95,19 +94,6 @@ export const slideGroups = [
           "That node checks format, signature, and account state",
           "Valid data is relayed to neighboring peers",
           "More nodes repeat the checks until the network converges",
-        ],
-      },
-      {
-        number: "01.4",
-        layout: "node-motion",
-        eyebrow: "Node network in motion",
-        headline: "A blockchain spreads through peer-to-peer verification, not one central broadcast.",
-        description:
-          "This view separates the moving network from the explanation. One node receives data, peers re-check it independently, and validators help decide what becomes canonical history.",
-        bullets: [
-          "Packets move between peers rather than through one master server.",
-          "Every node runs the same checks locally before relaying data.",
-          "The shared ledger updates only after broad agreement.",
         ],
       },
       {
@@ -231,14 +217,32 @@ export const slides = slideGroups.flatMap((group) => {
     content: group.overview ?? null,
   };
 
-  const children = group.children.map((child, childIndex) => ({
-    number: `${group.number}.${childIndex + 1}`,
-    title: child,
-    parentTitle: group.title,
-    level: "child",
-    chrome: "Subtopic",
-    content: group.childContent?.[childIndex] ?? null,
-  }));
+  let contentIndex = 0;
+
+  const children = group.children.map((child, childIndex) => {
+    if (typeof child === "string") {
+      const content = group.childContent?.[contentIndex] ?? null;
+      contentIndex += 1;
+
+      return {
+        number: `${group.number}.${childIndex + 1}`,
+        title: child,
+        parentTitle: group.title,
+        level: "child",
+        chrome: "Subtopic",
+        content,
+      };
+    }
+
+    return {
+      number: child.number,
+      title: child.title,
+      parentTitle: group.title,
+      level: "child",
+      chrome: "Subtopic",
+      content: child.content ?? null,
+    };
+  });
 
   return [parent, ...children];
 });

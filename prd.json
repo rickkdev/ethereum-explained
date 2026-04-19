@@ -1,62 +1,607 @@
 {
-  "project": "Minimal Tic-Tac-Toe",
-  "branchName": "ralph/minimal-tic-tac-toe",
-  "description": "Build a super minimalistic tic-tac-toe game in plain JavaScript that runs in the browser.",
+  "project": "Bhutan Bootcamp Presentation",
+  "branchName": "ralph/bhutan-bootcamp-presentation",
+  "description": "Build the blockchain education presentation slide by slide as a polished Vite + React deck, with one implementable story for every parent slide and subslide in the current presentation map.",
   "userStories": [
     {
-      "id": "US-001",
-      "title": "Create a minimal browser app shell",
-      "description": "As a player, I need a barebones HTML, CSS, and JavaScript setup so the game loads in a browser without any framework.",
+      "id": "SLIDE-01",
+      "title": "Build the chapter intro for What is a blockchain",
+      "description": "As a learner, I want the opening slide for blockchain basics to frame the chapter with a clear headline, supporting pillars, and a strong takeaway before the subslides begin.",
       "acceptanceCriteria": [
-        "App uses plain HTML, CSS, and JavaScript only",
-        "Page renders a centered game container with a 3x3 board mount point",
-        "No build step is required to run the game locally",
+        "Slide 01 renders as a parent chapter slide for What is a blockchain",
+        "The slide communicates shared record, rules before trust, and hard to rewrite as the three core ideas",
+        "The layout feels presentation-ready and matches the deck-wide visual system",
         "Verify in browser"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
-      "id": "US-002",
-      "title": "Implement tic-tac-toe interactions",
-      "description": "As a player, I want to click squares to alternate between X and O so I can play a full game.",
+      "id": "SLIDE-01-1",
+      "title": "Build slide 01.1 Shared ledger basics",
+      "description": "As a learner, I want a comparison between a traditional database and a blockchain ledger so I understand why a shared record matters.",
       "acceptanceCriteria": [
-        "Clicking an empty cell places the current player's mark",
-        "Turns alternate X then O",
-        "Filled cells cannot be overwritten",
-        "Game state is managed in JavaScript",
+        "Slide 01.1 explains the shared ledger concept in plain language",
+        "The slide contrasts centralized record-keeping with a replicated blockchain ledger",
+        "A simple step flow shows how an update becomes part of common history",
         "Verify in browser"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
-      "id": "US-003",
-      "title": "Show win or draw state",
-      "description": "As a player, I want the game to detect wins and draws so the round ends correctly.",
+      "id": "SLIDE-01-2",
+      "title": "Build slide 01.2 Blockchain in motion",
+      "description": "As a learner, I want to see the chain advancing visually so I can internalize how new validated blocks extend the record over time.",
       "acceptanceCriteria": [
-        "All standard tic-tac-toe win lines are detected",
-        "A status label shows the winner or a draw message",
-        "Board input stops after a win or draw",
+        "Slide 01.2 presents the blockchain as an animated sequence of blocks moving forward",
+        "The motion clearly shows older blocks shifting back while the newest block arrives",
+        "Supporting labels explain transactions gathering, validation, and chain advancement",
         "Verify in browser"
       ],
       "priority": 3,
+      "passes": true,
+      "notes": "Use a Remotion-driven animation similar to the current blockchain in motion slide."
+    },
+    {
+      "id": "SLIDE-01-3",
+      "title": "Build slide 01.3 How nodes work",
+      "description": "As a learner, I want to understand how nodes verify and relay information so the network can converge without one central server.",
+      "acceptanceCriteria": [
+        "Slide 01.3 explains what a node is and what it does",
+        "The slide contrasts centralized validation with peer-to-peer verification",
+        "The flow from wallet to peer relay to network convergence is clear",
+        "Verify in browser"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Add a Remotion animation if the network relay concept needs motion to read clearly, using the same approach as the blockchain motion slide."
+    },
+    {
+      "id": "SLIDE-01-4",
+      "title": "Build slide 01.4 Blocks, validators, and finality",
+      "description": "As a learner, I want a pipeline view from transactions to finality so I understand how activity becomes reliable history.",
+      "acceptanceCriteria": [
+        "Slide 01.4 shows the stages from transactions to blocks to validators to finality",
+        "Each stage has concise educational copy",
+        "The slide defines finality in a way that is understandable to beginners",
+        "Verify in browser"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02",
+      "title": "Build the chapter intro for Bitcoin",
+      "description": "As a learner, I want the Bitcoin chapter to establish why Bitcoin exists and what topics the next set of slides will cover.",
+      "acceptanceCriteria": [
+        "Slide 02 renders as a parent chapter slide for Bitcoin",
+        "The slide introduces Bitcoin as the first major blockchain application and frames the chapter arc",
+        "The layout leaves the deck feeling cohesive with chapter 01",
+        "Verify in browser"
+      ],
+      "priority": 6,
       "passes": false,
       "notes": ""
     },
     {
-      "id": "US-004",
-      "title": "Add a simple restart control",
-      "description": "As a player, I want to restart the board instantly so I can play again.",
+      "id": "SLIDE-02-1",
+      "title": "Build slide 02.1 The problem Bitcoin solves",
+      "description": "As a learner, I want to understand the double-spend and trust problem so Bitcoin feels like an answer to a real issue.",
       "acceptanceCriteria": [
-        "A reset button clears the board and status",
-        "The next round always starts with X",
-        "The layout stays visually minimalistic",
+        "Slide 02.1 explains the problem of digital scarcity and trusted intermediaries",
+        "The slide makes clear why double-spending is hard to solve online",
+        "The design stays simple enough for first-time learners",
         "Verify in browser"
       ],
-      "priority": 4,
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02-2",
+      "title": "Build slide 02.2 Satoshi and the white paper",
+      "description": "As a learner, I want context on Satoshi Nakamoto and the white paper so I can place Bitcoin historically without losing focus on the ideas.",
+      "acceptanceCriteria": [
+        "Slide 02.2 introduces Satoshi Nakamoto and the white paper at a high level",
+        "The slide anchors Bitcoin's launch in its historical moment",
+        "The copy stays concise and presentation-friendly rather than biographical",
+        "Verify in browser"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02-3",
+      "title": "Build slide 02.3 What is a block?",
+      "description": "As a learner, I want to know what information a Bitcoin block contains so the rest of the chapter has a concrete mental model.",
+      "acceptanceCriteria": [
+        "Slide 02.3 explains a block as a batch of ordered transactions plus metadata",
+        "The slide visually distinguishes transactions, header data, and block identity",
+        "The explanation supports the later hashing and mining slides",
+        "Verify in browser"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02-4",
+      "title": "Build slide 02.4 The chain and hashing",
+      "description": "As a learner, I want to see how blocks link through hashes so I understand why changing past data breaks the chain.",
+      "acceptanceCriteria": [
+        "Slide 02.4 explains hashing and block linkage in beginner-friendly language",
+        "The slide shows how one block references the previous block",
+        "The design makes tampering consequences easy to grasp visually",
+        "Verify in browser"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "Add a Remotion animation if needed to show hash links updating or breaking across a chain."
+    },
+    {
+      "id": "SLIDE-02-5",
+      "title": "Build slide 02.5 Mining and halving",
+      "description": "As a learner, I want to understand how miners compete to add blocks and why halvings change Bitcoin issuance over time.",
+      "acceptanceCriteria": [
+        "Slide 02.5 explains mining as block production under Proof of Work",
+        "The slide explains what a halving is and why it matters to issuance",
+        "The content avoids jargon overload while preserving technical accuracy",
+        "Verify in browser"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": "Add a Remotion animation if useful for showing issuance stepping down over successive halvings."
+    },
+    {
+      "id": "SLIDE-02-6",
+      "title": "Build slide 02.6 21M hard cap",
+      "description": "As a learner, I want to understand Bitcoin's fixed supply so I can connect its monetary policy to its design.",
+      "acceptanceCriteria": [
+        "Slide 02.6 explains the idea of a fixed 21 million supply",
+        "The slide connects the hard cap to issuance and halvings",
+        "The visual treatment keeps the idea memorable without excess decoration",
+        "Verify in browser"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02-7",
+      "title": "Build slide 02.7 Nodes and decentralization",
+      "description": "As a learner, I want to know why node operators matter so decentralization feels operational rather than abstract.",
+      "acceptanceCriteria": [
+        "Slide 02.7 explains the role of nodes in enforcing Bitcoin's rules",
+        "The slide connects node distribution to censorship resistance and resilience",
+        "The copy distinguishes nodes from miners clearly",
+        "Verify in browser"
+      ],
+      "priority": 13,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02-8",
+      "title": "Build slide 02.8 Wallets and keys",
+      "description": "As a learner, I want a simple mental model for wallets and keys so I know what users actually control.",
+      "acceptanceCriteria": [
+        "Slide 02.8 explains public and private key roles at a beginner level",
+        "The slide clarifies that wallets manage keys and signing, not coins stored in an app",
+        "The layout is clean enough to support later wallet and EOA slides",
+        "Verify in browser"
+      ],
+      "priority": 14,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-02-9",
+      "title": "Build slide 02.9 Transactions and mempool",
+      "description": "As a learner, I want to understand where transactions wait before confirmation so pending activity makes sense.",
+      "acceptanceCriteria": [
+        "Slide 02.9 explains the mempool as the waiting area for valid unconfirmed transactions",
+        "The slide connects sending a transaction to miner selection and confirmation",
+        "The explanation stays distinct from Ethereum gas mechanics covered later",
+        "Verify in browser"
+      ],
+      "priority": 15,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-03",
+      "title": "Build the chapter intro for Ethereum",
+      "description": "As a learner, I want the Ethereum chapter opener to establish the shift from digital money to a programmable blockchain.",
+      "acceptanceCriteria": [
+        "Slide 03 renders as a parent chapter slide for Ethereum",
+        "The slide frames Ethereum as extending blockchain utility beyond simple transfers",
+        "The chapter intro prepares the audience for state, the EVM, and smart contracts",
+        "Verify in browser"
+      ],
+      "priority": 16,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-03-1",
+      "title": "Build slide 03.1 What Ethereum adds beyond Bitcoin",
+      "description": "As a learner, I want a clear comparison between Bitcoin and Ethereum so I understand why Ethereum exists.",
+      "acceptanceCriteria": [
+        "Slide 03.1 explains Ethereum's broader programmability compared with Bitcoin",
+        "The slide keeps the comparison accurate without overstating either system",
+        "The visual structure makes the contrast easy to present live",
+        "Verify in browser"
+      ],
+      "priority": 17,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-03-2",
+      "title": "Build slide 03.2 State, accounts, and the EVM",
+      "description": "As a learner, I want to understand Ethereum's state machine and execution environment so smart contracts are easier to grasp.",
+      "acceptanceCriteria": [
+        "Slide 03.2 explains accounts, shared state, and the EVM in accessible terms",
+        "The slide shows that transactions update shared state through execution",
+        "The content creates a strong bridge to the smart contracts chapter",
+        "Verify in browser"
+      ],
+      "priority": 18,
+      "passes": false,
+      "notes": "Add a Remotion animation if needed to show state transitions flowing through the EVM."
+    },
+    {
+      "id": "SLIDE-03-3",
+      "title": "Build slide 03.3 Smart contracts and programmability",
+      "description": "As a learner, I want to see what programmable logic on Ethereum enables so contracts feel useful rather than abstract.",
+      "acceptanceCriteria": [
+        "Slide 03.3 explains smart contracts as code that executes on-chain",
+        "The slide includes concrete examples of programmable behaviors",
+        "The slide sets up the next chapter cleanly",
+        "Verify in browser"
+      ],
+      "priority": 19,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-04",
+      "title": "Build the chapter intro for Smart Contracts",
+      "description": "As a learner, I want the smart contracts chapter opener to frame contracts as deterministic software with real constraints and risks.",
+      "acceptanceCriteria": [
+        "Slide 04 renders as a parent chapter slide for Smart Contracts",
+        "The slide introduces contracts as on-chain programs with rules and outcomes",
+        "The presentation tone stays educational rather than promotional",
+        "Verify in browser"
+      ],
+      "priority": 20,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-04-1",
+      "title": "Build slide 04.1 How contracts execute",
+      "description": "As a learner, I want to understand the lifecycle of a contract call so execution stops feeling magical.",
+      "acceptanceCriteria": [
+        "Slide 04.1 explains deployment, calling a function, execution, and state updates",
+        "The slide makes clear that every node executes the same logic",
+        "The narrative remains beginner-friendly without losing the deterministic model",
+        "Verify in browser"
+      ],
+      "priority": 21,
+      "passes": false,
+      "notes": "Add a Remotion animation if needed to show a contract call moving from user input to state change."
+    },
+    {
+      "id": "SLIDE-04-2",
+      "title": "Build slide 04.2 Common examples and risks",
+      "description": "As a learner, I want examples of what contracts can do and what can go wrong so the tradeoffs are concrete.",
+      "acceptanceCriteria": [
+        "Slide 04.2 includes practical contract examples such as tokens, escrow, or governance",
+        "The slide introduces key risks like bugs, exploits, and upgrade complexity",
+        "The content balances capability with caution",
+        "Verify in browser"
+      ],
+      "priority": 22,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-05",
+      "title": "Build the chapter intro for Ethereum Values and CROPS",
+      "description": "As a learner, I want this chapter to introduce Ethereum's cultural values before diving into the CROPS framework.",
+      "acceptanceCriteria": [
+        "Slide 05 renders as a parent chapter slide for Ethereum values",
+        "The slide frames values as design principles that shape the ecosystem",
+        "The chapter opener fits the same visual language as the rest of the deck",
+        "Verify in browser"
+      ],
+      "priority": 23,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-05-1",
+      "title": "Build slide 05.1 What CROPS stands for",
+      "description": "As a learner, I want a clear explanation of the CROPS acronym so I can remember the value framework.",
+      "acceptanceCriteria": [
+        "Slide 05.1 defines each letter in CROPS clearly",
+        "The visual layout helps the audience scan and remember the framework",
+        "The wording stays specific to Ethereum ecosystem values",
+        "Verify in browser"
+      ],
+      "priority": 24,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-05-2",
+      "title": "Build slide 05.2 How values show up in ecosystem design",
+      "description": "As a learner, I want examples of how Ethereum values influence products and governance so the framework feels real.",
+      "acceptanceCriteria": [
+        "Slide 05.2 ties CROPS principles to visible ecosystem design choices",
+        "The slide shows at least a few concrete manifestations of those values",
+        "The content avoids drifting into vague slogans",
+        "Verify in browser"
+      ],
+      "priority": 25,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-06",
+      "title": "Build the chapter intro for DeFi use-cases",
+      "description": "As a learner, I want the DeFi chapter opener to frame decentralized finance as a set of on-chain financial building blocks.",
+      "acceptanceCriteria": [
+        "Slide 06 renders as a parent chapter slide for DeFi use-cases",
+        "The slide introduces DeFi without assuming prior finance expertise",
+        "The chapter opener prepares the audience for both opportunities and risks",
+        "Verify in browser"
+      ],
+      "priority": 26,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-06-1",
+      "title": "Build slide 06.1 Swaps, lending, and stablecoins",
+      "description": "As a learner, I want a clear tour of core DeFi primitives so I can recognize the main categories of on-chain finance.",
+      "acceptanceCriteria": [
+        "Slide 06.1 explains swaps, lending, and stablecoins at a conceptual level",
+        "The slide distinguishes the role each primitive plays in DeFi",
+        "The examples are concrete enough to support later discussion of composability",
+        "Verify in browser"
+      ],
+      "priority": 27,
+      "passes": false,
+      "notes": "Add a Remotion animation if useful for showing assets moving across protocols in one user journey."
+    },
+    {
+      "id": "SLIDE-06-2",
+      "title": "Build slide 06.2 Risks, composability, and real-world fit",
+      "description": "As a learner, I want to understand why DeFi is powerful but fragile so I can evaluate use-cases more critically.",
+      "acceptanceCriteria": [
+        "Slide 06.2 explains composability as protocols building on each other",
+        "The slide highlights meaningful risks such as liquidations, smart contract bugs, and market structure issues",
+        "The content discusses where DeFi may or may not fit real-world needs",
+        "Verify in browser"
+      ],
+      "priority": 28,
+      "passes": false,
+      "notes": "Add a Remotion animation if needed to illustrate composability chains or cascading risk."
+    },
+    {
+      "id": "SLIDE-07",
+      "title": "Build the chapter intro for the Ethereum community",
+      "description": "As a learner, I want the community chapter opener to frame Ethereum as a social and technical ecosystem rather than a single company.",
+      "acceptanceCriteria": [
+        "Slide 07 renders as a parent chapter slide for the Ethereum community",
+        "The slide introduces the idea of a many-sided ecosystem with different roles",
+        "The opener keeps the tone grounded and explanatory",
+        "Verify in browser"
+      ],
+      "priority": 29,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-07-1",
+      "title": "Build slide 07.1 Core teams, researchers, and builders",
+      "description": "As a learner, I want to see the main actor groups in Ethereum so the ecosystem has a human shape.",
+      "acceptanceCriteria": [
+        "Slide 07.1 identifies core teams, researchers, client teams, and builders",
+        "The slide shows how these groups contribute differently",
+        "The layout helps the audience understand roles without oversimplifying them",
+        "Verify in browser"
+      ],
+      "priority": 30,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-07-2",
+      "title": "Build slide 07.2 How the ecosystem coordinates change",
+      "description": "As a learner, I want to understand how Ethereum evolves without a single central controller.",
+      "acceptanceCriteria": [
+        "Slide 07.2 explains rough coordination across discussions, research, client implementation, and upgrades",
+        "The slide shows that change emerges through social and technical processes together",
+        "The content stays high-level enough for a presentation audience",
+        "Verify in browser"
+      ],
+      "priority": 31,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-08",
+      "title": "Build the chapter intro for Gas and transaction fees",
+      "description": "As a learner, I want the gas chapter opener to frame fees as part of network resource management, not just a nuisance.",
+      "acceptanceCriteria": [
+        "Slide 08 renders as a parent chapter slide for gas and fees",
+        "The slide introduces the idea that computation and block space are scarce resources",
+        "The opener sets up both why fees exist and how users experience them",
+        "Verify in browser"
+      ],
+      "priority": 32,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-08-1",
+      "title": "Build slide 08.1 Why gas exists",
+      "description": "As a learner, I want to understand gas as a pricing mechanism for computation so fees feel principled rather than arbitrary.",
+      "acceptanceCriteria": [
+        "Slide 08.1 explains gas as a way to meter computation and storage usage",
+        "The slide connects gas to spam resistance and fair resource allocation",
+        "The explanation stays distinct from total fee calculation details",
+        "Verify in browser"
+      ],
+      "priority": 33,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-08-2",
+      "title": "Build slide 08.2 Fee market and user experience",
+      "description": "As a learner, I want to see how fee markets affect what users pay and how transactions feel in practice.",
+      "acceptanceCriteria": [
+        "Slide 08.2 explains that users compete for block space through fee bidding mechanics",
+        "The slide connects congestion to user-facing fee volatility and waiting time",
+        "The design keeps the concept teachable without too much protocol detail",
+        "Verify in browser"
+      ],
+      "priority": 34,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-09",
+      "title": "Build the chapter intro for Wallets and Keys / EOA",
+      "description": "As a learner, I want the wallet chapter opener to frame identity and control on Ethereum before details about EOAs and custody.",
+      "acceptanceCriteria": [
+        "Slide 09 renders as a parent chapter slide for wallets and EOAs",
+        "The slide introduces wallet control, signing, and custody as the core themes",
+        "The opener maintains consistency with the rest of the deck",
+        "Verify in browser"
+      ],
+      "priority": 35,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-09-1",
+      "title": "Build slide 09.1 EOAs, seed phrases, and signing",
+      "description": "As a learner, I want to understand how EOAs and seed phrases relate to signatures so wallet security has a technical basis.",
+      "acceptanceCriteria": [
+        "Slide 09.1 explains EOAs, seed phrases, and signing in clear beginner language",
+        "The slide distinguishes account abstraction ideas from classic EOAs only if necessary for clarity",
+        "The content reinforces safe mental models around key material",
+        "Verify in browser"
+      ],
+      "priority": 36,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-09-2",
+      "title": "Build slide 09.2 Custody models and wallet UX",
+      "description": "As a learner, I want a comparison of self-custody and custodial models so the tradeoffs are explicit.",
+      "acceptanceCriteria": [
+        "Slide 09.2 compares self-custody, custodial, and hybrid wallet patterns",
+        "The slide connects security tradeoffs to user experience choices",
+        "The presentation remains practical and non-dogmatic",
+        "Verify in browser"
+      ],
+      "priority": 37,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-10",
+      "title": "Build the chapter intro for Consensus",
+      "description": "As a learner, I want the consensus chapter opener to frame agreement as the core problem of decentralized systems.",
+      "acceptanceCriteria": [
+        "Slide 10 renders as a parent chapter slide for consensus",
+        "The slide introduces consensus as the process of agreeing on valid history",
+        "The opener prepares the audience for Proof of Work and Proof of Stake tradeoffs",
+        "Verify in browser"
+      ],
+      "priority": 38,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-10-1",
+      "title": "Build slide 10.1 Proof of Work vs Proof of Stake",
+      "description": "As a learner, I want a side-by-side explanation of Proof of Work and Proof of Stake so the tradeoffs are easier to compare.",
+      "acceptanceCriteria": [
+        "Slide 10.1 explains the core mechanism of Proof of Work and Proof of Stake",
+        "The slide presents the comparison in a balanced, non-caricatured way",
+        "The visual treatment helps the audience compare security resources and participation models",
+        "Verify in browser"
+      ],
+      "priority": 39,
+      "passes": false,
+      "notes": "Add a Remotion animation if needed to make the two consensus flows legible in a single comparison."
+    },
+    {
+      "id": "SLIDE-10-2",
+      "title": "Build slide 10.2 Security assumptions and tradeoffs",
+      "description": "As a learner, I want to understand what each consensus model assumes about attackers and incentives so the comparison has depth.",
+      "acceptanceCriteria": [
+        "Slide 10.2 explains the major security assumptions behind consensus choices",
+        "The slide includes tradeoffs such as capital, energy, coordination, or attack surfaces as appropriate",
+        "The content stays understandable without flattening the nuance completely",
+        "Verify in browser"
+      ],
+      "priority": 40,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-11",
+      "title": "Build the chapter intro for Security and OPSEC",
+      "description": "As a learner, I want the final chapter opener to shift the deck from concepts to practical self-protection.",
+      "acceptanceCriteria": [
+        "Slide 11 renders as a parent chapter slide for security and OPSEC",
+        "The slide introduces security as both technical and behavioral",
+        "The opener sets up a practical closing section for the presentation",
+        "Verify in browser"
+      ],
+      "priority": 41,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-11-1",
+      "title": "Build slide 11.1 Common attack surfaces",
+      "description": "As a learner, I want to see the main ways users get exploited so I can recognize risk patterns early.",
+      "acceptanceCriteria": [
+        "Slide 11.1 covers common attack surfaces such as phishing, malicious approvals, and compromised devices or sites",
+        "The slide keeps examples practical and current enough to be useful",
+        "The content remains high-signal for a live presentation",
+        "Verify in browser"
+      ],
+      "priority": 42,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "SLIDE-11-2",
+      "title": "Build slide 11.2 Practical safety habits",
+      "description": "As a learner, I want a concise checklist of habits that reduce risk so the presentation ends with actionable guidance.",
+      "acceptanceCriteria": [
+        "Slide 11.2 presents a practical set of OPSEC habits for everyday users",
+        "The slide emphasizes repeatable behaviors rather than vague warnings",
+        "The final slide lands as a strong, useful close to the deck",
+        "Verify in browser"
+      ],
+      "priority": 43,
       "passes": false,
       "notes": ""
     }

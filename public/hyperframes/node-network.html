@@ -7,16 +7,18 @@
     <style>
       :root {
         color-scheme: dark;
-        --bg-0: #060c16;
-        --bg-1: #0c1420;
-        --panel: rgba(14, 22, 34, 0.92);
-        --line: rgba(255, 255, 255, 0.14);
-        --line-active: rgba(245, 174, 67, 0.62);
-        --ink: #edf2fa;
-        --muted: rgba(237, 242, 250, 0.68);
-        --cyan: #8fb7ff;
-        --gold: #d99534;
-        --green: #6dd3a0;
+        --paper: #f3efdf;
+        --ink: #f3efdf;
+        --muted: rgba(243, 239, 223, 0.62);
+        --line: rgba(243, 239, 223, 0.12);
+        --line-active: rgba(243, 239, 223, 0.72);
+        --panel: rgba(18, 18, 18, 0.88);
+        --panel-strong: rgba(28, 28, 28, 0.96);
+        --edge: rgba(243, 239, 223, 0.16);
+        --validator: #c46a3c;
+        --peer: #e0d7bb;
+        --pulse: rgba(196, 106, 60, 0.18);
+        --packet: #f3efdf;
       }
 
       * {
@@ -30,10 +32,10 @@
         height: 100%;
         overflow: hidden;
         background:
-          radial-gradient(circle at top left, rgba(143, 183, 255, 0.14), transparent 22%),
-          linear-gradient(180deg, var(--bg-0), var(--bg-1));
+          radial-gradient(circle at top left, rgba(243, 239, 223, 0.08), transparent 28%),
+          linear-gradient(180deg, rgba(22, 22, 22, 0.98), rgba(10, 10, 10, 0.98));
         color: var(--ink);
-        font-family: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+        font-family: "Instrument Sans", "Avenir Next", "Segoe UI", sans-serif;
       }
 
       #stage {
@@ -43,168 +45,93 @@
         overflow: hidden;
       }
 
-      .panel {
-        position: absolute;
-        inset: 24px;
-        border-radius: 28px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 18%),
-          rgba(8, 13, 21, 0.82);
-      }
-
-      .eyebrow {
-        position: absolute;
-        top: 34px;
-        left: 42px;
-        font-size: 18px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--cyan);
-      }
-
-      .headline {
-        position: absolute;
-        top: 74px;
-        left: 42px;
-        width: 520px;
-        font-size: 52px;
-        line-height: 0.98;
-        letter-spacing: -0.04em;
-      }
-
-      .subcopy {
-        position: absolute;
-        top: 208px;
-        left: 42px;
-        width: 460px;
-        color: var(--muted);
-        font-size: 24px;
-        line-height: 1.45;
-      }
-
       .network {
         position: absolute;
-        inset: 66px 42px 38px 540px;
+        inset: 0;
+        background:
+          radial-gradient(circle at 22% 18%, rgba(243, 239, 223, 0.06), transparent 18%),
+          linear-gradient(180deg, rgba(20, 20, 20, 0.82), rgba(8, 8, 8, 0.9));
       }
 
       .links {
         position: absolute;
-        inset: 0;
+        inset: 58px 54px 54px;
       }
 
       .links line {
         stroke: var(--line);
-        stroke-width: 3;
+        stroke-width: 2.5;
         stroke-linecap: round;
       }
 
       .links line.active {
         stroke: var(--line-active);
-        stroke-dasharray: 12 16;
+        stroke-dasharray: 10 14;
         animation: dash 5.4s linear infinite;
       }
 
       .node {
         position: absolute;
-        width: 112px;
-        height: 112px;
-        margin-left: -56px;
-        margin-top: -56px;
-        border-radius: 999px;
+        width: 148px;
+        height: 110px;
+        margin-left: -74px;
+        margin-top: -55px;
         display: grid;
         place-items: center;
-        text-align: center;
-        background: radial-gradient(circle at 32% 30%, rgba(143, 183, 255, 0.22), rgba(14, 22, 34, 0.98));
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 36px rgba(0, 0, 0, 0.22);
+        padding: 18px;
+        text-align: left;
+        background:
+          linear-gradient(180deg, rgba(52, 52, 52, 0.22), transparent 30%),
+          linear-gradient(180deg, rgba(24, 24, 24, 0.96), rgba(10, 10, 10, 0.98));
+        border: 1px solid var(--edge);
+        box-shadow: 0 18px 32px rgba(0, 0, 0, 0.22);
         animation: nodePulse 5.4s linear infinite;
         animation-delay: var(--delay);
       }
 
       .node strong {
         display: block;
-        font-size: 24px;
+        font-size: 34px;
+        letter-spacing: -0.05em;
       }
 
       .node span {
         display: block;
-        margin-top: 6px;
-        font-size: 14px;
+        margin-top: 7px;
+        font-size: 12px;
         color: var(--muted);
-        letter-spacing: 0.05em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
+      }
+
+      .node::after {
+        content: "";
+        position: absolute;
+        inset: 12px;
+        border: 1px solid rgba(243, 239, 223, 0.06);
+        pointer-events: none;
+      }
+
+      .node-peer strong {
+        color: var(--peer);
+      }
+
+      .node-validator strong {
+        color: #f1b08d;
       }
 
       .node-validator {
-        background: radial-gradient(circle at 32% 30%, rgba(217, 149, 52, 0.26), rgba(14, 22, 34, 0.98));
-      }
-
-      .ledger {
-        position: absolute;
-        right: 28px;
-        top: 182px;
-        width: 286px;
-        padding: 24px 24px 22px;
-        border-radius: 24px;
-        background: linear-gradient(180deg, rgba(17, 26, 39, 0.98), rgba(8, 14, 22, 0.98));
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 24px 44px rgba(0, 0, 0, 0.25);
-      }
-
-      .ledger .label {
-        font-size: 15px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: var(--gold);
-      }
-
-      .ledger h3 {
-        margin: 12px 0 0;
-        font-size: 34px;
-        line-height: 1;
-        letter-spacing: -0.04em;
-      }
-
-      .ledger p {
-        margin: 12px 0 0;
-        font-size: 19px;
-        line-height: 1.4;
-        color: var(--muted);
-      }
-
-      .ledger-lines {
-        display: grid;
-        gap: 8px;
-        margin-top: 20px;
-      }
-
-      .ledger-lines span {
-        display: block;
-        height: 10px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .ledger-lines span:nth-child(1) {
-        width: 100%;
-      }
-
-      .ledger-lines span:nth-child(2) {
-        width: 84%;
-      }
-
-      .ledger-lines span:nth-child(3) {
-        width: 70%;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(196, 106, 60, 0.18), transparent 42%),
+          linear-gradient(180deg, rgba(40, 24, 18, 0.94), rgba(12, 10, 10, 0.98));
       }
 
       .packet {
         position: absolute;
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        background: var(--green);
-        box-shadow: 0 0 0 8px rgba(109, 211, 160, 0.16);
+        width: 16px;
+        height: 16px;
+        background: var(--packet);
+        box-shadow: 0 0 0 10px var(--pulse);
         animation: travel 5.4s linear infinite;
       }
 
@@ -220,24 +147,6 @@
         animation-delay: 3.6s;
       }
 
-      .status {
-        position: absolute;
-        left: 42px;
-        bottom: 46px;
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .status div {
-        padding: 12px 16px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.04);
-        font-size: 18px;
-        color: rgba(244, 239, 227, 0.9);
-      }
-
       @keyframes dash {
         to {
           stroke-dashoffset: -56;
@@ -249,18 +158,18 @@
         12%,
         100% {
           transform: scale(1);
-          border-color: rgba(255, 255, 255, 0.1);
+          border-color: var(--edge);
         }
 
         8% {
-          transform: scale(1.06);
-          border-color: rgba(245, 174, 67, 0.42);
+          transform: scale(1.04);
+          border-color: rgba(243, 239, 223, 0.28);
         }
       }
 
       @keyframes travel {
         0% {
-          transform: translate(42px, 246px);
+          transform: translate(84px, 352px);
           opacity: 0;
         }
 
@@ -269,22 +178,22 @@
         }
 
         34% {
-          transform: translate(250px, 128px);
+          transform: translate(318px, 162px);
           opacity: 1;
         }
 
         58% {
-          transform: translate(446px, 176px);
+          transform: translate(560px, 218px);
           opacity: 1;
         }
 
         82% {
-          transform: translate(630px, 248px);
+          transform: translate(804px, 332px);
           opacity: 1;
         }
 
         100% {
-          transform: translate(738px, 248px);
+          transform: translate(946px, 332px);
           opacity: 0;
         }
       }
@@ -292,80 +201,62 @@
   </head>
   <body>
     <div id="stage" data-composition-id="node-network" data-start="0" data-duration="12" data-width="1280" data-height="720">
-      <div class="panel"></div>
-      <div class="eyebrow">HyperFrames composition</div>
-      <div class="headline">Nodes verify first, then forward.</div>
-      <div class="subcopy">
-        One node receives a transaction, checks the rules, relays it onward, and validators compare what they saw before the shared ledger advances.
-      </div>
-
       <div class="network">
-        <svg class="links" viewBox="0 0 700 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <line x1="88" y1="250" x2="220" y2="120" />
-          <line x1="88" y1="250" x2="238" y2="388" />
-          <line x1="220" y1="120" x2="392" y2="170" class="active" />
-          <line x1="238" y1="388" x2="392" y2="170" />
-          <line x1="392" y1="170" x2="560" y2="250" class="active" />
-          <line x1="238" y1="388" x2="560" y2="250" />
-          <line x1="560" y1="250" x2="676" y2="250" class="active" />
+        <svg class="links" viewBox="0 0 1040 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="130" y1="354" x2="302" y2="162" />
+          <line x1="130" y1="354" x2="292" y2="468" />
+          <line x1="302" y1="162" x2="548" y2="218" class="active" />
+          <line x1="292" y1="468" x2="548" y2="218" />
+          <line x1="548" y1="218" x2="792" y2="332" class="active" />
+          <line x1="292" y1="468" x2="792" y2="332" />
+          <line x1="792" y1="332" x2="936" y2="332" class="active" />
         </svg>
 
-        <div class="node" style="left: 88px; top: 250px; --delay: 0s;">
+        <div class="node node-peer" style="left: 130px; top: 354px; --delay: 0s;">
           <div>
             <strong>N1</strong>
-            <span>Ingress</span>
+            <span>Ingress node</span>
           </div>
         </div>
 
-        <div class="node" style="left: 220px; top: 120px; --delay: 0.8s;">
+        <div class="node node-peer" style="left: 302px; top: 162px; --delay: 0.8s;">
           <div>
             <strong>N2</strong>
-            <span>Peer</span>
+            <span>Peer relay</span>
           </div>
         </div>
 
-        <div class="node" style="left: 238px; top: 388px; --delay: 1.5s;">
+        <div class="node node-peer" style="left: 292px; top: 468px; --delay: 1.5s;">
           <div>
             <strong>N3</strong>
-            <span>Peer</span>
+            <span>Peer relay</span>
           </div>
         </div>
 
-        <div class="node node-validator" style="left: 392px; top: 170px; --delay: 2.2s;">
+        <div class="node node-validator" style="left: 548px; top: 218px; --delay: 2.2s;">
           <div>
             <strong>V1</strong>
             <span>Validator</span>
           </div>
         </div>
 
-        <div class="node node-validator" style="left: 560px; top: 250px; --delay: 3s;">
+        <div class="node node-validator" style="left: 792px; top: 332px; --delay: 3s;">
           <div>
             <strong>V2</strong>
             <span>Validator</span>
           </div>
         </div>
 
+        <div class="node node-peer" style="left: 936px; top: 332px; --delay: 3.6s;">
+          <div>
+            <strong>N4</strong>
+            <span>Updated peer</span>
+          </div>
+        </div>
+
         <div class="packet packet-a"></div>
         <div class="packet packet-b"></div>
         <div class="packet packet-c"></div>
-
-        <div class="ledger">
-          <div class="label">Canonical record</div>
-          <h3>Shared ledger</h3>
-          <p>Only updates that survive repeated verification get carried into the accepted history.</p>
-          <div class="ledger-lines">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="status">
-        <div>Receive transaction</div>
-        <div>Check signatures and balances</div>
-        <div>Relay to peers</div>
-        <div>Agree on the same block</div>
       </div>
     </div>
   </body>
