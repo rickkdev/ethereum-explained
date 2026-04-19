@@ -165,6 +165,34 @@ export const slideGroups = [
       callout: "Bitcoin is the first major blockchain application: digital scarcity enforced by a public network.",
       footer: "From double-spend problem to blocks, mining, and self-custody",
     },
+    childContent: [
+      {
+        number: "02.1",
+        layout: "ledger",
+        eyebrow: "The problem Bitcoin solves",
+        headline: "Online money is hard because digital information can be copied perfectly.",
+        description:
+          "If money is just data, the same payment can be sent to two places at once. Traditional systems solve that with a bank or payment company keeping the master ledger. Bitcoin was designed to solve the same problem without one central scorekeeper.",
+        comparison: [
+          {
+            label: "Physical cash",
+            title: "One note can only be handed over once",
+            body: "When you pass a paper bill to someone else, you no longer control that same bill. Scarcity is enforced by the physical object itself.",
+          },
+          {
+            label: "Digital payments",
+            title: "A message can be copied and broadcast twice",
+            body: "A digital payment is information, and information is cheap to duplicate. Someone needs a trusted record to decide which spend is real and which one should be rejected.",
+          },
+        ],
+        flow: [
+          "A user creates a digital payment message",
+          "That same message can be copied to multiple recipients",
+          "Each recipient needs one agreed order of spends",
+          "Banks solve this with a private ledger; Bitcoin tries to solve it with a public one",
+        ],
+      },
+    ],
   },
   {
     number: "03",

@@ -30,6 +30,7 @@ Ralph is an autonomous AI agent loop that runs AI coding tools repeatedly until 
 - The presentation site now runs as a top-level Vite + React app; shared slide metadata lives in `src/data/slides.js`, and rendering/state live in `src/App.jsx`
 - First-pass slide builds can store structured content for completed slides in `src/data/slides.js`; `src/App.jsx` should render rich layouts when `slide.content` exists and fall back to placeholders for unfinished slides
 - Parent chapter slides should usually use a group-level `overview` object in `src/data/slides.js`; the shared overview renderer already handles headline, three pillars, callout, and footer without new React code
+- Child slides can be implemented incrementally in `src/data/slides.js` by appending to `childContent` in order; if a later child has no entry yet, `src/App.jsx` falls back to the unfinished-slide placeholder automatically
 - Use slide-number classes like `slide-01`, `slide-01-1`, and `slide-01-2` for bespoke visual treatments; keep shared layout logic in `src/App.jsx` and push art-direction details into decorative layers in `src/styles.css`
 - For deck polish, prefer minimal composition over ornamental graphics: if a shape, orbit, wave, or glow does not explain the concept, remove it and tighten spacing before adding new visual treatment
 - Watch slide grid row sizing on content-heavy slides; avoid giving annotation rows flexible `1fr` height because it creates fake bottom padding like the note labels on slide `01.2`

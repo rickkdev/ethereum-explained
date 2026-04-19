@@ -1,5 +1,6 @@
 ## Codebase Patterns
 - Parent chapter intro slides should be added as a group-level `overview` object in `src/data/slides.js`; the shared overview renderer in `src/App.jsx` already maps that shape into the standard chapter layout.
+- Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -12,4 +13,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - Parent chapter slides do not need custom React work when the standard chapter structure is enough; add `overview` content to the slide group and let the shared renderer pick it up.
   - Root `AGENTS.md` is the right place to preserve deck-wide authoring conventions that apply across future slide stories.
   - Browser verification is still manual in this environment; use `npm run build` for a fast regression check, then note that a human browser pass is still needed.
+---
+
+## 2026-04-19 13:47 CEST - SLIDE-02-1
+- Implemented slide 02.1 as a shared-layout explainer covering digital scarcity, the double-spend problem, and why trusted intermediaries keep the master ledger in traditional online payments.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-WKr2KGmH.js`; removed stale build asset `dist/assets/index-ATKB0yGI.js`
+- **Learnings for future iterations:**
+  - The existing `ledger` slide layout works for more than blockchain-mechanics slides; it also fits “problem / comparison / sequence” explainers without adding new React code.
+  - `npm run build` is the only automated quality gate currently configured, and browser verification still needs a manual pass outside this environment.
+  - Building the deck updates tracked `dist/` artifacts, so include the regenerated hashed bundle and removed stale bundle in the same commit.
 ---
