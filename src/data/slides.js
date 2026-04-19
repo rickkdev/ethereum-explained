@@ -529,6 +529,32 @@ export const slideGroups = [
           "The coins live on the shared ledger as spendable outputs, not inside the wallet application itself.",
         ],
       },
+      {
+        number: "02.9",
+        layout: "ledger",
+        eyebrow: "Transactions and mempool",
+        headline: "A Bitcoin transaction is pending in the mempool until a miner selects it for a block and the network confirms it.",
+        description:
+          "The mempool is the waiting area each node keeps for valid but unconfirmed transactions. After a wallet signs and broadcasts a transaction, nodes verify it, hold it in memory, and relay it onward. Miners then choose from that pool when assembling the next candidate block.",
+        comparison: [
+          {
+            label: "Pending state",
+            title: "The mempool is a queue of valid transactions still waiting for confirmation",
+            body: "A transaction can be properly signed and accepted by nodes before it is final. While it sits in the mempool, it has been seen and checked, but it is not yet part of Bitcoin's permanent block history.",
+          },
+          {
+            label: "Confirmed state",
+            title: "A mined transaction moves from shared waiting room to shared history",
+            body: "When a miner includes that transaction in a valid block and the network accepts the block, the transaction leaves the mempool and becomes part of the ledger other nodes sync and verify.",
+          },
+        ],
+        flow: [
+          "A wallet signs a transaction and broadcasts it to a Bitcoin node",
+          "Nodes verify the format, signatures, and spendability, then place valid transactions in their mempool",
+          "Miners pick transactions from the mempool when building a candidate block, often prioritizing higher-fee transactions",
+          "Once the block is accepted by the network, the transaction gains confirmations and leaves the mempool",
+        ],
+      },
     ],
   },
   {
