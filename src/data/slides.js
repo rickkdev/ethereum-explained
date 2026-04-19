@@ -830,6 +830,42 @@ export const slideGroups = [
           "Privacy and security are separate values: one protects information and autonomy, the other protects funds and system integrity.",
         ],
       },
+      {
+        number: "05.2",
+        layout: "anatomy",
+        eyebrow: "How values show up in ecosystem design",
+        headline: "Ethereum's values become visible when you look at what the ecosystem keeps building, funding, and defending.",
+        description:
+          "CROPS matters because it changes design choices. The ecosystem tends to favor permissionless access over gatekeepers, open standards over closed platforms, privacy tools over total transparency by default, and cautious security practices over fast but brittle upgrades.",
+        frameLabel: "From principle to concrete ecosystem choice",
+        segments: [
+          {
+            label: "C + R",
+            title: "Permissionless access and resistance to control",
+            body: "Ethereum applications are typically built so a wallet can connect and interact directly without asking a platform operator for approval first. The same instinct shows up in resistance to app-store style chokepoints, infrastructure monocultures, and governance patterns that would let one actor quietly decide who gets to participate.",
+          },
+          {
+            label: "O",
+            title: "Open-source clients, standards, and exits",
+            body: "Core clients, wallets, SDKs, and standards like ERCs are developed in public so others can inspect them, fork them, or build compatible alternatives. That is why the ecosystem has multiple clients, many wallet interfaces, and shared token standards instead of one official product stack.",
+          },
+          {
+            label: "P",
+            title: "Privacy shows up as a design goal, even when it is incomplete",
+            body: "The chain is transparent, but the ecosystem still keeps pushing for better privacy through practices like new-address hygiene, selective disclosure, zero-knowledge tooling, and products that minimize what users must reveal just to use an application.",
+          },
+          {
+            label: "S",
+            title: "Security-first culture slows down high-risk change",
+            body: "Critical systems are expected to go through audits, formal review, bug bounties, staged rollouts, and conservative upgrade debates. Client diversity, careful protocol changes, and strong key-management habits all reflect the idea that protecting user funds and network integrity matters more than shipping quickly.",
+          },
+        ],
+        notes: [
+          "These values are visible in product defaults, open standards, funding priorities, and governance habits, not just in mission statements.",
+          "Privacy is aspirational as well as practical in Ethereum today: the value shapes roadmaps even when the current user experience is still imperfect.",
+          "The useful teaching move is principle to manifestation: ask what a value caused the ecosystem to build or defend.",
+        ],
+      },
     ],
   },
   {

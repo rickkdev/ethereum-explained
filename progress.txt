@@ -14,6 +14,7 @@
 - The shared `issuance` layout can also explain a fixed cap if `eras` are framed as cumulative supply milestones; the same bar treatment reads well for "approaching the ceiling" stories.
 - Wallet mental-model slides can reuse the shared `anatomy` layout by splitting the explanation into public-side details, private-key control, and wallet-software responsibilities.
 - Acronym or framework slides can also reuse the shared `anatomy` layout if each letter or principle is one segment; keep the grid responsive so 5+ cards wrap cleanly without new React code.
+- Principle-to-manifestation slides can also reuse the shared `anatomy` layout by pairing each value with one visible ecosystem or governance choice instead of falling back to abstract slogans.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -170,5 +171,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Acronym and framework slides fit the shared `anatomy` layout well when each letter or principle maps to one segment and the grid is allowed to auto-fit rather than forcing exactly three columns.
   - For values-heavy slides, define the principle in operational terms first so the content stays specific and does not read like a slogan wall.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 14:52 CEST - SLIDE-05-2
+- Implemented slide 05.2 as a values-in-practice explainer using the shared anatomy layout, tying CROPS principles to visible ecosystem choices like permissionless app access, open ERC standards and client diversity, privacy-preserving tooling, and security-first upgrade culture.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-Dt5G1hGV.js`; removed stale build asset `dist/assets/index-CSp9mfRB.js`
+- **Learnings for future iterations:**
+  - Principle-to-manifestation slides fit the shared `anatomy` layout when each segment pairs one value with a concrete product, governance, or infrastructure choice.
+  - For culture and values slides, concrete examples like open standards, client diversity, audits, and privacy tooling teach better than repeating the value words alone.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
