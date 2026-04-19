@@ -201,7 +201,7 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 ---
 ## 2026-04-19 15:00 CEST - SLIDE-06-2
 - Implemented slide 06.2 as a DeFi composability-and-risk explainer using the shared ledger layout, pairing stacked protocol upside with cascading failure modes and practical constraints around support, legal recourse, and market structure.
-- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-CnOAzSnZ.js`; removed stale build asset `dist/assets/index-BC1elv6j.js`
 - **Learnings for future iterations:**
   - Composability-versus-fragility topics fit the shared `ledger` layout when one card teaches the stacked user flow and the other grounds the failure modes and real-world limits.
   - For DeFi risk slides, keep the dependency chain explicit so liquidations, oracle issues, and thin liquidity read as system interactions rather than isolated bugs.
