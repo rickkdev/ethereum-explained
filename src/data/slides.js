@@ -1257,6 +1257,34 @@ export const slideGroups = [
       callout: "Consensus is the answer to the core decentralized-systems question: who gets to write history, and under what rules?",
       footer: "From Proof of Work vs Proof of Stake to security assumptions and system tradeoffs",
     },
+    childContent: [
+      {
+        number: "10.1",
+        layout: "ledger",
+        eyebrow: "Proof of Work vs Proof of Stake",
+        headline: "Proof of Work and Proof of Stake solve the same problem differently: who may extend the chain, and what resource an attacker must control to cheat.",
+        description:
+          "Both models aim to make honest block production easier than rewriting history, but they use different scarce inputs. Proof of Work leans on computation, hardware, and electricity, while Proof of Stake leans on locked capital and the risk of losing that stake for bad behavior.",
+        comparison: [
+          {
+            label: "Proof of Work",
+            title: "Block producers compete with energy and hardware",
+            body: "Miners gather transactions and race to find a valid hash below the difficulty target. Winning depends on computational work, specialized equipment, and ongoing electricity costs, so attacking the chain means outspending honest miners in real-world resources.",
+          },
+          {
+            label: "Proof of Stake",
+            title: "Validators participate by bonding capital to the protocol",
+            body: "Validators lock up stake, take turns proposing and attesting to blocks, and risk penalties if they act dishonestly or stay offline. Security comes from the value placed at risk and the network's ability to slash or eject bad actors instead of from constant energy burn.",
+          },
+        ],
+        flow: [
+          "Proof of Work: miners assemble a block candidate and hash repeatedly until someone finds a valid solution",
+          "The network verifies that work and accepts the winning block if it follows the rules",
+          "Proof of Stake: validators post stake, then the protocol selects proposers and attesters for each round",
+          "The network accepts the block when enough stake-backed votes confirm the same history",
+        ],
+      },
+    ],
   },
   {
     number: "11",

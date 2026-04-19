@@ -546,7 +546,7 @@
         "Verify in browser"
       ],
       "priority": 39,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if needed to make the two consensus flows legible in a single comparison."
     },
     {

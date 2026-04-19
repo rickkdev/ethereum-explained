@@ -4,6 +4,7 @@
 - Historical/context subslides can reuse the `ledger` layout when they read cleanly as "before vs proposal" plus a short dated sequence, so simple origin stories do not need custom timeline components.
 - Pending-versus-confirmed lifecycle slides also fit the `ledger` layout well: use the two comparison cards for state before and after confirmation, and the side flow for the broadcast-to-inclusion path.
 - Capability-comparison slides can also use the `ledger` layout by putting the incumbent system on one card, the expanded system on the other, and the side flow on the reason the newer model exists.
+- Consensus comparison slides can also use the `ledger` layout by putting Proof of Work and Proof of Stake in the two cards and using the side flow to narrate how each model advances accepted history.
 - Smart-contract concept slides can also use the shared `ledger` layout by comparing centralized backend logic with on-chain code, then using the side flow for the deploy-call-execute-update lifecycle.
 - Capability-versus-risk slides can also use the shared `ledger` layout by putting concrete use-cases in one card, failure modes in the other, and using the side flow to show how the same automation creates both leverage and risk.
 - Smart-contract execution lifecycle slides can use the shared `pipeline` layout when the story is deploy -> call -> deterministic execution -> state update; that keeps execution explainers data-driven without new React components.
@@ -292,4 +293,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - Chapter intros for consensus topics still fit the shared `overview` schema when the three pillars cover agreement on history, the scarce resource used for security, and the tradeoff lens for the subslides.
   - For consensus framing, define the problem first as agreement on canonical history before comparing specific mechanisms like Proof of Work and Proof of Stake.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:23 CEST - SLIDE-10-1
+- Implemented slide 10.1 as a consensus comparison explainer using the shared ledger layout, contrasting Proof of Work's hardware-and-energy race with Proof of Stake's bonded-capital validator model and clarifying how each reaches accepted history.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`
+- **Learnings for future iterations:**
+  - Consensus comparison slides fit the shared `ledger` layout well when each card owns one mechanism and the side flow narrates how candidate blocks become accepted history.
+  - For Proof of Work versus Proof of Stake teaching slides, keep the comparison anchored on scarce security resources and participation models rather than drifting into culture-war framing.
+  - Browser verification still needs a manual follow-up in this environment; `npm run build` remains the automated quality check.
 ---
