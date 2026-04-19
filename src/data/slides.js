@@ -964,6 +964,28 @@ export const slideGroups = [
       "Core teams, researchers, and builders",
       "How the ecosystem coordinates change",
     ],
+    overview: {
+      eyebrow: "Chapter 07",
+      headline: "Ethereum is not one company shipping one product. It is a many-sided ecosystem coordinating around shared infrastructure.",
+      intro:
+        "To understand Ethereum, you have to look beyond the protocol itself. Researchers, client teams, application builders, educators, node operators, and community stewards all shape how the network evolves, which is why governance looks more like rough coordination than top-down management.",
+      pillars: [
+        {
+          title: "Many roles, one ecosystem",
+          body: "Ethereum depends on different groups doing different jobs: some research upgrades, some maintain clients, some build applications, and some operate infrastructure that keeps the network usable.",
+        },
+        {
+          title: "Social and technical layers",
+          body: "The chain runs on software, but software choices come from discussion, research, implementation, testing, and community buy-in. The ecosystem is social coordination plus protocol engineering together.",
+        },
+        {
+          title: "What this chapter covers",
+          body: "We first map the major actor groups, then show how Ethereum changes through discussions, EIPs, client work, and network upgrades without a single central controller.",
+        },
+      ],
+      callout: "Ethereum works because many independent groups keep aligning on the same shared system, not because one organization commands the network.",
+      footer: "From ecosystem roles to rough consensus, client work, and protocol change",
+    },
   },
   {
     number: "08",

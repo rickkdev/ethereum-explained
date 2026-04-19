@@ -207,3 +207,11 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - For DeFi risk slides, keep the dependency chain explicit so liquidations, oracle issues, and thin liquidity read as system interactions rather than isolated bugs.
   - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
 ---
+## 2026-04-19 14:59 CEST - SLIDE-07
+- Implemented the Ethereum community chapter intro as a shared overview slide, framing Ethereum as a many-sided ecosystem of researchers, client teams, builders, operators, and coordinators rather than a single company.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-tA95tn_d.js`; removed stale build asset `dist/assets/index-CnOAzSnZ.js`
+- **Learnings for future iterations:**
+  - Community-focused chapter intros still fit the shared `overview` layout when the three pillars cover ecosystem roles, social-plus-technical coordination, and the chapter roadmap.
+  - For Ethereum governance or community framing, keep the language on rough coordination and independent actor groups so the deck does not imply a central manager.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
