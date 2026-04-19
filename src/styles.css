@@ -581,6 +581,257 @@ select {
     rgba(24, 24, 24, 0.82);
 }
 
+.defi-cascade-layout {
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 100%;
+}
+
+.defi-cascade-shell {
+  padding: 24px;
+  min-height: 100%;
+  display: grid;
+  gap: 22px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(114, 170, 255, 0.08), transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(255, 128, 128, 0.08), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%),
+    rgba(24, 24, 24, 0.82);
+}
+
+.defi-cascade-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: start;
+}
+
+.defi-cascade-phase {
+  margin-top: 10px;
+  max-width: 38rem;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
+.defi-cascade-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.defi-cascade-chip {
+  padding: 8px 10px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: rgba(18, 18, 18, 0.82);
+}
+
+.defi-cascade-chip.alert {
+  border-color: rgba(255, 128, 128, 0.42);
+  color: rgba(255, 216, 216, 0.94);
+}
+
+.defi-cascade-chip.muted {
+  border-color: rgba(114, 170, 255, 0.34);
+  color: rgba(219, 230, 255, 0.94);
+}
+
+.defi-cascade-stage {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background:
+    radial-gradient(circle at 50% 10%, rgba(114, 170, 255, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 34%),
+    rgba(16, 16, 16, 0.9);
+}
+
+.defi-cascade-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.58), transparent 96%);
+  pointer-events: none;
+}
+
+.defi-cascade-rail {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 42%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(214, 214, 214, 0.06), rgba(114, 170, 255, 0.3), rgba(214, 214, 214, 0.06));
+}
+
+.defi-cascade-links,
+.defi-cascade-token,
+.defi-cascade-warning {
+  position: absolute;
+}
+
+.defi-cascade-links {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.defi-cascade-links line {
+  stroke: rgba(114, 170, 255, 0.72);
+  stroke-width: 0.4;
+  stroke-dasharray: 0.8 1.6;
+  animation: edgeFlow 3.8s linear infinite;
+}
+
+.defi-cascade-card,
+.defi-cascade-panel,
+.defi-cascade-token,
+.defi-cascade-warning {
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 34%),
+    rgba(24, 24, 24, 0.88);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
+}
+
+.defi-cascade-card {
+  position: absolute;
+  top: 54px;
+  width: 19%;
+  min-height: 192px;
+  padding: 20px;
+}
+
+.defi-cascade-card.affected {
+  border-color: rgba(255, 128, 128, 0.24);
+}
+
+.defi-cascade-card h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.defi-cascade-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.defi-cascade-status {
+  margin-top: 14px;
+  padding: 8px 10px;
+  border: 1px solid rgba(114, 170, 255, 0.22);
+  background: rgba(114, 170, 255, 0.08);
+  color: rgba(219, 230, 255, 0.94);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.defi-cascade-status.alert {
+  border-color: rgba(255, 128, 128, 0.24);
+  background: rgba(255, 128, 128, 0.08);
+  color: rgba(255, 216, 216, 0.94);
+}
+
+.defi-cascade-token {
+  z-index: 2;
+  min-width: 132px;
+  padding: 10px 14px;
+  color: #d8fff0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.defi-cascade-token.alert {
+  border-color: rgba(255, 128, 128, 0.38);
+  color: rgba(255, 216, 216, 0.96);
+}
+
+.defi-cascade-warning {
+  top: 260px;
+  z-index: 2;
+  padding: 10px 12px;
+  color: rgba(255, 216, 216, 0.94);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.defi-cascade-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.defi-cascade-panel {
+  padding: 20px;
+}
+
+.defi-cascade-panel.stress {
+  border-color: rgba(255, 128, 128, 0.22);
+}
+
+.defi-cascade-snapshot-list,
+.defi-cascade-step-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.defi-cascade-snapshot-row,
+.defi-cascade-step {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(145, 145, 145, 0.16);
+  background: rgba(26, 26, 26, 0.8);
+}
+
+.defi-cascade-snapshot-row span,
+.defi-cascade-step span {
+  display: block;
+  color: var(--text-dim);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.defi-cascade-snapshot-row strong,
+.defi-cascade-step strong {
+  display: block;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.defi-cascade-step {
+  align-items: flex-start;
+}
+
+.defi-cascade-step.active {
+  border-color: rgba(255, 128, 128, 0.26);
+  background: rgba(255, 128, 128, 0.08);
+}
+
 .defi-motion-head {
   display: flex;
   justify-content: space-between;
@@ -2226,6 +2477,7 @@ select {
   .pipeline-grid,
   .anatomy-stack,
   .hash-chain-track,
+  .defi-cascade-bottom,
   .defi-motion-stage,
   .defi-motion-bottom,
   .defi-wallet-grid,
@@ -2252,6 +2504,11 @@ select {
     flex-direction: column;
   }
 
+  .defi-cascade-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .evm-motion-head {
     align-items: stretch;
     flex-direction: column;
@@ -2267,6 +2524,10 @@ select {
   }
 
   .defi-motion-legend {
+    justify-content: flex-start;
+  }
+
+  .defi-cascade-legend {
     justify-content: flex-start;
   }
 
@@ -2348,6 +2609,7 @@ select {
   .anatomy-stack,
   .hash-chain-track,
   .hash-motion-stage,
+  .defi-cascade-bottom,
   .defi-motion-stage,
   .defi-motion-bottom,
   .defi-wallet-grid,
@@ -2383,6 +2645,28 @@ select {
   .defi-motion-rail,
   .defi-asset-token {
     display: none;
+  }
+
+  .defi-cascade-stage {
+    min-height: auto;
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .defi-cascade-grid,
+  .defi-cascade-rail,
+  .defi-cascade-links,
+  .defi-cascade-token,
+  .defi-cascade-warning {
+    display: none;
+  }
+
+  .defi-cascade-card {
+    position: static;
+    width: auto;
+    min-height: 0;
+    transform: none !important;
   }
 
   .evm-motion-stage {

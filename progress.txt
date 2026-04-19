@@ -1,6 +1,7 @@
 ## Codebase Patterns
 - Smart-contract lifecycle motion slides can reuse the shared `evm-state-motion` layout by keeping the conceptual deploy/call/execute/update arc in `segments` and feeding one concrete contract call through `transaction`, `stateBefore`, `stateAfter`, and `executionSteps`.
 - DeFi motion follow-ups can reuse the shared `defi-journey-motion` layout by keeping the primitive explainer's `segments` and `notes`, then adding `journeyLabel`, `journeySteps`, `walletStart`, and `walletFinish` for one concrete multi-protocol user flow.
+- DeFi fragility motion slides can reuse the shared `defi-cascade-motion` layout by defining the composed `stages` plus `healthySnapshot`, `stressSnapshot`, and `incidentSteps` so the learner sees the normal stack before the cascade.
 - Practical or closing chapter intros can still use the shared `overview` layout; make the three pillars cover the threat model or behavior shift plus the roadmap into actionable subslides.
 - Parent chapter intro slides should be added as a group-level `overview` object in `src/data/slides.js`; the shared overview renderer in `src/App.jsx` already maps that shape into the standard chapter layout.
 - Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
@@ -381,5 +382,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - DeFi motion slides work best when one concrete user journey ties the primitives together; animating swap, collateral, and stablecoin steps separately makes composability harder to feel.
   - Keeping the explainer's `segments` and `notes` while adding compact journey-state fields lets the motion slide stay data-driven without duplicating the original lesson copy.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 17:49 CEST - REMOTION-06-2
+- Reworked slide 06.2 into a Remotion-style DeFi cascade animation that shows a healthy stacked user flow first, then an oracle shock at the lending layer cascading into liquidation pressure and downstream liquidity stress.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-NrJS6xW8.css`, `dist/assets/index-K69vVd0j.js`; removed stale build assets `dist/assets/index-Uv6kd9kM.css` and `dist/assets/index-CnpnX5A_.js`
+- **Learnings for future iterations:**
+  - DeFi fragility motion slides can reuse the shared `defi-cascade-motion` layout when the teaching goal is to show the normal composed path before showing one dependency break propagate across the stack.
+  - Compact slide data in `src/data/slides.js` is enough for this pattern: `stages` for the stack, `healthySnapshot` and `stressSnapshot` for before-and-after state, and `incidentSteps` for the cascade sequence.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

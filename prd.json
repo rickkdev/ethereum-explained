@@ -686,7 +686,7 @@
         "Verify in browser"
       ],
       "priority": 49,
-      "passes": false,
+      "passes": true,
       "notes": "This is a strong candidate for animation because cascading dependency risk is hard to communicate with a static comparison alone."
     },
     {

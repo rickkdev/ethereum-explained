@@ -718,6 +718,208 @@ function DeFiJourneyMotionGraphic({ slide, isActive }) {
   );
 }
 
+function DeFiCascadeMotionGraphic({ slide, isActive }) {
+  const frame = useLoopFrame(isActive);
+  const cycleFrame = frame % 276;
+  const { journeyLabel, stages, healthySnapshot, stressSnapshot, incidentSteps, frameLabel, notes } = slide.content;
+  const healthyProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 10),
+    durationInFrames: 96,
+    config: {
+      damping: 16,
+      stiffness: 88,
+      mass: 0.96,
+    },
+  });
+  const cascadeProgress = spring({
+    fps: PRESENTATION_FPS,
+    frame: Math.max(0, cycleFrame - 138),
+    durationInFrames: 84,
+    config: {
+      damping: 17,
+      stiffness: 92,
+      mass: 0.94,
+    },
+  });
+
+  const phaseLabel = cycleFrame < 120
+    ? "Composability first: the same position moves through multiple protocols without leaving the chain"
+    : cycleFrame < 170
+      ? "A collateral shock hits the lending layer and changes the assumptions downstream"
+      : cycleFrame < 236
+        ? "Liquidation pressure and pulled liquidity ripple through the rest of the stack"
+        : "Loop resets so both the upside and the failure path stay legible";
+
+  const healthyCardIndex = Math.min(stages.length - 1, Math.floor(cycleFrame / 34));
+  const tokenX = cycleFrame < 132
+    ? interpolate(healthyProgress, [0, 1], [10, 86], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      })
+    : interpolate(cascadeProgress, [0, 1], [56, 84], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      });
+  const tokenY = cycleFrame < 132
+    ? interpolate(healthyProgress, [0, 0.5, 1], [40, 32, 40], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      })
+    : interpolate(cascadeProgress, [0, 1], [40, 62], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      });
+  const tokenLabel = cycleFrame < 92 ? "2 ETH" : cycleFrame < 132 ? "1,500 USDC" : "Forced unwind";
+  const disruptionOpacity = interpolate(cascadeProgress, [0, 0.12, 1], [0, 0.9, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const disruptionX = interpolate(cascadeProgress, [0, 1], [55, 84], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <div className="content-card defi-cascade-shell">
+      <div className="defi-cascade-head">
+        <div>
+          <div className="panel-label">{journeyLabel}</div>
+          <div className="defi-cascade-phase">{phaseLabel}</div>
+        </div>
+
+        <div className="defi-cascade-legend">
+          <span className="defi-cascade-chip">Healthy flow</span>
+          <span className="defi-cascade-chip alert">Dependency shock</span>
+          <span className="defi-cascade-chip muted">Downstream impact</span>
+        </div>
+      </div>
+
+      <div className="defi-cascade-stage">
+        <div className="defi-cascade-grid" />
+        <div className="defi-cascade-rail" />
+
+        <svg className="defi-cascade-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {stages.slice(0, -1).map((stage, index) => (
+            <line
+              key={`${stage.label}-${stages[index + 1].label}`}
+              x1={16 + index * 23}
+              y1={42}
+              x2={39 + index * 23}
+              y2={42}
+            />
+          ))}
+        </svg>
+
+        {stages.map((stage, index) => {
+          const pulse = spring({
+            fps: PRESENTATION_FPS,
+            frame: Math.max(0, cycleFrame - index * 24),
+            durationInFrames: 30,
+            config: {
+              damping: 15,
+              stiffness: 108,
+              mass: 0.9,
+            },
+          });
+          const status = cycleFrame < 132
+            ? stage.healthyState
+            : index < 2
+              ? stage.stressState
+              : index === 2
+                ? "Liquidating"
+                : "Constrained";
+          const isAffected = cycleFrame >= 138 && index >= 1;
+
+          return (
+            <article
+              key={stage.label}
+              className={`defi-cascade-card ${isAffected ? "affected" : ""}`}
+              style={{
+                left: `${8 + index * 23}%`,
+                transform: `translateY(${interpolate(pulse, [0, 1], [12, 0], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                })}px)`,
+              }}
+            >
+              <div className="stage-index">0{index + 1}</div>
+              <div className="card-label">{stage.label}</div>
+              <h3>{stage.title}</h3>
+              <p>{stage.body}</p>
+              <div className={`defi-cascade-status ${isAffected ? "alert" : ""}`}>{status}</div>
+            </article>
+          );
+        })}
+
+        <div
+          className={`defi-cascade-token ${cycleFrame >= 138 ? "alert" : ""}`}
+          style={{
+            left: `${tokenX}%`,
+            top: `${tokenY}%`,
+          }}
+        >
+          {tokenLabel}
+        </div>
+
+        <div className="defi-cascade-warning" style={{ opacity: disruptionOpacity, left: `${disruptionX}%` }}>
+          Oracle reprices collateral
+        </div>
+      </div>
+
+      <div className="defi-cascade-bottom">
+        <article className="defi-cascade-panel">
+          <div className="panel-label">{frameLabel}</div>
+          <div className="defi-cascade-snapshot-list">
+            {healthySnapshot.map((item) => (
+              <div key={item.label} className="defi-cascade-snapshot-row">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="defi-cascade-panel stress">
+          <div className="panel-label">After the dependency shock</div>
+          <div className="defi-cascade-snapshot-list">
+            {stressSnapshot.map((item) => (
+              <div key={item.label} className="defi-cascade-snapshot-row">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="defi-cascade-panel steps">
+          <div className="panel-label">How the cascade travels</div>
+          <div className="defi-cascade-step-list">
+            {incidentSteps.map((step, index) => (
+              <div
+                key={step}
+                className={`defi-cascade-step ${cycleFrame >= 134 + index * 28 ? "active" : ""}`}
+              >
+                <span>0{index + 1}</span>
+                <strong>{step}</strong>
+              </div>
+            ))}
+          </div>
+        </article>
+      </div>
+
+      <div className="notes-panel">
+        {notes.map((note, index) => (
+          <div key={note} className="note-pill">
+            <span className="note-index">0{index + 1}</span>
+            <span>{note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function EvmStateMotionGraphic({ slide, isActive }) {
   const frame = useLoopFrame(isActive);
   const cycleFrame = frame % 270;
@@ -1315,6 +1517,26 @@ function SlideFrame({ slide, isActive }) {
                 </div>
               ))}
             </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "defi-cascade-motion") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="motion-layout defi-cascade-layout">
+            <div className="motion-header">
+              <SlideIntro
+                kicker={`Slide ${slide.number}`}
+                title={slide.title}
+                copy={slide.content.description}
+              />
+            </div>
+
+            <DeFiCascadeMotionGraphic slide={slide} isActive={isActive} />
           </div>
         </SlideShell>
       </section>

@@ -1067,28 +1067,81 @@ export const slideGroups = [
       },
       {
         number: "06.2",
-        layout: "ledger",
+        layout: "defi-cascade-motion",
         eyebrow: "Risks, composability, and real-world fit",
         headline: "DeFi is powerful because protocols can stack together, but that same composability can turn one weak link into a larger failure.",
         description:
           "On-chain finance is modular: a wallet can connect to a swap, a lending market can rely on a stablecoin, and an app can build on all of them. That openness creates new product possibilities, but it also means liquidation engines, oracle inputs, smart-contract code, and thin markets can amplify each other's problems.",
-        comparison: [
+        frameLabel: "Healthy stack before the shock",
+        journeyLabel: "One leveraged DeFi stack, then a propagated break",
+        stages: [
           {
-            label: "Composability",
-            title: "Protocols can plug into each other like financial Lego",
-            body: "A user might swap into collateral, deposit it into a lending market, borrow a stablecoin, and move that stable asset into another app without leaving the chain. Shared standards and visible state make those connections possible.",
+            label: "Wallet",
+            title: "User position starts with one on-chain asset",
+            body: "The wallet is the entry point for the strategy. One asset can be moved across several protocols without handing control to a bank or broker.",
+            healthyState: "Funding position",
+            stressState: "Absorbing losses",
           },
           {
-            label: "Fragility and fit",
-            title: "Open finance still has sharp edges and does not fit every need",
-            body: "Smart-contract bugs, forced liquidations, oracle mistakes, MEV-heavy market structure, and shallow liquidity can all hurt users. DeFi fits best when programmability and open access matter more than chargebacks, customer support, or strong legal recourse.",
+            label: "Swap",
+            title: "Liquidity pool converts into the collateral asset",
+            body: "The exchange layer makes the composed path possible by turning the original asset into something the next protocol will accept as collateral.",
+            healthyState: "Price path quoted",
+            stressState: "Liquidity thins",
+          },
+          {
+            label: "Lending",
+            title: "Collateral backs borrowed stablecoins",
+            body: "The lending market depends on price feeds and liquidation logic. It is the layer where a market shock often becomes an enforced unwind rather than a paper loss.",
+            healthyState: "Health factor strong",
+            stressState: "Oracle shock lands",
+          },
+          {
+            label: "Downstream app",
+            title: "Borrowed stablecoins fund the next protocol",
+            body: "The final app benefits from open composability, but it also inherits the stability of every layer upstream. If collateral gets unwound, this leg loses its funding source.",
+            healthyState: "Strategy running",
+            stressState: "Liquidity pulled",
           },
         ],
-        flow: [
-          "A user starts with one on-chain asset in a wallet",
-          "That asset is swapped or posted as collateral in another protocol",
-          "The next app depends on prices, code, and liquidity from the earlier layers",
-          "If one layer breaks or markets move fast, risk can cascade through the full stack",
+        healthySnapshot: [
+          {
+            label: "Wallet",
+            value: "2 ETH deployed",
+          },
+          {
+            label: "Collateral",
+            value: "1.95 cbETH posted",
+          },
+          {
+            label: "Borrowed stablecoin",
+            value: "1,500 USDC active",
+          },
+        ],
+        stressSnapshot: [
+          {
+            label: "Collateral value",
+            value: "Drops below safe range",
+          },
+          {
+            label: "Lending state",
+            value: "Liquidation begins",
+          },
+          {
+            label: "Downstream app",
+            value: "Position starved of liquidity",
+          },
+        ],
+        incidentSteps: [
+          "Oracle reprices collateral lower after a fast market move.",
+          "The lending market marks the position unsafe and starts liquidation logic.",
+          "Borrowed stablecoins are pulled back or sold, pressuring the downstream app.",
+          "The user learns that one dependency failure can travel through the full stack.",
+        ],
+        notes: [
+          "Composability is real upside: the same open standards let users build richer financial flows without leaving the chain.",
+          "The same openness creates stacked dependencies. Price feeds, collateral rules, liquidity, and contract code all become part of one risk surface.",
+          "DeFi fits best where programmable settlement is worth the extra protocol and market-structure risk.",
         ],
       },
     ],
