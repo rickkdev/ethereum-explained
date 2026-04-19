@@ -20,6 +20,7 @@
 - Ecosystem role-mapping slides can also reuse the shared `anatomy` layout by assigning each segment to one actor group, its job, and its dependency on the rest of the network.
 - Resource-pricing slides can also reuse the shared `anatomy` layout by separating what the protocol meters, why that pricing exists, and what misconception or next-step topic should be kept out of scope.
 - EOA and key-management slides can also reuse the shared `anatomy` layout by separating the visible account, the recovery secret, and the signature flow; that keeps wallet education accurate without implying the seed phrase is used directly on-chain.
+- Multi-model tradeoff slides can also reuse the shared `anatomy` layout by making each segment one operating model and using the notes to spell out control, recovery, and UX tradeoffs without forcing the story into the two-card `ledger` template.
 - Composability-versus-fragility slides can also reuse the shared `ledger` layout by putting protocol-stacking upside in one card, cascading risks and practical limits in the other, and using the side flow to show how dependency chains propagate failure.
 - Fee-market slides can also reuse the shared `ledger` layout by contrasting calm versus crowded block space in the two cards and using the side flow to map wallet quote, pending competition, and inclusion priority into the user-facing wait-versus-cost tradeoff.
 
@@ -275,4 +276,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - EOA and key-management slides fit the shared `anatomy` layout well when one segment covers the account, one covers recovery material, and one covers signature-based authorization.
   - For wallet education, be explicit that seed phrases are backup secrets and that signatures, not the phrase itself, are what the network verifies.
   - Browser verification still needs a manual follow-up in this environment; `npm run build` remains the automated quality check.
+---
+## 2026-04-19 15:20 CEST - SLIDE-09-2
+- Implemented slide 09.2 as a wallet custody explainer using the shared anatomy layout, comparing self-custody, custodial, and hybrid wallet patterns while tying each model to control, recovery, and day-to-day UX tradeoffs.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-ye4mAe5k.js`; removed stale build asset `dist/assets/index-B6KewJtO.js`
+- **Learnings for future iterations:**
+  - Three-way tradeoff slides can stay inside the shared `anatomy` layout by making each segment one operating model instead of trying to stretch the two-column `ledger` comparison.
+  - For custody education, keep the framing practical: explain who can sign, recover, freeze, or lose access rather than treating one model as universally correct.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

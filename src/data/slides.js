@@ -1195,6 +1195,37 @@ export const slideGroups = [
           "Signing is the core act of authorization: it is how a user proves, \"I control this account,\" without publishing the secret.",
         ],
       },
+      {
+        number: "09.2",
+        layout: "anatomy",
+        eyebrow: "Custody models and wallet UX",
+        headline: "Wallet design is really a custody decision: who holds signing power, how recovery works, and what tradeoffs the user accepts.",
+        description:
+          "Different wallet patterns optimize for different risks. Self-custody gives the user direct control, custodial products trade control for support and recovery, and hybrid approaches try to reduce sharp edges without pretending the tradeoffs disappear.",
+        frameLabel: "Three common custody patterns",
+        segments: [
+          {
+            label: "Self-custody",
+            title: "The user controls the keys and bears the recovery burden",
+            body: "A browser wallet, hardware wallet, or seed-based mobile wallet lets the user sign directly. That usually means stronger sovereignty and fewer platform dependencies, but it also means backup mistakes, phishing, or device loss can become permanent account loss.",
+          },
+          {
+            label: "Custodial",
+            title: "A service controls the keys and offers account-style convenience",
+            body: "An exchange or hosted wallet keeps the signing keys on the user's behalf. The product can offer password resets, support, and familiar onboarding, but the user now depends on that company for withdrawals, policy decisions, uptime, and security.",
+          },
+          {
+            label: "Hybrid",
+            title: "Modern wallets split control across devices, policies, or recovery helpers",
+            body: "Some wallets use multisig, social recovery, passkeys, or smart-account tooling to make key management less fragile. These models can improve usability and safety, but users still need to understand who can authorize actions and what happens if one recovery path fails.",
+          },
+        ],
+        notes: [
+          "The practical question is not which model is morally superior. It is which party can sign, freeze, recover, or lose access.",
+          "Better UX often means easier recovery and simpler onboarding, but those conveniences usually come from shifting some responsibility away from the user.",
+          "Hybrid wallets can reduce operational risk, yet they should still be explained in terms of trust assumptions rather than as \"magic\" security.",
+        ],
+      },
     ],
   },
   {
