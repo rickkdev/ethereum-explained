@@ -6,6 +6,7 @@
 - Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
 - Monetary-policy slides can use the shared `issuance` layout with `process`, `eras`, `stats`, and `notes` when one slide needs both a protocol workflow and a stepped reward or supply schedule.
 - The shared `issuance` layout can also explain a fixed cap if `eras` are framed as cumulative supply milestones; the same bar treatment reads well for "approaching the ceiling" stories.
+- Wallet mental-model slides can reuse the shared `anatomy` layout by splitting the explanation into public-side details, private-key control, and wallet-software responsibilities.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -75,4 +76,12 @@ Started: Sun Apr 19 12:21:13 CEST 2026
   - The shared `anatomy` layout also works for role-based concept slides where each segment explains a different responsibility or consequence, not just the physical parts of one object.
   - For decentralization topics, anchor the explanation in operational roles first, then connect distribution to censorship resistance and uptime so the concept stays concrete.
   - Automated verification still relies on `npm run build`; browser verification remains a manual follow-up in this environment.
+---
+## 2026-04-19 14:02 CEST - SLIDE-02-8
+- Implemented slide 02.8 as a Bitcoin wallet explainer using the shared anatomy layout, separating the public side of receiving, the private key's signing role, and the wallet app's job as a key manager rather than a coin container.
+- Files changed: `AGENTS.md`, `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-hQFR9SqI.js`; removed stale build asset `dist/assets/index-IYO3GbAN.js`
+- **Learnings for future iterations:**
+  - Wallet slides read better when they explicitly separate blockchain state from wallet software so beginners do not assume coins live inside the app.
+  - The shared `anatomy` layout is a good fit for wallet and key mental models because each segment can own one responsibility in the receive/sign/manage flow.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---

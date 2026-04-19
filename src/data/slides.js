@@ -498,6 +498,37 @@ export const slideGroups = [
           "Miners and nodes overlap sometimes in practice, but conceptually they play different roles in Bitcoin's design.",
         ],
       },
+      {
+        number: "02.8",
+        layout: "anatomy",
+        eyebrow: "Wallets and keys",
+        headline: "A Bitcoin wallet is mostly a key manager: it helps you generate addresses, sign transactions, and prove control over coins recorded on the chain.",
+        description:
+          "Coins are not stored inside an app like files in a folder. The blockchain holds the shared record of ownership, while your wallet manages the keys that let you authorize spending from addresses you control.",
+        frameLabel: "What a wallet actually controls",
+        segments: [
+          {
+            label: "Public side",
+            title: "Public keys and addresses tell the network where coins can be received",
+            body: "A wallet can derive public-facing addresses from your keys. Other people can send bitcoin to those addresses, and everyone can see those outputs on the blockchain without learning your private key.",
+          },
+          {
+            label: "Private side",
+            title: "The private key is the secret that authorizes spending",
+            body: "When you want to move bitcoin, the wallet uses a private key to create a digital signature. That signature proves you are allowed to spend the coins linked to that key without exposing the secret itself.",
+          },
+          {
+            label: "Wallet software",
+            title: "The wallet manages keys and signing, not a pile of coins inside the app",
+            body: "The app helps you view balances, generate receive addresses, and sign transactions. If you restore the same keys in another wallet, you can still access the same coins because the blockchain, not the app, is the source of truth.",
+          },
+        ],
+        notes: [
+          "Public keys and addresses are for receiving; private keys are for authorizing spending.",
+          "A wallet is an interface for key management and transaction signing.",
+          "The coins live on the shared ledger as spendable outputs, not inside the wallet application itself.",
+        ],
+      },
     ],
   },
   {
