@@ -1326,6 +1326,28 @@ export const slideGroups = [
     number: "11",
     title: "Security & OPSEC",
     children: ["Common attack surfaces", "Practical safety habits"],
+    overview: {
+      eyebrow: "Chapter 11",
+      headline: "Security in crypto is partly technical, but a lot of it is behavioral discipline.",
+      intro:
+        "The last chapter shifts from how blockchains work to how people get hurt using them. Wallets, apps, links, approvals, and recovery flows all create attack surface, so good OPSEC means treating routine clicks and disclosures as part of your threat model.",
+      pillars: [
+        {
+          title: "Threats are layered",
+          body: "Losses do not come only from protocol bugs. They also come from phishing, malicious approvals, fake support, device compromise, and rushed decision-making.",
+        },
+        {
+          title: "Habits matter",
+          body: "Separate wallets, careful signing, skeptical link hygiene, and recovery planning are practical defenses that reduce the blast radius of mistakes.",
+        },
+        {
+          title: "What this chapter covers",
+          body: "We first map common attack surfaces around wallets and apps, then close with concrete safety habits that beginners can apply immediately.",
+        },
+      ],
+      callout: "OPSEC is not paranoia. It is the routine practice of making theft, coercion, and mistakes harder.",
+      footer: "From phishing and approvals to wallet hygiene and safer daily practice",
+    },
   },
 ];
 

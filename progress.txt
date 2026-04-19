@@ -1,4 +1,5 @@
 ## Codebase Patterns
+- Practical or closing chapter intros can still use the shared `overview` layout; make the three pillars cover the threat model or behavior shift plus the roadmap into actionable subslides.
 - Parent chapter intro slides should be added as a group-level `overview` object in `src/data/slides.js`; the shared overview renderer in `src/App.jsx` already maps that shape into the standard chapter layout.
 - Child slides can be filled into `src/data/slides.js` incrementally through `childContent`; missing later entries safely render the shared unfinished-slide placeholder until their story is implemented.
 - Historical/context subslides can reuse the `ledger` layout when they read cleanly as "before vs proposal" plus a short dated sequence, so simple origin stories do not need custom timeline components.
@@ -309,5 +310,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - Security-assumption tradeoff slides fit the shared `anatomy` layout when each segment owns one comparison dimension instead of one system.
   - For consensus nuance slides, compare what attackers must acquire, what honest participants must keep doing, and how recovery works after faults; that keeps the content balanced without flattening differences into slogans.
+  - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
+---
+## 2026-04-19 15:29 CEST - SLIDE-11
+- Implemented the Security & OPSEC chapter intro as a shared overview slide, shifting the deck from protocol concepts into practical self-protection and framing security as both technical attack surface and user behavior.
+- Files changed: `src/data/slides.js`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-DShu3Val.js`; removed stale build asset `dist/assets/index-BlNllGKA.js`
+- **Learnings for future iterations:**
+  - Practical or closing chapter intros still fit the shared `overview` layout when the three pillars cover the threat model, the behavior shift, and the roadmap into concrete habits.
+  - For security chapter openers, connect technical risks with routine user actions early so later phishing and wallet-hygiene slides read as one coherent topic.
   - `npm run build` passed; browser verification still needs a manual follow-up in this environment.
 ---
