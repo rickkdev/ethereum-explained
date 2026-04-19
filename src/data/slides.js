@@ -305,6 +305,87 @@ export const slideGroups = [
           "That mismatch ripples forward: later blocks still point to the old hash, so the chain shows visible tampering.",
         ],
       },
+      {
+        number: "02.5",
+        layout: "issuance",
+        eyebrow: "Mining and halving",
+        headline: "Mining adds new blocks through Proof of Work, and the block reward halves on a fixed schedule.",
+        description:
+          "Miners gather transactions and compete to find a valid block hash. When a miner wins, the network accepts a new block and issues the block reward. Roughly every 210,000 blocks, that reward is cut in half, so Bitcoin's new supply arrives more slowly over time.",
+        processLabel: "How mining turns pending payments into one new block",
+        process: [
+          {
+            title: "Pending transactions gather",
+            body: "Miners select valid transactions from the mempool and assemble a candidate block.",
+          },
+          {
+            title: "Proof of Work competition begins",
+            body: "Each miner repeatedly hashes the block header with different nonces, searching for a hash below the difficulty target.",
+          },
+          {
+            title: "One block wins the race",
+            body: "The first miner to find a valid hash broadcasts the block so other nodes can verify it.",
+          },
+          {
+            title: "Reward plus fees are issued",
+            body: "If the block is accepted, the winning miner earns the block subsidy and transaction fees for that block.",
+          },
+        ],
+        erasLabel: "Halvings reduce new issuance step by step",
+        eras: [
+          {
+            label: "Launch era",
+            title: "2009 to 2012",
+            reward: "50 BTC",
+            width: "100%",
+            body: "Bitcoin starts with the largest subsidy so the network can bootstrap security and distribution.",
+          },
+          {
+            label: "1st halving",
+            title: "2012 to 2016",
+            reward: "25 BTC",
+            width: "50%",
+            body: "After 210,000 blocks, the new bitcoin created per block is cut in half.",
+          },
+          {
+            label: "2nd and 3rd halvings",
+            title: "2016 to 2024",
+            reward: "12.5 to 6.25 BTC",
+            width: "25%",
+            body: "Each halving keeps the same pattern: less new supply enters the market even as blocks continue.",
+          },
+          {
+            label: "4th halving",
+            title: "2024 onward",
+            reward: "3.125 BTC",
+            width: "12.5%",
+            body: "The issuance schedule keeps stepping down until the subsidy becomes tiny and fees matter more.",
+            tone: "active",
+          },
+        ],
+        stats: [
+          {
+            label: "Block rhythm",
+            value: "~10 min",
+            body: "Bitcoin targets roughly one new block about every ten minutes on average.",
+          },
+          {
+            label: "Halving trigger",
+            value: "210,000 blocks",
+            body: "The reward changes by block count, not by a vote or central policy meeting.",
+          },
+          {
+            label: "Why it matters",
+            value: "Slower issuance",
+            body: "Halvings make Bitcoin's monetary policy predictable and increasingly scarce over time.",
+          },
+        ],
+        notes: [
+          "Mining is not just minting coins; it is the process that orders transactions into Bitcoin's shared ledger.",
+          "The block reward has two parts: newly issued bitcoin plus the fees attached to transactions in that block.",
+          "A halving cuts only the new issuance rate. The network keeps running, and miners still compete to produce blocks.",
+        ],
+      },
     ],
   },
   {

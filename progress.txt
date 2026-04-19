@@ -4,6 +4,7 @@
 - Historical/context subslides can reuse the `ledger` layout when they read cleanly as "before vs proposal" plus a short dated sequence, so simple origin stories do not need custom timeline components.
 - Structural explainer slides can use the shared `anatomy` layout with `frameLabel`, `segments`, and `notes` when a concept needs its internal parts separated visually without adding slide-specific React code.
 - Cause-and-effect security slides can use a shared `hash-chain` layout with `chain` and `tamperedChain` arrays in `src/data/slides.js`; the renderer can show an intact path and a broken reference without bespoke slide components.
+- Monetary-policy slides can use the shared `issuance` layout with `process`, `eras`, `stats`, and `notes` when one slide needs both a protocol workflow and a stepped reward or supply schedule.
 
 # Ralph Progress Log
 Started: Sun Apr 19 12:21:13 CEST 2026
@@ -48,5 +49,13 @@ Started: Sun Apr 19 12:21:13 CEST 2026
 - **Learnings for future iterations:**
   - The shared `hash-chain` layout works well for slides that need to compare a valid chain against a tampered one without introducing motion.
   - Driving both the intact and broken rows from slide data keeps the React renderer reusable for later security or consensus explainers.
+  - `npm run build` passed; browser verification is still manual in this environment.
+---
+## 2026-04-19 13:57 CEST - SLIDE-02-5
+- Implemented slide 02.5 as a shared-layout Bitcoin explainer pairing the mining flow with a stepped halving schedule, plus supporting stats and beginner-friendly notes about issuance and fees.
+- Files changed: `AGENTS.md`, `src/App.jsx`, `src/data/slides.js`, `src/styles.css`, `prd.json`, `progress.txt`, `dist/index.html`, `dist/assets/index-BFby-P-C.css`, `dist/assets/index-B4UuHBaW.js`; removed stale build assets `dist/assets/index-W9nIsY-6.css` and `dist/assets/index-C-3jAm-n.js`
+- **Learnings for future iterations:**
+  - The shared `issuance` layout works when a slide needs to explain both a protocol process and a shrinking reward or supply schedule without resorting to a one-off component.
+  - Keeping the reward-era bars data-driven in `src/data/slides.js` makes it easy to reuse the same renderer for later Bitcoin supply or Ethereum issuance comparisons.
   - `npm run build` passed; browser verification is still manual in this environment.
 ---

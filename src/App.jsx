@@ -622,6 +622,78 @@ function SlideFrame({ slide, isActive }) {
     );
   }
 
+  if (slide.content?.layout === "issuance") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="issuance-layout">
+            <SlideIntro
+              kicker={`Slide ${slide.number}`}
+              title={slide.title}
+              copy={slide.content.description}
+            />
+
+            <div className="issuance-grid">
+              <article className="content-card issuance-process-card">
+                <div className="panel-label">{slide.content.processLabel}</div>
+                <ol className="issuance-process-list">
+                  {slide.content.process.map((step, index) => (
+                    <li key={step.title} className="issuance-process-step">
+                      <div className="stage-index">0{index + 1}</div>
+                      <div>
+                        <h3>{step.title}</h3>
+                        <p>{step.body}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </article>
+
+              <article className="content-card issuance-eras-card">
+                <div className="panel-label">{slide.content.erasLabel}</div>
+                <div className="issuance-era-list">
+                  {slide.content.eras.map((era) => (
+                    <div key={era.title} className={`issuance-era ${era.tone ?? ""}`}>
+                      <div className="issuance-era-meta">
+                        <div className="card-label">{era.label}</div>
+                        <div className="issuance-era-value">{era.reward}</div>
+                      </div>
+
+                      <div className="issuance-era-bar-track">
+                        <div className="issuance-era-bar" style={{ width: era.width }} />
+                      </div>
+
+                      <p>{era.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </div>
+
+            <div className="issuance-stats">
+              {slide.content.stats.map((stat) => (
+                <article key={stat.label} className="content-card issuance-stat-card">
+                  <div className="card-label">{stat.label}</div>
+                  <strong>{stat.value}</strong>
+                  <p>{stat.body}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
   if (slide.content) {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>

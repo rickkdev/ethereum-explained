@@ -437,7 +437,8 @@ select {
 .pipeline-layout,
 .motion-layout,
 .anatomy-layout,
-.hash-chain-layout {
+.hash-chain-layout,
+.issuance-layout {
   display: grid;
   gap: 22px;
 }
@@ -684,6 +685,117 @@ select {
       transparent 10px,
       transparent 18px
     );
+}
+
+.issuance-grid,
+.issuance-stats {
+  display: grid;
+  gap: 22px;
+}
+
+.issuance-grid {
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: start;
+}
+
+.issuance-process-card,
+.issuance-eras-card,
+.issuance-stat-card {
+  padding: 24px;
+}
+
+.issuance-process-list {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.issuance-process-step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(145, 145, 145, 0.18);
+}
+
+.issuance-process-step:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.issuance-process-step h3,
+.issuance-stat-card strong {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.issuance-era-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.issuance-era {
+  padding: 18px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 34%),
+    rgba(24, 24, 24, 0.82);
+}
+
+.issuance-era.active {
+  border-color: rgba(255, 241, 179, 0.46);
+  background:
+    linear-gradient(180deg, rgba(255, 241, 179, 0.07), transparent 34%),
+    rgba(31, 29, 19, 0.88);
+}
+
+.issuance-era-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.issuance-era-value {
+  font-size: 1.26rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.issuance-era-bar-track {
+  height: 10px;
+  margin: 14px 0 12px;
+  border: 1px solid rgba(145, 145, 145, 0.18);
+  background: rgba(15, 15, 15, 0.92);
+}
+
+.issuance-era-bar {
+  height: 100%;
+  min-width: 12px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.88), rgba(176, 176, 176, 0.74));
+}
+
+.issuance-era.active .issuance-era-bar {
+  background: linear-gradient(90deg, rgba(255, 241, 179, 0.96), rgba(165, 133, 62, 0.84));
+}
+
+.issuance-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.issuance-stat-card strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.5rem;
+}
+
+.issuance-stat-card p {
+  margin-top: 10px;
 }
 
 .overview-footer {
@@ -1170,8 +1282,13 @@ select {
   .pipeline-grid,
   .anatomy-stack,
   .hash-chain-track,
+  .issuance-stats,
   .notes-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .issuance-grid {
+    grid-template-columns: 1fr;
   }
 
   .hash-chain-item {
@@ -1243,6 +1360,7 @@ select {
   .pipeline-grid,
   .anatomy-stack,
   .hash-chain-track,
+  .issuance-stats,
   .notes-panel,
   .overview-footer,
   .placeholder-meta {

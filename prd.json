@@ -154,7 +154,7 @@
         "Verify in browser"
       ],
       "priority": 11,
-      "passes": false,
+      "passes": true,
       "notes": "Add a Remotion animation if useful for showing issuance stepping down over successive halvings."
     },
     {
