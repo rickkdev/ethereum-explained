@@ -971,7 +971,47 @@ function SlideIntro({ kicker, title, copy }) {
   );
 }
 
+function XMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="social-icon">
+      <path
+        d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-7.4L5.6 22H2.5l7.24-8.28L1.8 2h6.4l4.42 6.7L18.9 2Zm-1.09 18h1.73L7.26 3.9H5.4Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 function SlideFrame({ slide, isActive }) {
+  if (slide.content?.layout === "speaker-intro") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="speaker-layout">
+            <div className="speaker-copy">
+              <div className="slide-kicker">{slide.content.eyebrow}</div>
+              <h1 className="speaker-title">{slide.title}</h1>
+              <div className="speaker-role">{slide.content.role}</div>
+              <div className="intro-rule" />
+              <p className="speaker-bio">{slide.content.bio}</p>
+
+              <div className="speaker-social">
+                <span className="speaker-social-badge">
+                  <XMark />
+                </span>
+                <span className="speaker-social-handle">{slide.content.handle}</span>
+              </div>
+            </div>
+
+            <div className="speaker-portrait-card content-card">
+              <img src={slide.content.image} alt={slide.title} className="speaker-portrait" />
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
   if (slide.content?.layout === "ledger") {
     return (
       <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>

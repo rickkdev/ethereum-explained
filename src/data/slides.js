@@ -1,5 +1,18 @@
 export const slideGroups = [
   {
+    number: "0",
+    title: "Rick",
+    children: [],
+    overview: {
+      layout: "speaker-intro",
+      eyebrow: "Slide 0",
+      role: "Software Engineer • Developer Relations • Ethereum Foundation",
+      image: "/rick.jpg",
+      bio: "Rick is a software engineer and developer relations leader with over a decade of experience in the Blockchain & Ethereum ecosystem. He currently works with the EF focusing on developer education & community growth. His work bridges deep technical expertise with ecosystem-building and real-world adoption.",
+      handle: "@rickdotbuild",
+    },
+  },
+  {
     number: "01",
     title: "What is a blockchain",
     children: [
@@ -1479,9 +1492,9 @@ export const slideGroups = [
     ],
     overview: {
       eyebrow: "Chapter 09",
-      headline: "Wallets are how users control blockchain accounts: they manage keys, produce signatures, and define who actually holds custody.",
+      headline: "Wallets are how users control blockchain accounts: they manage keys, produce signatures, and define who actually holds custody. Bitcoin transactions are more like 'here are the coins I'm unlocking and here's where they go,' while Ethereum is more like 'here's an instruction from account X, with a nonce proving order.'",
       intro:
-        "A wallet is the interface between a person and the chain. On Ethereum, that means understanding externally owned accounts, the private key material behind them, and the tradeoff between controlling your own keys or delegating that responsibility to someone else.",
+        "A wallet is the interface between a person and the chain. On Ethereum, that means understanding externally owned accounts, the private key material behind them, and the tradeoff between controlling your own keys or delegating that responsibility to someone else. The signing flow, the cryptographic guarantees, and the hardware wallet security model are still the same across both systems.",
       pillars: [
         {
           title: "Control",
@@ -1508,7 +1521,7 @@ export const slideGroups = [
           ],
         },
       ],
-      callout: "The wallet is the user's control surface, but the real power lies in who can produce a valid signature.",
+      callout: "The wallet is the user's control surface, but the real power lies in who can produce a valid signature. The transaction model differs, but the signing trust model does not.",
       footer: "From EOAs and seed phrases to self-custody, custodians, and wallet tradeoffs",
     },
     childContent: [

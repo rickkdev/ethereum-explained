@@ -4,6 +4,20 @@
   "description": "Build the blockchain education presentation slide by slide as a polished Vite + React deck, with one implementable story for every parent slide and subslide in the current presentation map.",
   "userStories": [
     {
+      "id": "SLIDE-00",
+      "title": "Build the speaker intro slide for Rick",
+      "description": "As a learner, I want an opening speaker slide so I know who is presenting, why his perspective matters, and where to find him online before the curriculum begins.",
+      "acceptanceCriteria": [
+        "Slide 0 renders before chapter 01 as a speaker introduction",
+        "The slide includes Rick's portrait, bio, current EF focus, and X handle",
+        "The visual treatment feels intentional and presentation-ready within the existing deck system",
+        "Verify in browser"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Use a dedicated speaker-intro layout fed by top-level slide group metadata so future presenter slides can reuse the same structure."
+    },
+    {
       "id": "SLIDE-01",
       "title": "Build the chapter intro for What is a blockchain",
       "description": "As a learner, I want the opening slide for blockchain basics to frame the chapter with a clear headline, supporting pillars, and a strong takeaway before the subslides begin.",
@@ -13,7 +27,7 @@
         "The layout feels presentation-ready and matches the deck-wide visual system",
         "Verify in browser"
       ],
-      "priority": 1,
+      "priority": 2,
       "passes": true,
       "notes": ""
     },
@@ -27,7 +41,7 @@
         "A simple step flow shows how an update becomes part of common history",
         "Verify in browser"
       ],
-      "priority": 2,
+      "priority": 3,
       "passes": true,
       "notes": ""
     },
@@ -41,7 +55,7 @@
         "Supporting labels explain transactions gathering, validation, and chain advancement",
         "Verify in browser"
       ],
-      "priority": 3,
+      "priority": 4,
       "passes": true,
       "notes": "Use a Remotion-driven animation similar to the current blockchain in motion slide."
     },
@@ -55,7 +69,7 @@
         "The flow from wallet to peer relay to network convergence is clear",
         "Verify in browser"
       ],
-      "priority": 4,
+      "priority": 5,
       "passes": true,
       "notes": "Add a Remotion animation if the network relay concept needs motion to read clearly, using the same approach as the blockchain motion slide."
     },
@@ -69,7 +83,7 @@
         "The slide defines finality in a way that is understandable to beginners",
         "Verify in browser"
       ],
-      "priority": 5,
+      "priority": 6,
       "passes": true,
       "notes": ""
     },
@@ -83,7 +97,7 @@
         "The layout leaves the deck feeling cohesive with chapter 01",
         "Verify in browser"
       ],
-      "priority": 6,
+      "priority": 7,
       "passes": true,
       "notes": ""
     },
@@ -97,7 +111,7 @@
         "The design stays simple enough for first-time learners",
         "Verify in browser"
       ],
-      "priority": 7,
+      "priority": 8,
       "passes": true,
       "notes": ""
     },
@@ -111,7 +125,7 @@
         "The copy stays concise and presentation-friendly rather than biographical",
         "Verify in browser"
       ],
-      "priority": 8,
+      "priority": 9,
       "passes": true,
       "notes": ""
     },
@@ -125,7 +139,7 @@
         "The explanation supports the later hashing and mining slides",
         "Verify in browser"
       ],
-      "priority": 9,
+      "priority": 10,
       "passes": true,
       "notes": ""
     },
@@ -139,7 +153,7 @@
         "The design makes tampering consequences easy to grasp visually",
         "Verify in browser"
       ],
-      "priority": 10,
+      "priority": 11,
       "passes": true,
       "notes": "Add a Remotion animation if needed to show hash links updating or breaking across a chain."
     },
@@ -153,7 +167,7 @@
         "The content avoids jargon overload while preserving technical accuracy",
         "Verify in browser"
       ],
-      "priority": 11,
+      "priority": 12,
       "passes": true,
       "notes": "Add a Remotion animation if useful for showing issuance stepping down over successive halvings."
     },
@@ -167,7 +181,7 @@
         "The visual treatment keeps the idea memorable without excess decoration",
         "Verify in browser"
       ],
-      "priority": 12,
+      "priority": 13,
       "passes": true,
       "notes": ""
     },
@@ -181,7 +195,7 @@
         "The copy distinguishes nodes from miners clearly",
         "Verify in browser"
       ],
-      "priority": 13,
+      "priority": 14,
       "passes": true,
       "notes": ""
     },
@@ -195,7 +209,7 @@
         "The layout is clean enough to support later wallet and EOA slides",
         "Verify in browser"
       ],
-      "priority": 14,
+      "priority": 15,
       "passes": true,
       "notes": ""
     },
@@ -209,7 +223,7 @@
         "The explanation stays distinct from Ethereum gas mechanics covered later",
         "Verify in browser"
       ],
-      "priority": 15,
+      "priority": 16,
       "passes": true,
       "notes": ""
     },
