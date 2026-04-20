@@ -948,7 +948,7 @@ function SlideShell({ slide, children }) {
       <div className="slide-edge slide-edge-right" />
 
       <header className="slide-topbar">
-        <div className="brand-mark">Architectural Noir</div>
+        <div className="brand-mark">Blockchain Skills Bootcamp</div>
         <div className="topbar-meta">
           <span>{slide.level === "parent" ? "Main topic" : "Subtopic"}</span>
           <span>{slide.parentTitle}</span>
@@ -1000,7 +1000,14 @@ function SlideFrame({ slide, isActive }) {
                   <div className="card-index">0{index + 1}</div>
                   <div className="card-label">{item.label}</div>
                   <h3>{item.title}</h3>
-                  <p>{item.body}</p>
+                  {item.body ? <p>{item.body}</p> : null}
+                  {item.bullets?.length ? (
+                    <ul className="comparison-bullets">
+                      {item.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </article>
               ))}
             </div>
@@ -1094,9 +1101,61 @@ function SlideFrame({ slide, isActive }) {
                 <article key={stage.title} className="content-card stage-card">
                   <div className="stage-index">0{index + 1}</div>
                   <h3>{stage.title}</h3>
-                  <p>{stage.body}</p>
+                  {stage.body ? <p>{stage.body}</p> : null}
+                  {stage.bullets?.length ? (
+                    <ul className="stage-bullets">
+                      {stage.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </article>
               ))}
+            </div>
+
+            <div className="notes-panel">
+              {slide.content.notes.map((note, index) => (
+                <div key={note} className="note-pill">
+                  <span className="note-index">0{index + 1}</span>
+                  <span>{note}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SlideShell>
+      </section>
+    );
+  }
+
+  if (slide.content?.layout === "process-diagram") {
+    return (
+      <section className={`frame ${isActive ? "active" : ""}`} data-slide-index={slide.number}>
+        <SlideShell slide={slide}>
+          <div className="pipeline-layout process-diagram-layout">
+            <SlideIntro
+              kicker={`Slide ${slide.number}`}
+              title={slide.title}
+              copy={slide.content.description}
+            />
+
+            <div className="content-card process-diagram-shell">
+              <div className="panel-label">{slide.content.frameLabel}</div>
+
+              <div className="process-diagram-track">
+                {slide.content.stages.map((stage, index) => (
+                  <article key={stage.title} className="process-node">
+                    <div className="process-node-step">0{index + 1}</div>
+                    <h3>{stage.title}</h3>
+                    {stage.bullets?.length ? (
+                      <ul className="process-node-bullets">
+                        {stage.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
             </div>
 
             <div className="notes-panel">
@@ -1193,7 +1252,14 @@ function SlideFrame({ slide, isActive }) {
                     <div className="card-index">0{index + 1}</div>
                     <div className="card-label">{segment.label}</div>
                     <h3>{segment.title}</h3>
-                    <p>{segment.body}</p>
+                    {segment.body ? <p>{segment.body}</p> : null}
+                    {segment.bullets?.length ? (
+                      <ul className="segment-bullets">
+                        {segment.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </article>
                 ))}
               </div>
@@ -1359,7 +1425,14 @@ function SlideFrame({ slide, isActive }) {
                 <article key={pillar.title} className="content-card pillar-card">
                   <div className="card-index">0{index + 1}</div>
                   <h3>{pillar.title}</h3>
-                  <p>{pillar.body}</p>
+                  {pillar.body ? <p>{pillar.body}</p> : null}
+                  {pillar.bullets?.length ? (
+                    <ul className="overview-bullets">
+                      {pillar.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </article>
               ))}
             </div>
@@ -1429,7 +1502,7 @@ export default function App() {
       <aside className="sidebar">
         <div className="sidebar-head">
           <div className="deck-label">Workshop Deck</div>
-          <div className="deck-title">Intro to Blockchain for University Students</div>
+          <div className="deck-title">Intro to Ethereum</div>
         </div>
 
         <div className="slide-list">

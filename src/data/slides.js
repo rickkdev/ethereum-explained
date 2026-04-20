@@ -63,7 +63,7 @@ export const slideGroups = [
         eyebrow: "Blockchain in motion",
         headline: "The chain advances when a new block is appended to the end of the record.",
         description:
-          "Use this animation as the visual intuition: older blocks shift backward, the newest validated block enters at the edge, and the shared history moves forward as one sequence.",
+          "Each new valid block is added to the end of the chain. As that happens, the older blocks move further into history and the shared record grows one step at a time.",
         bullets: [
           "Each rectangle is one block in the ordered history.",
           "The rightmost block is the newest accepted batch of transactions.",
@@ -141,6 +141,79 @@ export const slideGroups = [
       "21M hard cap",
       "Nodes and decentralization",
       "Wallets and keys",
+      {
+        number: "02.8.1",
+        title: "How a wallet actually sends a transaction",
+        content: {
+          layout: "anatomy",
+          eyebrow: "Wallet transaction flow",
+          headline: "A wallet sends a transaction in five simple steps: review, build, sign, verify, and broadcast.",
+          description:
+            "Use this slide as the mental model for a Bitcoin wallet such as Sparrow, Electrum, or a hardware-wallet companion app: the app shows the request, prepares the transaction, gets a signature, and sends the signed transaction to a Bitcoin node.",
+          frameLabel: "From wallet click to node relay",
+          segments: [
+            {
+              label: "Frontend",
+              title: "1. Review the transaction in the wallet UI",
+              bullets: [
+                "Check the network, address, amount, and fee",
+                "For contract calls, inspect the method or prompt",
+                "This screen is your chance to catch bad data",
+              ],
+            },
+            {
+              label: "Builder",
+              title: "2. The wallet builds the exact message",
+              bullets: [
+                "The wallet selects coins to spend and creates outputs",
+                "It sets the destination, change address, and fee",
+                "Those fields become the transaction to be signed",
+              ],
+            },
+            {
+              label: "Hot wallet",
+              title: "3A. Hot wallet signing happens on your device",
+              bullets: [
+                "The private key stays in the browser or phone wallet",
+                "The app unlocks it locally and creates the signature",
+                "Fast and convenient, but the device is part of the risk",
+              ],
+            },
+            {
+              label: "Hardware wallet",
+              title: "3B. Hardware wallet signing happens on a separate device",
+              bullets: [
+                "The computer sends an unsigned transaction to the hardware wallet",
+                "You verify key details on the hardware wallet screen",
+                "The device signs and returns only the signature",
+              ],
+            },
+            {
+              label: "Verification",
+              title: "4. The signature proves control of the account",
+              bullets: [
+                "The private key is not revealed",
+                "The signature is tied to the exact transaction data",
+                "If someone changes the data later, the signature fails",
+              ],
+            },
+            {
+              label: "Broadcast",
+              title: "5. The wallet sends the signed payload to a node",
+              bullets: [
+                "The wallet sends the signed transaction to a Bitcoin node or wallet server",
+                "The node checks format, signatures, and whether the inputs are spendable",
+                "If valid, the transaction enters the mempool and is relayed",
+              ],
+            },
+          ],
+          notes: [
+            "What you review in the wallet should match the transaction fields being signed.",
+            "Hot wallets keep signing on the connected device; hardware wallets move signing to a separate device.",
+            "If the payload changes after signing, the node rejects it because the signature no longer matches.",
+          ],
+        },
+      },
       "Transactions and mempool",
     ],
     overview: {
@@ -563,7 +636,52 @@ export const slideGroups = [
     children: [
       "What Ethereum adds beyond Bitcoin",
       "State, accounts, and the EVM",
-      "Smart contracts and programmability",
+      {
+        number: "03.2.1",
+        title: "What the EVM is",
+        content: {
+          layout: "anatomy",
+          eyebrow: "What the EVM is",
+          headline: "The EVM is Ethereum's shared execution engine.",
+          description:
+            "Keep the idea simple: when a transaction calls contract code, every node uses the EVM to run the same instructions and check the same result.",
+          frameLabel: "Three things to remember",
+          segments: [
+            {
+              label: "Definition",
+              title: "What it is",
+              bullets: [
+                "EVM means Ethereum Virtual Machine",
+                "It is the environment that runs smart-contract code",
+                "Every Ethereum node uses the same execution rules",
+              ],
+            },
+            {
+              label: "Role",
+              title: "What it does",
+              bullets: [
+                "Takes a transaction and current state as input",
+                "Executes the contract instructions",
+                "Returns the state changes if execution is valid",
+              ],
+            },
+            {
+              label: "Why it matters",
+              title: "Why it matters",
+              bullets: [
+                "All honest nodes should get the same result",
+                "That shared result lets apps run on-chain",
+                "This is why Ethereum can be more than payments",
+              ],
+            },
+          ],
+          notes: [
+            "The EVM is not one server. It is a common execution model used by all nodes.",
+            "Smart contracts run inside the EVM.",
+            "Same input plus same rules should produce the same output.",
+          ],
+        },
+      },
     ],
     overview: {
       eyebrow: "Chapter 03",
@@ -620,55 +738,41 @@ export const slideGroups = [
         eyebrow: "State, accounts, and the EVM",
         headline: "Ethereum keeps one shared state machine: accounts hold data, transactions request changes, and the EVM computes the next valid state.",
         description:
-          "Instead of tracking only who paid whom, Ethereum tracks account balances, contract code, and contract storage. When a transaction arrives, every node runs the same computation in the Ethereum Virtual Machine, then updates the shared state if the execution is valid.",
+          "Ethereum does more than track transfers. It tracks accounts, balances, code, and storage, then uses the EVM to compute the next shared state.",
         frameLabel: "How Ethereum turns transactions into state changes",
         segments: [
           {
             label: "Accounts",
-            title: "Every address points to an account with current data",
-            body: "Ethereum organizes the system around accounts. Externally owned accounts can send transactions, while contract accounts also store code and persistent storage. Together they define the current snapshot the network is agreeing on.",
+            title: "Every address maps to an account",
+            bullets: [
+              "EOAs can send transactions",
+              "Contract accounts also hold code and storage",
+              "Together they make up the current snapshot of Ethereum",
+            ],
           },
           {
             label: "Shared state",
-            title: "Balances, storage, and code live in one evolving record",
-            body: "The chain is not just a list of transfers. It is a shared state that includes ETH balances, token balances, contract variables, and deployed program code. Each block moves that global state from one version to the next.",
+            title: "The chain stores one evolving state",
+            bullets: [
+              "ETH balances are part of it",
+              "Token balances and contract variables are part of it",
+              "Deployed contract code is part of it too",
+            ],
           },
           {
             label: "EVM execution",
-            title: "Transactions are executed before the state is updated",
-            body: "When a transaction calls a contract, nodes run the same instructions inside the EVM. If execution succeeds under the protocol rules, the resulting balance changes, storage writes, and emitted outputs become the next accepted state.",
+            title: "The EVM runs the transaction before state updates",
+            bullets: [
+              "Each node runs the same instructions",
+              "Valid execution produces the same result everywhere",
+              "That result becomes the next accepted state",
+            ],
           },
         ],
         notes: [
-          "A transaction is a request to change Ethereum's shared state, not just a message to move coins.",
-          "The EVM is the common execution environment that lets every node reproduce the same result from the same input.",
-          "This is the bridge to smart contracts: contract code is what the EVM runs when transactions interact with applications on-chain.",
-        ],
-      },
-      {
-        number: "03.3",
-        layout: "ledger",
-        eyebrow: "Smart contracts and programmability",
-        headline: "A smart contract is on-chain code that runs the same way for every participant and updates shared state when its rules are triggered.",
-        description:
-          "Instead of asking one company server to execute business logic, Ethereum lets transactions call contract code that lives on the chain itself. That makes behaviors like token issuance, escrow release, and automated exchange logic part of the shared state machine every node can verify.",
-        comparison: [
-          {
-            label: "Traditional app logic",
-            title: "One backend decides what the program should do",
-            body: "In a normal web app, the rules for balances, permissions, or payouts run on a company's server. Users can interact with the product, but they cannot independently verify or reproduce the exact execution environment.",
-          },
-          {
-            label: "Smart contract logic",
-            title: "Shared code executes against the same chain state",
-            body: "On Ethereum, the contract code and storage live on-chain. When a transaction calls that code, every node runs the same instructions and arrives at the same state update, which is why the application logic becomes part of the network itself.",
-          },
-        ],
-        flow: [
-          "A developer deploys contract code to an address on Ethereum",
-          "A user sends a transaction that calls one of the contract's functions",
-          "The EVM executes the code against the current shared state",
-          "The result can transfer tokens, release escrow, record votes, or update application storage for everyone",
+          "A transaction is a request to change shared state, not just move coins.",
+          "The EVM is the shared execution environment every node uses.",
+          "Smart contracts are the code the EVM runs during those state changes.",
         ],
       },
     ],
@@ -676,24 +780,39 @@ export const slideGroups = [
   {
     number: "04",
     title: "Smart Contracts",
-    children: ["How contracts execute", "Common examples and risks"],
+    children: [
+      "How contracts execute",
+      "Common examples and risks",
+    ],
     overview: {
       eyebrow: "Chapter 04",
-      headline: "Smart contracts are deterministic programs on a blockchain: rules go on-chain, and outcomes follow from the code plus current state.",
+      headline: "Smart contracts move application logic onto the chain, so the same code runs for everyone against the same shared state.",
       intro:
-        "Ethereum lets developers deploy software that many users can call through the same shared state machine. That creates new coordination tools, but it also means bugs, bad assumptions, and upgrade choices become part of the system's real risk surface.",
+        "This chapter picks up the smart-contract idea directly: code is deployed on-chain, users call it through transactions, and the network executes the same rules for everyone.",
       pillars: [
         {
-          title: "Programs on-chain",
-          body: "A smart contract is code stored at an address. Users send transactions to its functions, and every node executes the same logic against the same state.",
+          title: "What changes from a normal app",
+          bullets: [
+            "Traditional apps run logic on one company backend",
+            "Smart contracts put that logic on-chain",
+            "Users are interacting with shared code, not a private server",
+          ],
         },
         {
-          title: "Rules create outcomes",
-          body: "Contracts can move assets, update storage, enforce conditions, and coordinate users without a central operator manually approving each step.",
+          title: "What smart contracts do",
+          bullets: [
+            "Store code and state at a contract address",
+            "Run when a transaction calls a function",
+            "Move assets, update storage, and enforce rules automatically",
+          ],
         },
         {
-          title: "Power with constraints",
-          body: "Because the code is public, stateful, and hard to change safely, developers must think about bugs, exploits, gas costs, and upgrade paths from the start.",
+          title: "Why they matter",
+          bullets: [
+            "Every node can verify the same execution",
+            "Apps can work without one operator approving each action",
+            "Bugs and upgrade choices become part of the risk surface",
+          ],
         },
       ],
       callout: "Smart contracts are not magic agreements. They are software with explicit rules, predictable execution, and real failure modes.",
@@ -702,33 +821,50 @@ export const slideGroups = [
     childContent: [
       {
         number: "04.1",
-        layout: "pipeline",
+        layout: "process-diagram",
         eyebrow: "How contracts execute",
-        headline: "A contract call follows a repeatable path: code is deployed once, users call functions through transactions, the EVM runs the logic, and the shared state updates if execution succeeds.",
+        headline: "One contract call moves through a simple on-chain process.",
         description:
-          "Smart contract execution is deterministic, not magical. The contract code lives on-chain at an address, a user submits a transaction that targets one of its functions, and every node replays the same computation against the same current state before accepting the result.",
+          "Read this left to right: wallet request, contract call, EVM execution, then state update.",
+        frameLabel: "Contract call flow",
         stages: [
           {
-            title: "Deploy the code",
-            body: "A developer publishes contract bytecode to Ethereum. Once the deployment transaction is accepted, the contract exists at an address with code and, often, initial storage.",
+            title: "User wallet",
+            bullets: [
+              "Chooses an action",
+              "Signs the transaction",
+              "Sends it to the network",
+            ],
           },
           {
-            title: "Call a function",
-            body: "A wallet sends a transaction to that contract address with function data and any required ETH. This transaction is a request for the network to run a specific piece of contract logic.",
+            title: "Contract call",
+            bullets: [
+              "Targets a contract address",
+              "Includes function data",
+              "May include ETH value",
+            ],
           },
           {
-            title: "Every node executes it",
-            body: "When the transaction is included in a block, each node runs the same contract code inside the EVM using the same inputs and current state. Determinism matters: honest nodes should compute the same result independently.",
+            title: "EVM execution",
+            bullets: [
+              "Nodes run the same code",
+              "Current state is checked",
+              "A result is computed",
+            ],
           },
           {
-            title: "State changes become shared history",
-            body: "If execution succeeds under the protocol rules, balances, storage values, and emitted outputs are updated in Ethereum's shared state. If it fails, the intended state change does not go through.",
+            title: "State update",
+            bullets: [
+              "Balances may change",
+              "Storage may change",
+              "The new state becomes shared history",
+            ],
           },
         ],
         notes: [
-          "Deployment is a separate step from calling; the same on-chain code is reused by every later transaction.",
-          "Nodes do not trust one backend result. They reproduce the same contract execution independently.",
-          "A contract call can change balances or storage only if the current state and the function rules both allow it.",
+          "Same input and same state should produce the same result.",
+          "If execution fails, the intended update does not happen.",
+          "This is the core loop behind Ethereum applications.",
         ],
       },
       {
@@ -737,17 +873,25 @@ export const slideGroups = [
         eyebrow: "Common examples and risks",
         headline: "Smart contracts can automate tokens, escrow, and voting, but the same automation makes bugs and governance mistakes matter immediately.",
         description:
-          "Useful contract systems turn shared rules into software that anyone can inspect and call. That power comes with sharp edges: if the code has a flaw, the exploit path can be just as automatic as the intended behavior, and even a safe contract can become risky if its upgrade process is unclear.",
+          "Smart contracts are powerful because they automate shared rules. They are risky because the chain will also automate bad logic.",
         comparison: [
           {
             label: "Common examples",
             title: "Contracts make repeated coordination tasks explicit and automatic",
-            body: "A token contract tracks balances and transfer rules, an escrow contract holds funds until agreed conditions are met, and a governance contract records votes and enforces outcomes without one operator editing a private database.",
+            bullets: [
+              "Token contracts track balances and transfers",
+              "Escrow contracts hold funds until conditions are met",
+              "Governance contracts record votes and outcomes",
+            ],
           },
           {
             label: "Common risks",
             title: "The chain executes flawed logic just as faithfully as correct logic",
-            body: "A bug can freeze or leak funds, an exploit can abuse a hidden edge case, and an upgrade path can introduce governance risk if users are no longer sure who can change the rules after deployment.",
+            bullets: [
+              "A bug can freeze or leak funds",
+              "An exploit can abuse hidden edge cases",
+              "An upgrade path can create governance risk",
+            ],
           },
         ],
         flow: [
@@ -836,34 +980,50 @@ export const slideGroups = [
         eyebrow: "How values show up in ecosystem design",
         headline: "Ethereum's values become visible when you look at what the ecosystem keeps building, funding, and defending.",
         description:
-          "CROPS matters because it changes design choices. The ecosystem tends to favor permissionless access over gatekeepers, open standards over closed platforms, privacy tools over total transparency by default, and cautious security practices over fast but brittle upgrades.",
+          "CROPS matters because it shapes design choices. You can see the values in what the ecosystem builds and protects.",
         frameLabel: "From principle to concrete ecosystem choice",
         segments: [
           {
             label: "C + R",
             title: "Permissionless access and resistance to control",
-            body: "Ethereum applications are typically built so a wallet can connect and interact directly without asking a platform operator for approval first. The same instinct shows up in resistance to app-store style chokepoints, infrastructure monocultures, and governance patterns that would let one actor quietly decide who gets to participate.",
+            bullets: [
+              "Wallets can usually connect without asking permission first",
+              "The ecosystem resists chokepoints and single points of control",
+              "Governance is cautious about giving one actor too much power",
+            ],
           },
           {
             label: "O",
             title: "Open-source clients, standards, and exits",
-            body: "Core clients, wallets, SDKs, and standards like ERCs are developed in public so others can inspect them, fork them, or build compatible alternatives. That is why the ecosystem has multiple clients, many wallet interfaces, and shared token standards instead of one official product stack.",
+            bullets: [
+              "Clients, wallets, and SDKs are built in public",
+              "ERC standards help different apps stay compatible",
+              "Users and builders can inspect, fork, or switch tools",
+            ],
           },
           {
             label: "P",
             title: "Privacy shows up as a design goal, even when it is incomplete",
-            body: "The chain is transparent, but the ecosystem still keeps pushing for better privacy through practices like new-address hygiene, selective disclosure, zero-knowledge tooling, and products that minimize what users must reveal just to use an application.",
+            bullets: [
+              "The chain is transparent, but privacy still matters",
+              "The ecosystem pushes selective disclosure and ZK tools",
+              "Good products ask users to reveal less, not more",
+            ],
           },
           {
             label: "S",
             title: "Security-first culture slows down high-risk change",
-            body: "Critical systems are expected to go through audits, formal review, bug bounties, staged rollouts, and conservative upgrade debates. Client diversity, careful protocol changes, and strong key-management habits all reflect the idea that protecting user funds and network integrity matters more than shipping quickly.",
+            bullets: [
+              "Critical systems go through audits and review",
+              "Upgrades are debated carefully before rollout",
+              "Protecting funds matters more than moving fast",
+            ],
           },
         ],
         notes: [
-          "These values are visible in product defaults, open standards, funding priorities, and governance habits, not just in mission statements.",
-          "Privacy is aspirational as well as practical in Ethereum today: the value shapes roadmaps even when the current user experience is still imperfect.",
-          "The useful teaching move is principle to manifestation: ask what a value caused the ecosystem to build or defend.",
+          "Values show up in defaults, standards, and governance habits.",
+          "Privacy is still incomplete, but it clearly shapes the roadmap.",
+          "A useful question is: what did this value cause the ecosystem to build?",
         ],
       },
     ],
@@ -883,15 +1043,27 @@ export const slideGroups = [
       pillars: [
         {
           title: "Finance becomes modular",
-          body: "Instead of one bank or broker bundling everything together, DeFi breaks common financial functions into protocols for exchange, borrowing, collateral, and settlement.",
+          bullets: [
+            "Exchange, borrowing, and settlement become separate protocols",
+            "Users combine these pieces instead of using one bank product",
+            "Finance becomes more legible and programmable",
+          ],
         },
         {
           title: "Protocols can compose",
-          body: "Because these systems are on-chain and programmable, one application can build on another. A wallet, a swap, a lending market, and a stablecoin can all connect inside one user flow.",
+          bullets: [
+            "One app can build on another",
+            "Wallets, swaps, lending, and stablecoins can connect in one flow",
+            "Shared state makes those connections possible",
+          ],
         },
         {
           title: "Opportunity comes with protocol risk",
-          body: "Open access and automation can be powerful, but they do not remove risk. Code flaws, cascading liquidations, oracle failures, and poor market design still matter.",
+          bullets: [
+            "Open access does not remove risk",
+            "Code flaws and oracle failures still matter",
+            "Liquidations and poor market design can cascade",
+          ],
         },
       ],
       callout: "DeFi is best understood as reusable financial infrastructure: legible, programmable, and sometimes fragile.",
@@ -901,31 +1073,52 @@ export const slideGroups = [
       {
         number: "06.1",
         layout: "anatomy",
-        eyebrow: "Swaps, lending, and stablecoins",
-        headline: "Three DeFi primitives show up again and again: swaps move between assets, lending markets turn collateral into credit, and stablecoins try to keep one unit close to one dollar.",
+        eyebrow: "Swaps, lending, stablecoins, and RWAs",
+        headline: "Four DeFi primitives show up again and again: swaps, lending, stablecoins, and tokenized real-world assets.",
         description:
-          "The easiest way to read DeFi is by function. One protocol category helps users exchange assets, another lets them borrow against posted collateral, and another provides a steadier unit of account so prices, loans, and payments are easier to reason about on-chain.",
+          "The easiest way to read DeFi is by function: exchange, credit, stable settlement, and yield-bearing assets linked to off-chain instruments.",
         frameLabel: "Reading core DeFi primitives by job to be done",
         segments: [
           {
             label: "Swaps",
             title: "Swap protocols let users trade one asset for another on-chain",
-            body: "A swap protocol is the exchange layer of DeFi. Instead of sending funds to a centralized broker, users interact with a contract that quotes a price path and settles the trade against on-chain liquidity, such as swapping ETH for USDC or one token for another.",
+            bullets: [
+              "They are the exchange layer of DeFi",
+              "Users trade directly against on-chain liquidity",
+              "Example: swap ETH for USDC",
+            ],
           },
           {
             label: "Lending",
             title: "Lending markets turn posted collateral into borrowable liquidity",
-            body: "A lending protocol lets users deposit assets into shared pools and borrow against collateral they lock on-chain. One user earns yield by supplying liquidity, while another can unlock short-term capital without selling the asset they already hold.",
+            bullets: [
+              "Users deposit assets into shared pools",
+              "Borrowers lock collateral to access liquidity",
+              "Suppliers earn yield while borrowers avoid selling",
+            ],
           },
           {
             label: "Stablecoins",
             title: "Stablecoins provide the relatively steady unit that many DeFi workflows depend on",
-            body: "Stablecoins are blockchain-based assets designed to track something less volatile, usually the US dollar. They matter because traders, borrowers, and apps often need a predictable reference asset for quoting prices, posting collateral, or making payments without taking full crypto price risk every step of the way.",
+            bullets: [
+              "They try to track a steadier asset, usually the US dollar",
+              "They help with pricing, collateral, and payments",
+              "They reduce the need to hold only volatile assets",
+            ],
+          },
+          {
+            label: "RWAs",
+            title: "RWA products bring real-world yield on-chain through tokenized assets",
+            bullets: [
+              "They represent claims linked to off-chain assets like Treasury bills or credit products",
+              "Many are designed to pass through yield from those underlying assets",
+              "They matter when users want blockchain access plus more familiar sources of return",
+            ],
           },
         ],
         notes: [
-          "Swaps answer exchange, lending answers credit, and stablecoins answer price stability and settlement.",
-          "These primitives often connect in one user flow: swap into collateral, borrow a stablecoin, then move that stable asset elsewhere.",
+          "Swaps answer exchange, lending answers credit, stablecoins answer settlement, and RWAs answer on-chain access to off-chain yield.",
+          "These primitives can connect in one user flow: swap into collateral, borrow a stablecoin, or move funds into a yield-bearing RWA product.",
           "Thinking in protocol roles first makes later composability slides easier to teach than starting with brand names or token jargon.",
         ],
       },
@@ -935,17 +1128,25 @@ export const slideGroups = [
         eyebrow: "Risks, composability, and real-world fit",
         headline: "DeFi is powerful because protocols can stack together, but that same composability can turn one weak link into a larger failure.",
         description:
-          "On-chain finance is modular: a wallet can connect to a swap, a lending market can rely on a stablecoin, and an app can build on all of them. That openness creates new product possibilities, but it also means liquidation engines, oracle inputs, smart-contract code, and thin markets can amplify each other's problems.",
+          "On-chain finance is modular, which creates both useful combinations and new failure chains.",
         comparison: [
           {
             label: "Composability",
             title: "Protocols can plug into each other like financial Lego",
-            body: "A user might swap into collateral, deposit it into a lending market, borrow a stablecoin, and move that stable asset into another app without leaving the chain. Shared standards and visible state make those connections possible.",
+            bullets: [
+              "A user can swap, lend, borrow, and move assets in one stack",
+              "Shared standards make protocols easier to connect",
+              "Visible on-chain state helps apps compose",
+            ],
           },
           {
             label: "Fragility and fit",
             title: "Open finance still has sharp edges and does not fit every need",
-            body: "Smart-contract bugs, forced liquidations, oracle mistakes, MEV-heavy market structure, and shallow liquidity can all hurt users. DeFi fits best when programmability and open access matter more than chargebacks, customer support, or strong legal recourse.",
+            bullets: [
+              "Bugs, liquidations, and oracle failures can hurt users",
+              "Thin liquidity and MEV can make markets worse",
+              "DeFi fits best when openness matters more than support or legal recourse",
+            ],
           },
         ],
         flow: [
@@ -972,15 +1173,27 @@ export const slideGroups = [
       pillars: [
         {
           title: "Many roles, one ecosystem",
-          body: "Ethereum depends on different groups doing different jobs: some research upgrades, some maintain clients, some build applications, and some operate infrastructure that keeps the network usable.",
+          bullets: [
+            "Some groups research upgrades",
+            "Some maintain clients and core infrastructure",
+            "Others build apps, tools, and education",
+          ],
         },
         {
           title: "Social and technical layers",
-          body: "The chain runs on software, but software choices come from discussion, research, implementation, testing, and community buy-in. The ecosystem is social coordination plus protocol engineering together.",
+          bullets: [
+            "The chain runs on software",
+            "Software choices come from research and discussion",
+            "Governance is social coordination plus engineering",
+          ],
         },
         {
           title: "What this chapter covers",
-          body: "We first map the major actor groups, then show how Ethereum changes through discussions, EIPs, client work, and network upgrades without a single central controller.",
+          bullets: [
+            "First: who the main actor groups are",
+            "Then: how ideas turn into upgrades",
+            "All without one central controller",
+          ],
         },
       ],
       callout: "Ethereum works because many independent groups keep aligning on the same shared system, not because one organization commands the network.",
@@ -993,23 +1206,35 @@ export const slideGroups = [
         eyebrow: "Core teams, researchers, and builders",
         headline: "Ethereum has a recognizable set of actor groups, but they do different jobs and none of them is the single owner of the network.",
         description:
-          "The ecosystem has human shape once you separate research, client implementation, and application building. These groups overlap in practice, but they contribute at different layers and depend on each other to move the network forward.",
+          "The easiest way to read the ecosystem is by role: research, clients, and builders.",
         frameLabel: "Who does what in the Ethereum ecosystem",
         segments: [
           {
             label: "Research and stewardship",
             title: "Core researchers and foundation-style teams explore protocol direction",
-            body: "Researchers study upgrades, tradeoffs, and security assumptions. Stewardship groups often fund work, coordinate discussion, and help keep long-term priorities visible, but they do not control the chain by decree.",
+            bullets: [
+              "They study upgrades and tradeoffs",
+              "They help coordinate long-term direction",
+              "They do not control the chain by decree",
+            ],
           },
           {
             label: "Client teams",
             title: "Independent client teams turn protocol ideas into production software",
-            body: "Execution and consensus clients implement Ethereum's rules in code, test upgrades, fix bugs, and ship releases that validators and node operators can run. Multiple teams matter because client diversity reduces reliance on one codebase.",
+            bullets: [
+              "They implement Ethereum's rules in code",
+              "They test upgrades and ship releases",
+              "Multiple clients reduce reliance on one codebase",
+            ],
           },
           {
             label: "Builders",
             title: "Application builders, tooling teams, and educators make the ecosystem usable",
-            body: "Wallet teams, app developers, infrastructure providers, educators, and community organizers turn protocol capability into things people can actually use. They also surface pain points that feed back into future research and client work.",
+            bullets: [
+              "They build wallets, apps, and tooling",
+              "They make the protocol usable in practice",
+              "They surface pain points back to researchers and client teams",
+            ],
           },
         ],
         notes: [
@@ -1024,23 +1249,39 @@ export const slideGroups = [
         eyebrow: "How the ecosystem coordinates change",
         headline: "Ethereum changes through rough coordination: ideas are debated socially, specified technically, implemented by multiple teams, and only then activated on the network.",
         description:
-          "No single leader flips a master switch for Ethereum. Change usually starts in public discussion, matures through research and EIPs, moves into independent client implementation and testing, and reaches the chain only if enough operators choose to adopt the upgrade together.",
+          "Ethereum upgrades move from discussion to proposal to implementation to adoption.",
         stages: [
           {
             title: "Discussion and problem framing",
-            body: "A pain point, security concern, or design opportunity is debated across calls, forums, research posts, and community conversations. Social alignment starts here: people need to agree that the problem is real and worth changing.",
+            bullets: [
+              "A problem or opportunity is identified",
+              "People debate it in calls, forums, and research posts",
+              "Social alignment starts here",
+            ],
           },
           {
             title: "Research and EIP design",
-            body: "Researchers and contributors turn the idea into a more precise proposal, often through an Ethereum Improvement Proposal. Tradeoffs, security assumptions, and compatibility questions are made explicit before anyone treats the change as ready.",
+            bullets: [
+              "The idea becomes more precise",
+              "Often it is written as an EIP",
+              "Tradeoffs and security assumptions are made explicit",
+            ],
           },
           {
             title: "Client implementation and testing",
-            body: "Independent client teams implement the proposal in code, compare behavior across clients, and test whether the upgrade works safely in practice. This is where social intent has to survive engineering reality.",
+            bullets: [
+              "Client teams implement the change in code",
+              "Behavior is tested across multiple clients",
+              "Engineering reality checks the original idea",
+            ],
           },
           {
             title: "Adoption and network upgrade",
-            body: "Validators, node operators, infrastructure providers, and apps choose whether to run software that includes the change. If enough of the ecosystem upgrades in coordination, the new rules become part of Ethereum's live network.",
+            bullets: [
+              "Operators and apps choose whether to upgrade",
+              "Enough coordinated adoption activates the change",
+              "The new rules become part of the live network",
+            ],
           },
         ],
         notes: [
@@ -1063,15 +1304,27 @@ export const slideGroups = [
       pillars: [
         {
           title: "Computation is scarce",
-          body: "Every contract call uses processing, storage access, and limited block capacity. Gas turns that resource use into a measurable cost instead of letting demand grow without limits.",
+          bullets: [
+            "Contract calls use processing and storage",
+            "Block space is limited",
+            "Gas turns resource use into a measurable cost",
+          ],
         },
         {
           title: "Fees manage contention",
-          body: "When more users compete for the same block space, fees help prioritize what gets included first. The fee market is how the network handles congestion without a central scheduler.",
+          bullets: [
+            "Users compete for limited block space",
+            "Fees help prioritize what gets included first",
+            "This is how Ethereum handles congestion",
+          ],
         },
         {
           title: "Users feel the tradeoff",
-          body: "Wallets surface gas as a practical choice about speed, timing, and cost. This chapter connects protocol-level resource pricing to the real transaction experience users see on screen.",
+          bullets: [
+            "Wallets turn gas into a user-facing choice",
+            "Users trade off speed, timing, and cost",
+            "Protocol pricing becomes a visible UX decision",
+          ],
         },
       ],
       callout: "Gas is Ethereum's resource meter: it prices execution so shared computation stays bounded and prioritizable.",
@@ -1084,23 +1337,35 @@ export const slideGroups = [
         eyebrow: "Why gas exists",
         headline: "Gas exists so Ethereum can measure resource usage before the network commits shared computation and storage.",
         description:
-          "Gas is not an arbitrary surcharge added after the fact. It is the unit Ethereum uses to meter how much work a transaction asks the network to do, so scarce block space and state growth are allocated with rules instead of guesswork.",
+          "Gas is Ethereum's way of measuring how much work a transaction asks the network to do.",
         frameLabel: "Why Ethereum meters execution",
         segments: [
           {
             label: "What gas measures",
             title: "Computation, storage access, and state changes",
-            body: "Different EVM operations consume different amounts of gas because they place different demands on the network. A simple transfer, a contract call, and writing new data to storage do not all cost the same amount of work.",
+            bullets: [
+              "Different EVM operations cost different amounts",
+              "Transfers, contract calls, and storage writes are not equal",
+              "Gas reflects the amount of requested work",
+            ],
           },
           {
             label: "Why it matters",
             title: "Spam resistance and bounded shared resources",
-            body: "If execution were free, attackers could flood the network with pointless computation or huge storage writes. Gas makes every action carry a resource cost, which discourages spam and keeps block capacity available for users willing to pay for real demand.",
+            bullets: [
+              "If execution were free, spam would be cheap",
+              "Gas makes every action carry a cost",
+              "That helps protect limited block capacity",
+            ],
           },
           {
             label: "What it is not",
             title: "Not the full fee formula by itself",
-            body: "Gas tells Ethereum how much work an action requires. The actual amount a user pays depends on fee-market pricing layered on top of that meter, which is the next slide's topic rather than this one.",
+            bullets: [
+              "Gas is a workload meter",
+              "It is not the full fee formula by itself",
+              "What users pay also depends on the fee market",
+            ],
           },
         ],
         notes: [
@@ -1111,28 +1376,50 @@ export const slideGroups = [
       },
       {
         number: "08.2",
-        layout: "ledger",
+        layout: "process-diagram",
         eyebrow: "Fee market and user experience",
         headline: "When block space is crowded, users compete with fees, and that competition changes both transaction cost and waiting time.",
         description:
-          "Ethereum does not have a central scheduler deciding whose transaction matters most. When demand rises above available block space, wallets turn the fee market into a user choice: pay more for faster inclusion, wait longer, or come back when congestion eases.",
-        comparison: [
+          "Read this as the user-facing fee sequence: quote, broadcast, competition, inclusion, then final fee paid.",
+        frameLabel: "How Ethereum fees become a user-visible cost",
+        stages: [
           {
-            label: "Lighter demand",
-            title: "Plenty of room keeps transaction costs calmer",
-            body: "When blocks are not heavily contested, users do not need to outbid each other aggressively. Wallet estimates tend to look more stable, and ordinary transactions are more likely to land quickly without much tuning from the sender.",
+            title: "Wallet quote",
+            bullets: [
+              "The wallet estimates the current fee market",
+              "It suggests a fee for the user's desired speed",
+              "The user signs with those settings",
+            ],
           },
           {
-            label: "Crowded demand",
-            title: "Competition pushes fees up and slower bids wait",
-            body: "When NFT mints, market volatility, or popular app activity crowd the network, more transactions chase the same limited block space. Users willing to pay higher fees are more likely to be included first, while lower bids can sit pending until demand cools or the sender reprices.",
+            title: "Broadcast",
+            bullets: [
+              "The signed transaction enters the network",
+              "It waits with other pending transactions",
+              "All are competing for limited block space",
+            ],
+          },
+          {
+            title: "Inclusion priority",
+            bullets: [
+              "Validators prefer more attractive fees",
+              "Higher-fee transactions usually land sooner",
+              "Lower-fee transactions may wait or need repricing",
+            ],
+          },
+          {
+            title: "Fee paid",
+            bullets: [
+              "Actual fee paid = gas used x effective gas price",
+              "Gas used depends on the work actually done",
+              "The final result is the cost the user sees",
+            ],
           },
         ],
-        flow: [
-          "A wallet estimates the current fee market and suggests a price for the user's desired speed.",
-          "The signed transaction enters the network and competes with other pending transactions for limited block space.",
-          "Validators usually include the transactions that offer more attractive fees first when demand is high.",
-          "The result is user-visible: higher costs during congestion and longer waiting times for lower-fee transactions.",
+        notes: [
+          "Crowded blocks make the competition more visible to users.",
+          "The fee is not just a quote; it depends on gas actually used.",
+          "Faster inclusion usually means paying a more competitive fee.",
         ],
       },
     ],
@@ -1140,7 +1427,56 @@ export const slideGroups = [
   {
     number: "09",
     title: "Wallets & Keys / EOA",
-    children: ["EOAs, seed phrases, and signing", "Custody models and wallet UX"],
+    children: [
+      "EOAs, seed phrases, and signing",
+      "Custody models and wallet UX",
+      {
+        number: "09.3",
+        title: "Multisignature wallets",
+        content: {
+          layout: "anatomy",
+          eyebrow: "Multisignature wallets",
+          headline: "A multisignature wallet requires more than one approval before funds or permissions can move.",
+          description:
+            "The core idea is simple: one key is not enough. Multiple signers must approve an action, which reduces single-key failure and makes shared treasury control more practical.",
+          frameLabel: "Why multisig matters",
+          segments: [
+            {
+              label: "How it works",
+              title: "Multiple signers share control",
+              bullets: [
+                "A multisig wallet has several authorized signers",
+                "A transaction needs a threshold such as 2-of-3 or 3-of-5",
+                "One compromised key is not enough to move funds",
+              ],
+            },
+            {
+              label: "Why it matters",
+              title: "It reduces single-key risk",
+              bullets: [
+                "It lowers the chance that one mistake drains everything",
+                "It helps teams separate authority across people or devices",
+                "It adds a review step before sensitive actions happen",
+              ],
+            },
+            {
+              label: "Why DeFi uses it",
+              title: "It is common for treasuries, protocols, and admin control",
+              bullets: [
+                "DAOs and protocol teams use multisigs for treasury management",
+                "Admin powers and upgrade controls are often placed behind multisigs",
+                "In DeFi, multisigs help manage large shared pools more safely",
+              ],
+            },
+          ],
+          notes: [
+            "A multisig improves security, but it also adds coordination overhead.",
+            "The key question is how many signers are required and who they are.",
+            "For DeFi, multisigs matter most wherever shared funds or admin powers exist.",
+          ],
+        },
+      },
+    ],
     overview: {
       eyebrow: "Chapter 09",
       headline: "Wallets are how users control blockchain accounts: they manage keys, produce signatures, and define who actually holds custody.",
@@ -1149,15 +1485,27 @@ export const slideGroups = [
       pillars: [
         {
           title: "Control",
-          body: "An externally owned account is controlled by private key material. The wallet helps the user access that account, inspect activity, and authorize actions, but the underlying authority comes from the keys.",
+          bullets: [
+            "An EOA is controlled by private key material",
+            "The wallet helps the user access and use that account",
+            "The real authority comes from the keys",
+          ],
         },
         {
           title: "Signing",
-          body: "Transactions and messages are not approved by a company account page. They are authorized with cryptographic signatures, which is why seed phrases, backups, and device security matter so much.",
+          bullets: [
+            "Transactions are authorized with signatures",
+            "The private key creates that signature",
+            "Backups and device security matter because of this",
+          ],
         },
         {
           title: "Custody",
-          body: "Some wallets leave the keys entirely with the user, others keep them with an exchange or service, and many products sit somewhere in between. The UX tradeoff is convenience versus direct control.",
+          bullets: [
+            "Some wallets leave keys with the user",
+            "Others keep keys with a service",
+            "The tradeoff is convenience versus direct control",
+          ],
         },
       ],
       callout: "The wallet is the user's control surface, but the real power lies in who can produce a valid signature.",
@@ -1170,23 +1518,35 @@ export const slideGroups = [
         eyebrow: "EOAs, seed phrases, and signing",
         headline: "An Ethereum wallet gives you access to an externally owned account, but the real authority comes from the secret material that can produce valid signatures.",
         description:
-          "For beginners, the key mental model is simple: the account is the public identity on-chain, the seed phrase or private key is the recovery secret behind it, and signing is the act that proves control without revealing that secret to the network.",
+          "Keep the mental model simple: account, backup secret, then signature.",
         frameLabel: "Three layers of wallet control",
         segments: [
           {
             label: "EOA",
             title: "An externally owned account is a user-controlled address on Ethereum",
-            body: "An EOA has an address, can hold ETH and tokens, and can start transactions. Unlike a smart-contract account, it does not run its own code. It acts because someone with the right key material authorizes an action on its behalf.",
+            bullets: [
+              "It has an address on Ethereum",
+              "It can hold ETH and tokens",
+              "It acts when the user signs",
+            ],
           },
           {
             label: "Seed phrase",
             title: "The seed phrase is a human backup for deriving wallet keys",
-            body: "Most modern wallets give the user a recovery phrase that can regenerate the private keys for that wallet. It is not something you share in normal use. It is a backup secret, and anyone who gets it can usually recreate the same wallet control on another device.",
+            bullets: [
+              "It is a backup for wallet recovery",
+              "It can regenerate the wallet's keys",
+              "Anyone who gets it can usually take control",
+            ],
           },
           {
             label: "Signing",
             title: "A signature proves control without exposing the private key itself",
-            body: "When you send a transaction or approve a message, the wallet uses the private key to create a signature. Nodes and applications can verify that signature against the public address, which is why the network can trust the authorization without ever seeing the secret.",
+            bullets: [
+              "The wallet uses the private key to sign",
+              "The network can verify the signature",
+              "The private key itself is not revealed",
+            ],
           },
         ],
         notes: [
@@ -1201,23 +1561,35 @@ export const slideGroups = [
         eyebrow: "Custody models and wallet UX",
         headline: "Wallet design is really a custody decision: who holds signing power, how recovery works, and what tradeoffs the user accepts.",
         description:
-          "Different wallet patterns optimize for different risks. Self-custody gives the user direct control, custodial products trade control for support and recovery, and hybrid approaches try to reduce sharp edges without pretending the tradeoffs disappear.",
+          "Different wallet models shift control, recovery, and risk in different ways.",
         frameLabel: "Three common custody patterns",
         segments: [
           {
             label: "Self-custody",
             title: "The user controls the keys and bears the recovery burden",
-            body: "A browser wallet, hardware wallet, or seed-based mobile wallet lets the user sign directly. That usually means stronger sovereignty and fewer platform dependencies, but it also means backup mistakes, phishing, or device loss can become permanent account loss.",
+            bullets: [
+              "The user signs directly",
+              "The user is responsible for backup and recovery",
+              "Mistakes can become permanent loss",
+            ],
           },
           {
             label: "Custodial",
             title: "A service controls the keys and offers account-style convenience",
-            body: "An exchange or hosted wallet keeps the signing keys on the user's behalf. The product can offer password resets, support, and familiar onboarding, but the user now depends on that company for withdrawals, policy decisions, uptime, and security.",
+            bullets: [
+              "A company or exchange controls the keys",
+              "The user gets easier onboarding and recovery",
+              "The user depends on that service for access",
+            ],
           },
           {
             label: "Hybrid",
             title: "Modern wallets split control across devices, policies, or recovery helpers",
-            body: "Some wallets use multisig, social recovery, passkeys, or smart-account tooling to make key management less fragile. These models can improve usability and safety, but users still need to understand who can authorize actions and what happens if one recovery path fails.",
+            bullets: [
+              "Control is split across devices or recovery helpers",
+              "This can improve usability and resilience",
+              "Users still need to understand the trust model",
+            ],
           },
         ],
         notes: [
@@ -1233,29 +1605,87 @@ export const slideGroups = [
     title: "Consensus",
     children: [
       "Proof of Work vs Proof of Stake",
-      "Security assumptions and tradeoffs",
+      "Proof of Stake summary",
+      {
+        number: "10.3",
+        title: "How to participate in staking",
+        content: {
+          layout: "anatomy",
+          eyebrow: "How to participate in staking",
+          headline: "There are two common ways to participate in Ethereum staking: run your own validator, or join a staking provider.",
+          description:
+            "Strictly speaking, only the first option means you personally run a node. The second option means you join a service that handles the validator operations for you.",
+          frameLabel: "Two common paths into Ethereum staking",
+          segments: [
+            {
+              label: "Run your own node",
+              title: "Solo staking means you run the validator yourself",
+              bullets: [
+                "You need 32 ETH to activate a validator",
+                "You need a machine connected to the internet and running reliably",
+                "You manage the software, keys, uptime, and slashing risk yourself",
+              ],
+            },
+            {
+              label: "Join a provider",
+              title: "Staking providers let you participate without running the full setup",
+              bullets: [
+                "Common options include Lido and Coinbase",
+                "They handle validator operations for the user",
+                "This is easier, but adds provider and custody tradeoffs",
+              ],
+            },
+            {
+              label: "Financial gain",
+              title: "The reward is usually a modest yield, not an outsized return",
+              bullets: [
+                "The gain comes from staking rewards paid by the protocol",
+                "As of April 20, 2026, Lido shows about 2.4% APR and Coinbase lists about 1.89% APY for ETH",
+                "Rates change over time and provider fees can reduce what the user receives",
+              ],
+            },
+          ],
+          notes: [
+            "Solo staking gives more control, but also more responsibility.",
+            "Joining a provider lowers the technical barrier, but you take on provider risk.",
+            "For small holders, pooled staking is usually the more practical path because solo staking requires 32 ETH.",
+          ],
+        },
+      },
     ],
     overview: {
       eyebrow: "Chapter 10",
-      headline: "Consensus is how a decentralized network agrees on one valid history without relying on one central referee.",
+      headline: "Ethereum changed from Proof of Work to Proof of Stake on September 15, 2022.",
       intro:
-        "Many participants can store the same chain, but they still need a way to decide which blocks count, which history is canonical, and how costly it should be to attack that process. This chapter frames consensus as the coordination layer that turns independent verifiers into one shared ledger.",
+        "This opener keeps the idea simple before the deeper slides. Ethereum used to rely on miners racing to find a valid hash. After the Merge on September 15, 2022, it moved to Proof of Stake, where validators stake ETH and are selected more like a protocol-controlled draw to propose blocks.",
       pillars: [
         {
-          title: "Agreement on history",
-          body: "Consensus is the process that helps the network converge on one accepted sequence of blocks instead of many conflicting versions of the truth.",
+          title: "What changed",
+          bullets: [
+            "Ethereum originally used Proof of Work",
+            "On September 15, 2022, it switched to Proof of Stake",
+            "This change is commonly called the Merge",
+          ],
         },
         {
-          title: "Resources and incentives",
-          body: "Different systems secure that agreement with different scarce resources, such as energy and hardware in Proof of Work or staked capital in Proof of Stake.",
+          title: "Main practical difference",
+          bullets: [
+            "Proof of Work relied on mining hardware and electricity",
+            "Proof of Stake relies on validators staking ETH",
+            "The switch greatly reduced Ethereum's energy use",
+          ],
         },
         {
-          title: "Tradeoffs matter",
-          body: "Consensus is never just a slogan. Each design makes assumptions about attackers, participation, cost, coordination, and what kind of security the network is buying.",
+          title: "Rough intuition",
+          bullets: [
+            "In Proof of Work, miners keep hashing until one finds a valid result",
+            "That winning miner can propose the next block",
+            "In Proof of Stake, a validator is selected more like a lucky draw and can earn rewards for honest participation",
+          ],
         },
       ],
-      callout: "Consensus is the answer to the core decentralized-systems question: who gets to write history, and under what rules?",
-      footer: "From Proof of Work vs Proof of Stake to security assumptions and system tradeoffs",
+      callout: "At a high level, Ethereum moved from proving work with energy to securing the chain with staked capital.",
+      footer: "From the Merge overview to Proof of Work vs Proof of Stake and deeper security tradeoffs",
     },
     childContent: [
       {
@@ -1319,37 +1749,53 @@ export const slideGroups = [
       {
         number: "10.2",
         layout: "anatomy",
-        eyebrow: "Security assumptions and tradeoffs",
-        headline: "Consensus security is not free. Each model makes different assumptions about what attackers can buy, what honest participants must keep doing, and how the network responds under stress.",
+        eyebrow: "Proof of Stake summary",
+        headline: "Proof of Stake is simple at a high level: validators lock ETH, help confirm blocks, earn rewards, and can be penalized for harmful behavior.",
         description:
-          "The useful comparison is not \"which model is perfect?\" It is which scarce resource secures the chain, what kind of coordination is needed when something goes wrong, and what failure modes are most important for the audience to understand.",
-        frameLabel: "Four dimensions of consensus security",
+          "This slide is just the summary after `10.1`: stake ETH, get selected for roles, participate honestly, and risk penalties if you break important rules.",
+        frameLabel: "Four simple ideas in Proof of Stake",
         segments: [
           {
-            label: "Attack cost",
-            title: "Proof of Work prices attacks in hardware and energy; Proof of Stake prices them in slashable capital",
-            body: "In Proof of Work, an attacker needs enough mining capacity and electricity to outrun or rival honest miners, which ties security to real-world operating costs. In Proof of Stake, the attacker needs enough stake to influence finalization or block production, which ties security to large amounts of capital that can be penalized or trapped if the protocol detects misconduct.",
+            label: "Stake",
+            title: "Validators lock ETH to join",
+            bullets: [
+              "Validators put ETH at stake in the protocol",
+              "That stake gives them a role in consensus",
+              "Security comes from capital being locked and at risk",
+            ],
           },
           {
-            label: "Honest participation",
-            title: "Each model assumes enough honest actors keep supplying the resource it depends on",
-            body: "Proof of Work assumes miners continue devoting hash power because block rewards and fees justify the expense. Proof of Stake assumes validators stay online, run current software, and keep enough stake distributed across many operators. If the honest side stops showing up, both systems become easier to censor, stall, or capture.",
+            label: "Selection",
+            title: "The protocol picks validators for jobs",
+            bullets: [
+              "One validator may be chosen to propose a block",
+              "Other validators attest to what they saw",
+              "This is more like protocol selection than a mining race",
+            ],
           },
           {
-            label: "Recovery path",
-            title: "Proof of Work leans on ongoing competition; Proof of Stake adds explicit coordination and penalties",
-            body: "When Proof of Work forks or suffers disruption, recovery usually comes from more honest work accumulating on one chain over time. Proof of Stake can use slashing, inactivity penalties, and social coordination to isolate bad validators or recover from severe faults, but that also means governance and client coordination become part of the practical security story.",
+            label: "Rewards",
+            title: "Honest participation can earn rewards",
+            bullets: [
+              "Validators earn rewards for doing their job correctly",
+              "That includes following protocol rules",
+              "The system uses rewards to encourage honest behavior",
+            ],
           },
           {
-            label: "Tradeoff surface",
-            title: "Energy, capital, latency, and attack style shift depending on the consensus choice",
-            body: "Proof of Work's critics focus on energy use, hardware concentration, and the possibility of majority hash-power attacks. Proof of Stake reduces constant energy burn, but its tradeoffs move toward validator concentration, correlated client or staking-provider risk, and the need to reason carefully about long-range attacks, censorship pressure, and who can coordinate upgrades or emergency responses.",
+            label: "Slashing",
+            title: "Clearly bad behavior can be penalized",
+            bullets: [
+              "Slashing means part of a validator's stake can be taken away",
+              "It is meant for serious harmful behavior",
+              "The point is to make attacks expensive and visible",
+            ],
           },
         ],
         notes: [
-          "Security assumptions are the hidden contract behind consensus: what resource must stay scarce, and what behavior from honest participants is taken for granted?",
-          "Proof of Work and Proof of Stake both buy history protection, but they buy it with different costs and different operational dependencies.",
-          "For beginners, the key takeaway is not that one model has no tradeoffs. It is that every consensus system chooses what kind of pain an attacker should face and what kind of burden defenders must carry.",
+          "Proof of Stake is secured by staked capital rather than constant energy burn.",
+          "Selection, rewards, and slashing are the main ideas to remember.",
+          "A simple '51% attack' story does not fit cleanly here: an attacker would need enormous stake, and attacking with it risks slashing, exposure, and damage to the value of the same ETH they locked.",
         ],
       },
     ],
