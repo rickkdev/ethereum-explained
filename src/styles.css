@@ -505,6 +505,19 @@ select {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.ledger-layout .comparison-grid {
+  margin-top: clamp(40px, 7vh, 84px);
+}
+
+.ledger-layout .comparison-card {
+  min-height: 168px;
+  padding: 20px 24px 16px;
+}
+
+.ledger-layout .card-index {
+  margin-bottom: 18px;
+}
+
 .overview-pillar-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -2020,6 +2033,10 @@ select {
 
   .ledger-layout {
     grid-template-columns: 1fr;
+  }
+
+  .ledger-layout .comparison-grid {
+    margin-top: 24px;
   }
 
   .comparison-grid,
