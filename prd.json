@@ -644,7 +644,7 @@
         "Verify in browser"
       ],
       "priority": 46,
-      "passes": true,
+      "passes": false,
       "notes": "This should turn the static anatomy explanation into a visible before-and-after state transition, not a generic moving background."
     },
     {
@@ -658,7 +658,7 @@
         "Verify in browser"
       ],
       "priority": 47,
-      "passes": true,
+      "passes": false,
       "notes": "Prefer a dedicated in-app Remotion component over an embedded external player so the execution steps stay tightly integrated with the slide."
     },
     {
@@ -672,7 +672,7 @@
         "Verify in browser"
       ],
       "priority": 48,
-      "passes": true,
+      "passes": false,
       "notes": "A single looping user journey is higher value than animating each primitive separately."
     },
     {
@@ -686,7 +686,7 @@
         "Verify in browser"
       ],
       "priority": 49,
-      "passes": true,
+      "passes": false,
       "notes": "This is a strong candidate for animation because cascading dependency risk is hard to communicate with a static comparison alone."
     },
     {

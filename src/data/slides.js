@@ -616,51 +616,12 @@ export const slideGroups = [
       },
       {
         number: "03.2",
-        layout: "evm-state-motion",
+        layout: "anatomy",
         eyebrow: "State, accounts, and the EVM",
         headline: "Ethereum keeps one shared state machine: accounts hold data, transactions request changes, and the EVM computes the next valid state.",
         description:
           "Instead of tracking only who paid whom, Ethereum tracks account balances, contract code, and contract storage. When a transaction arrives, every node runs the same computation in the Ethereum Virtual Machine, then updates the shared state if the execution is valid.",
         frameLabel: "How Ethereum turns transactions into state changes",
-        transaction: {
-          from: "EOA 0xA91",
-          to: "Vault.sol",
-          action: "deposit(2 ETH)",
-          gas: "Gas budget attached",
-        },
-        stateBefore: [
-          {
-            label: "User balance",
-            value: "12 ETH",
-          },
-          {
-            label: "Vault balance",
-            value: "40 ETH",
-          },
-          {
-            label: "Vault shares",
-            value: "100 shares",
-          },
-        ],
-        stateAfter: [
-          {
-            label: "User balance",
-            value: "10 ETH",
-          },
-          {
-            label: "Vault balance",
-            value: "42 ETH",
-          },
-          {
-            label: "Vault shares",
-            value: "102 shares",
-          },
-        ],
-        executionSteps: [
-          "The EOA signs a transaction that targets contract code at an address.",
-          "Every node runs the same bytecode against the same current state snapshot.",
-          "If execution succeeds, balances and storage move to one new accepted state.",
-        ],
         segments: [
           {
             label: "Accounts",
@@ -741,66 +702,27 @@ export const slideGroups = [
     childContent: [
       {
         number: "04.1",
-        layout: "evm-state-motion",
+        layout: "pipeline",
         eyebrow: "How contracts execute",
         headline: "A contract call follows a repeatable path: code is deployed once, users call functions through transactions, the EVM runs the logic, and the shared state updates if execution succeeds.",
         description:
           "Smart contract execution is deterministic, not magical. The contract code lives on-chain at an address, a user submits a transaction that targets one of its functions, and every node replays the same computation against the same current state before accepting the result.",
-        frameLabel: "Deploy once, then replay the same contract call everywhere",
-        transaction: {
-          from: "Wallet 0x4C2",
-          to: "Escrow.sol",
-          action: "releasePayment(invoiceId)",
-          gas: "Gas covers deterministic execution",
-        },
-        stateBefore: [
+        stages: [
           {
-            label: "Contract code",
-            value: "Already deployed",
+            title: "Deploy the code",
+            body: "A developer publishes contract bytecode to Ethereum. Once the deployment transaction is accepted, the contract exists at an address with code and, often, initial storage.",
           },
           {
-            label: "Escrow balance",
-            value: "5.0 ETH locked",
+            title: "Call a function",
+            body: "A wallet sends a transaction to that contract address with function data and any required ETH. This transaction is a request for the network to run a specific piece of contract logic.",
           },
           {
-            label: "Invoice status",
-            value: "Pending release",
-          },
-        ],
-        stateAfter: [
-          {
-            label: "Contract code",
-            value: "Same code, new state",
+            title: "Every node executes it",
+            body: "When the transaction is included in a block, each node runs the same contract code inside the EVM using the same inputs and current state. Determinism matters: honest nodes should compute the same result independently.",
           },
           {
-            label: "Escrow balance",
-            value: "3.0 ETH locked",
-          },
-          {
-            label: "Invoice status",
-            value: "Released to seller",
-          },
-        ],
-        executionSteps: [
-          "The contract was deployed earlier, so this transaction targets code already living at an address.",
-          "Every node replays the same function call against the same current storage and balances inside the EVM.",
-          "If the conditions pass, the shared state updates; if they fail, the intended change is rejected everywhere.",
-        ],
-        segments: [
-          {
-            label: "Deploy",
-            title: "Code is published once before anyone can call it",
-            body: "Deployment creates the contract account and stores its bytecode on-chain. Later users do not upload fresh logic each time; they call the same code that already lives at that address.",
-          },
-          {
-            label: "Call",
-            title: "A user asks the network to run one function",
-            body: "The wallet sends a transaction with calldata and, if needed, ETH. That message is not the result itself. It is a request for the network to execute the contract's rules from the current on-chain state.",
-          },
-          {
-            label: "Execute + update",
-            title: "Deterministic execution produces one accepted state transition",
-            body: "When the transaction is included, nodes run the same bytecode, inspect the same conditions, and either commit the resulting storage and balance updates or reject the change together.",
+            title: "State changes become shared history",
+            body: "If execution succeeds under the protocol rules, balances, storage values, and emitted outputs are updated in Ethereum's shared state. If it fails, the intended state change does not go through.",
           },
         ],
         notes: [
@@ -978,70 +900,12 @@ export const slideGroups = [
     childContent: [
       {
         number: "06.1",
-        layout: "defi-journey-motion",
+        layout: "anatomy",
         eyebrow: "Swaps, lending, and stablecoins",
         headline: "Three DeFi primitives show up again and again: swaps move between assets, lending markets turn collateral into credit, and stablecoins try to keep one unit close to one dollar.",
         description:
           "The easiest way to read DeFi is by function. One protocol category helps users exchange assets, another lets them borrow against posted collateral, and another provides a steadier unit of account so prices, loans, and payments are easier to reason about on-chain.",
         frameLabel: "Reading core DeFi primitives by job to be done",
-        journeyLabel: "One looping DeFi user journey",
-        walletStart: [
-          {
-            label: "Wallet",
-            value: "2.0 ETH",
-          },
-          {
-            label: "Collateral",
-            value: "None yet",
-          },
-          {
-            label: "Stablecoin",
-            value: "0 USDC",
-          },
-        ],
-        walletFinish: [
-          {
-            label: "Wallet",
-            value: "1,500 USDC",
-          },
-          {
-            label: "Collateral",
-            value: "1.95 cbETH locked",
-          },
-          {
-            label: "Debt",
-            value: "Borrow open",
-          },
-        ],
-        journeySteps: [
-          {
-            label: "Swap",
-            venue: "DEX liquidity pool",
-            action: "Swap ETH into a collateral asset",
-            input: "2.0 ETH",
-            output: "1.95 cbETH",
-            detail:
-              "The exchange layer turns one on-chain asset into another without handing custody to a broker.",
-          },
-          {
-            label: "Lending",
-            venue: "Collateral market",
-            action: "Deposit the new asset into a lending protocol",
-            input: "1.95 cbETH",
-            output: "Collateral active",
-            detail:
-              "The credit layer recognizes posted collateral and opens borrowing capacity against it.",
-          },
-          {
-            label: "Stablecoin",
-            venue: "Borrowed liquidity",
-            action: "Borrow a dollar-like asset against that collateral",
-            input: "Collateral posted",
-            output: "1,500 USDC",
-            detail:
-              "The stable unit becomes the spendable output that other apps, payments, or treasury flows can use.",
-          },
-        ],
         segments: [
           {
             label: "Swaps",
@@ -1067,81 +931,28 @@ export const slideGroups = [
       },
       {
         number: "06.2",
-        layout: "defi-cascade-motion",
+        layout: "ledger",
         eyebrow: "Risks, composability, and real-world fit",
         headline: "DeFi is powerful because protocols can stack together, but that same composability can turn one weak link into a larger failure.",
         description:
           "On-chain finance is modular: a wallet can connect to a swap, a lending market can rely on a stablecoin, and an app can build on all of them. That openness creates new product possibilities, but it also means liquidation engines, oracle inputs, smart-contract code, and thin markets can amplify each other's problems.",
-        frameLabel: "Healthy stack before the shock",
-        journeyLabel: "One leveraged DeFi stack, then a propagated break",
-        stages: [
+        comparison: [
           {
-            label: "Wallet",
-            title: "User position starts with one on-chain asset",
-            body: "The wallet is the entry point for the strategy. One asset can be moved across several protocols without handing control to a bank or broker.",
-            healthyState: "Funding position",
-            stressState: "Absorbing losses",
+            label: "Composability",
+            title: "Protocols can plug into each other like financial Lego",
+            body: "A user might swap into collateral, deposit it into a lending market, borrow a stablecoin, and move that stable asset into another app without leaving the chain. Shared standards and visible state make those connections possible.",
           },
           {
-            label: "Swap",
-            title: "Liquidity pool converts into the collateral asset",
-            body: "The exchange layer makes the composed path possible by turning the original asset into something the next protocol will accept as collateral.",
-            healthyState: "Price path quoted",
-            stressState: "Liquidity thins",
-          },
-          {
-            label: "Lending",
-            title: "Collateral backs borrowed stablecoins",
-            body: "The lending market depends on price feeds and liquidation logic. It is the layer where a market shock often becomes an enforced unwind rather than a paper loss.",
-            healthyState: "Health factor strong",
-            stressState: "Oracle shock lands",
-          },
-          {
-            label: "Downstream app",
-            title: "Borrowed stablecoins fund the next protocol",
-            body: "The final app benefits from open composability, but it also inherits the stability of every layer upstream. If collateral gets unwound, this leg loses its funding source.",
-            healthyState: "Strategy running",
-            stressState: "Liquidity pulled",
+            label: "Fragility and fit",
+            title: "Open finance still has sharp edges and does not fit every need",
+            body: "Smart-contract bugs, forced liquidations, oracle mistakes, MEV-heavy market structure, and shallow liquidity can all hurt users. DeFi fits best when programmability and open access matter more than chargebacks, customer support, or strong legal recourse.",
           },
         ],
-        healthySnapshot: [
-          {
-            label: "Wallet",
-            value: "2 ETH deployed",
-          },
-          {
-            label: "Collateral",
-            value: "1.95 cbETH posted",
-          },
-          {
-            label: "Borrowed stablecoin",
-            value: "1,500 USDC active",
-          },
-        ],
-        stressSnapshot: [
-          {
-            label: "Collateral value",
-            value: "Drops below safe range",
-          },
-          {
-            label: "Lending state",
-            value: "Liquidation begins",
-          },
-          {
-            label: "Downstream app",
-            value: "Position starved of liquidity",
-          },
-        ],
-        incidentSteps: [
-          "Oracle reprices collateral lower after a fast market move.",
-          "The lending market marks the position unsafe and starts liquidation logic.",
-          "Borrowed stablecoins are pulled back or sold, pressuring the downstream app.",
-          "The user learns that one dependency failure can travel through the full stack.",
-        ],
-        notes: [
-          "Composability is real upside: the same open standards let users build richer financial flows without leaving the chain.",
-          "The same openness creates stacked dependencies. Price feeds, collateral rules, liquidity, and contract code all become part of one risk surface.",
-          "DeFi fits best where programmable settlement is worth the extra protocol and market-structure risk.",
+        flow: [
+          "A user starts with one on-chain asset in a wallet",
+          "That asset is swapped or posted as collateral in another protocol",
+          "The next app depends on prices, code, and liquidity from the earlier layers",
+          "If one layer breaks or markets move fast, risk can cascade through the full stack",
         ],
       },
     ],
